@@ -1,0 +1,14 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+
+	<h1>Umfrage löschen?</h1>
+	
+	Möchten sie die Umfrage <strong>{survey.title}</strong> löschen?
+	
+	<br /><br />
+	
+	<f:link.action action="list" class="btn btn-danger">Nein, nicht löschen!</f:link.action>
+	<f:link.action action="delete" class="btn btn-success" arguments="{survey:survey}">Ja, löschen!</f:link.action>
+
+</f:section>

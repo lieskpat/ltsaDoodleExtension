@@ -1,0 +1,28 @@
+
+<f:layout name="Default" />
+
+<f:section name="content">
+	
+	<h1>Termin wählen</h1>
+	
+	<f:form action="add" object="{appiontment}" name="appiontment" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
+
+		<f:form.textfield type="date" property="appiontmentdate" class="form-control"  />
+		
+		
+		<input type="text" id="calendar_input">
+		<span>
+			<img id="calendar_icon" src="../common/calendar.gif" border="0">
+		</span>
+ 
+		<script>
+			var myCalendar = new dhtmlXCalendarObject(
+				{input:"calendar_input",button:"calendar_icon"}
+			);
+		</script>
+		
+		<f:form.submit value="weiter" class btn btn-primary" />
+		
+	</f:form>
+	
+</f:section>

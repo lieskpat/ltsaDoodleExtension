@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-09-27T10:24:54Z" product-name="survey">
+		<header/>
+		<body>
+			<trans-unit id="timevalue.description">
+				<source>time of the Appiontment</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

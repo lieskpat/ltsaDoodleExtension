@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-19T10:20:47Z" product-name="survey">
+		<header/>
+		<body>
+			<trans-unit id="poll.description">
+				<source>poll</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

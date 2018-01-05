@@ -1,0 +1,33 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	
+	<h1>{headline}</h1>
+
+	<f:form action="add" object="{survey}" name="survey" additionalAttributes="{role: 'form'}">
+	
+		<div class="form-group" style="width: 50%">
+			<label>Name</label>
+			<f:form.textfield property="organizername" class="form-control" />
+		</div>
+		
+		<div class="form-group">
+			<label>Umfrage-Titel</label>
+			<f:form.textfield property="title" class="form-control" />
+		</div>
+		
+		<div class="form-group">
+			<label>Beschreibung</label>
+			<f:form.textarea property="description" class="form-control" />
+		</div>
+		
+		<div class="form-group">
+			<label>Dürfen Teilnehmer andere Teilnehmer in der Umfrage sehen?</label>
+			<f:form.checkbox value="visible" property="visible" class="checkbox" checked="true" />
+		</div>
+		
+		<f:form.submit value="weiter" class="btn btn-primary"  />
+	
+	</f:form>
+	
+</f:section>

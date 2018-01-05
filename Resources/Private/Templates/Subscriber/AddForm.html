@@ -1,0 +1,59 @@
+<f:layout name="Default" />
+
+<f:section name="content">	
+
+	<h1>{survey.title}</h1>
+	
+	<f:flashMessages renderMode="div" class="alert alert-success" />
+	
+	<dl class="dl-horizontal">
+		<dt>Beschreibung:</dt>
+		<dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
+	</dl>
+	
+	<f:if condition="{survey.appiontments}" >
+		<f:form action="add" object="{poll}" name="poll" arguments="{survey:survey, timeofday:timeofday, subscriber:subscriber}">
+			<f:form.hidden name="polls[subscriber][]" value="{subscriber.uid}" /> 
+			<ul class="list-group">
+				<f:for each="{survey.appiontments}" as="appiontment" iteration="iterator" >
+					<f:form.hidden name="polls[appiontment][]" value="{iterator.index}" /> 
+					<li class="list-group-item">
+						<table class="table table-bordered table-sm">									
+							<thead>					
+								<tr>
+									<th rowspan="2"></th>														
+									<th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+								</tr>
+								<tr>						
+									<f:for each="{appiontment.timeOfDay}" as="timeofday" >
+										<th>{timeofday.timevalue} Uhr</th>
+									</f:for>
+								</tr>
+							</thead>
+				
+							<tbody>		
+								<tr>
+									<th width="150px">{subscriber.nameSubscriber}</th>								
+										<f:for each="{appiontment.timeOfDay}" as="timeofday" iteration="iteratorb" >
+											<td>
+												<f:form.checkbox name="polls[poll][{iterator.index}][{iteratorb.index}]" class="checkbox" checked="true" value="1" />
+												<f:form.hidden name="polls[timeofday][{iterator.index}][{iteratorb.index}]" value="{timeofday.uid}" /> 
+											</td>										
+										</f:for>									
+								</tr>
+							</tbody>						
+						</table>
+					</li>
+				</f:for>
+				<br />
+				<f:form.submit value="Abschicken" class="btn btn-primary" />
+			</ul>			
+		</f:form>
+	</f:if>
+	
+	<br />
+	<br />
+	<f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
+	
+</f:section>
+	
