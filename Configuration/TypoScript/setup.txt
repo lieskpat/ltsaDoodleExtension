@@ -38,6 +38,7 @@ plugin.tx_survey_surveylisting {
 				
 		}
 	}
+    }
 }
 
 page {
@@ -47,7 +48,7 @@ page {
 		dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.css
 	}
 	includeJSlibs {
-		jquery = //code.jquery.com/jquery.js
+		jquery = EXT:survey/Resources/Public/Bootstrap/js/jquery.js
 		jquery.external = 1
 		bootstrap = EXT:survey/Resources/Public/Bootstrap/js/bootstrap.min.js
 		dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.js
@@ -63,36 +64,36 @@ config.tx_extbase {
 }
 
 plugin.tx_survey._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
+textarea.f3-form-error {
+background-color:#FF9F9F;
+border: 1px #FF0000 solid;
+}
 
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
+input.f3-form-error {
+background-color:#FF9F9F;
+border: 1px #FF0000 solid;
+}
 
-	.tx-survey table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
+.tx-survey table {
+border-collapse:separate;
+border-spacing:10px;
+}
 
-	.tx-survey table th {
-		font-weight:bold;
-	}
+.tx-survey table th {
+font-weight:bold;
+}
 
-	.tx-survey table td {
-		vertical-align:top;
-	}
+.tx-survey table td {
+vertical-align:top;
+}
 
-	.typo3-messages .message-error {
-		color:red;
-	}
+.typo3-messages .message-error {
+color:red;
+}
 
-	.typo3-messages .message-ok {
-		color:green;
-	}
+.typo3-messages .message-ok {
+color:green;
+}
 
 )
 
@@ -119,5 +120,7 @@ commentAjax {
 	}
 	10 < tt_content.list.20.survey_surveylisting
 }
+
+
 
 

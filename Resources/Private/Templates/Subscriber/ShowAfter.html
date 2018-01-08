@@ -1,119 +1,117 @@
 <f:layout name="Default" />
-	
+
 <f:section name="content">	
 
-	<h1>{survey.title}</h1>
-	
-	<f:flashMessages renderMode="div" class="alert alert-success" />
-	
-	<dl class="dl-horizontal">
-		<dt>Beschreibung:</dt>
-		<dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
-	</dl>
-	
-	<f:if condition="{survey.appiontments}" >
-		<ul class="list-group">
-			
-				<li class="list-group-item">
-					<table class="table table-bordered table-sm">				
-						<thead>							
-							<tr>							
-								<th rowspan="2"></th>
-								<f:for each="{survey.appiontments}" as="appiontment" >								
-									<th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
-								</f:for>
-							</tr>
-							<tr>
-								<f:for each="{survey.appiontments}" as="appiontment" >
-									<f:for each="{appiontment.timeOfDay}" as="timeofdays" >
-										<th >{timeofdays.timevalue} Uhr</th>
-									</f:for>
-								</f:for>
-							</tr>							
-						</thead>
-					
-						<f:for each="{survey.subscribers}" as="subscribers" >
-							<tbody>		
-								<tr>
-									<th >{subscribers.nameSubscriber}</th>
-									<f:for each="{survey.appiontments}" as="appiontment" >
-										<f:for each="{appiontment.timeOfDay}" as="timeofday" >
-											<f:for each="{subscribers.subcheck}" as="subcheck">
-												<f:for each="{timeofday.timecheck}" as="poll" >
-													<f:if condition="{poll.uid}=={subcheck.uid}">
-														<f:then>
-															<f:if condition="{poll.poll}==1">																
-																<f:then>
-																	<td bgcolor=green >																	
-																	</td>
-																</f:then>																										
-															</f:if>	
-															<f:if condition="{poll.poll}==0">
-																<f:then>
-																	<td bgcolor=darkred>																		
-																	</td>
-																</f:then>
-															</f:if>
-														</f:then>														
-													</f:if>
-												</f:for>
-											</f:for>
-										</f:for>
-									</f:for>
-								</tr>
-							</tbody>
-						</f:for>
-					
-					</table>
-				</li>
-			
-		</ul>
-	</f:if>	
-	<br />
-	
-	<label>Kommentar</label>
-	<f:form action="commentAjax" name="comment" object="{comment}" arguments="{survey:survey, subscriber:subscriber}">
-		<table  >
-		<td width="300px">
-		<f:form.textarea property="comment" id="commentfield" style="width:100%"/>
-		</td>
-		</table>
-		<br />
-		<f:form.submit value="Senden" class="btn btn-primary btn-xs" id="commentsubmit" />
-	</f:form>
-	
-	<ul class="list-group" id="comments">
-		<f:for each="{survey.subscribers}" as="subscribers" >
-			<f:for each="{subscribers.comments}" as="comment" reverse="TRUE">
-				<li class="list-group-item">
-					<label>{subscriber.nameSubscriber}</label> <br />
-					{comment.comment}
-					<span class="text-muted">
-						(<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
-					</span>
-				</li>
-			</f:for>
-		</f:for>
-	</ul>
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#commentsubmit').click(function(){
-				var ajaxURL = '<f:uri.action action="commentAjax" controller="Subscriber" pageType="998" arguments="{survey:survey, subscriber:subscriber}" />';
-				var form = $('form');
-				$.post(ajaxURL, form.serialize(), function(response) {
-					console.log(response);
-					var items = [];
-					$.each(response, function(key, val) {
-						items.push('<li class="list-group-item">' + val.comment + '<span class="text-muted">(' + val.commentdate + ')</span>' + '</li>');
-					});
-					$('#comments').html(items.reverse().join(''));
-					$('#commentfield').val('');
-				});
-				return false;
-			});
-		});
-	</script>	
-	
+    <h1>{survey.title}</h1>
+
+    <dl class="dl-horizontal">
+        <dt>Beschreibung:</dt>
+        <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
+    </dl>
+
+    <f:if condition="{survey.appiontments}" >
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <table class="table table-bordered table-sm">				
+                    <thead>							
+                        <tr>							
+                            <th rowspan="2"></th>
+                    <f:for each="{survey.appiontments}" as="appiontment" >								
+                        <th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+                    </f:for>
+                    </tr>
+                    <tr>
+                    <f:for each="{survey.appiontments}" as="appiontment" >
+                        <f:for each="{appiontment.timeOfDay}" as="timeofdays" >
+                            <th >{timeofdays.timevalue} Uhr</th>
+                        </f:for>
+                    </f:for>
+                    </tr>							
+                    </thead>
+
+                    <f:for each="{survey.subscribers}" as="subscribers" >
+                        <tbody>		
+                            <tr>
+                                <th >{subscribers.nameSubscriber}</th>
+                        <f:for each="{survey.appiontments}" as="appiontment" >
+                            <f:for each="{appiontment.timeOfDay}" as="timeofday" >
+                                <f:for each="{subscribers.subcheck}" as="subcheck">
+                                    <f:for each="{timeofday.timecheck}" as="poll" >
+                                        <f:if condition="{poll.uid}=={subcheck.uid}">
+                                            <f:then>
+                                                <f:if condition="{poll.poll}==1">																
+                                                    <f:then>
+                                                        <td bgcolor=green >																	
+                                                        </td>
+                                                    </f:then>																										
+                                                </f:if>	
+                                                <f:if condition="{poll.poll}==0">
+                                                    <f:then>
+                                                        <td bgcolor=darkred>																		
+                                                        </td>
+                                                    </f:then>
+                                                </f:if>
+                                            </f:then>														
+                                        </f:if>
+                                    </f:for>
+                                </f:for>
+                            </f:for>
+                        </f:for>
+                        </tr>
+                        </tbody>
+                    </f:for>
+
+                </table>
+            </li>
+
+        </ul>
+    </f:if>	
+    <br />
+
+    <label>Kommentar</label>
+    <f:form action="commentAjax" name="comment" object="{comment}" arguments="{survey:survey, subscriber:subscriber}">
+        <table  >
+            <td width="300px">
+            <f:form.textarea property="comment" id="commentfield" style="width:100%"/>
+            </td>
+        </table>
+        <br />
+        <f:form.submit value="Senden" class="btn btn-primary btn-xs" id="commentsubmit" />
+    </f:form>
+
+    <ul class="list-group" id="comments">
+        <f:for each="{survey.subscribers}" as="subscribers" >
+            <f:for each="{subscribers.comments}" as="comment" reverse="TRUE">
+                <li class="list-group-item">
+                    <label>{subscriber.nameSubscriber}</label> <br />
+                    {comment.comment}
+                    <span class="text-muted">
+                        (<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
+                    </span>
+                </li>
+            </f:for>
+        </f:for>
+    </ul>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#commentsubmit').click(function () {
+                var ajaxURL = '<f:uri.action action="commentAjax" controller="Subscriber" pageType="998" arguments="{survey:survey, subscriber:subscriber}" />';
+                var form = $('form');
+                $.post(ajaxURL, form.serialize(), function (response) {
+                    console.log(response);
+                    var items = [];
+                    $.each(response, function (key, val) {
+                        items.push('<li class="list-group-item">' + val.comment + '<span class="text-muted">(' + val.commentdate + ')</span>' + '</li>');
+                    });
+                    $('#comments').html(items.reverse().join(''));
+                    $('#commentfield').val('');
+                });
+                return false;
+            });
+        });
+    </script>	
+
 </f:section>
-	
+

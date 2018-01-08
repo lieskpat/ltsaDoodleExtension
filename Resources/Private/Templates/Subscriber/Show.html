@@ -1,95 +1,93 @@
 <f:layout name="Default" />
-	
+
 <f:section name="content">	
 
-	<h1>{survey.title}</h1>
-	
-	<f:flashMessages renderMode="div" class="alert alert-success" />
-	
-	<dl class="dl-horizontal">
-		<dt>Beschreibung:</dt>
-		<dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
-	</dl>
-	
-	<f:if condition="{survey.appiontments}" >
-		<ul class="list-group">
-			
-				<li class="list-group-item">
-					<table class="table table-bordered table-sm">				
-						<thead>							
-							<tr>							
-								<th rowspan="2"></th>
-								<f:for each="{survey.appiontments}" as="appiontment" >								
-									<th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
-								</f:for>
-							</tr>
-							<tr>
-								<f:for each="{survey.appiontments}" as="appiontment" >
-									<f:for each="{appiontment.timeOfDay}" as="timeofdays" >
-										<th >{timeofdays.timevalue} Uhr</th>
-									</f:for>
-								</f:for>
-							</tr>							
-						</thead>
-					
-						<f:for each="{survey.subscribers}" as="subscribers" >
-							<tbody>		
-								<tr>
-									<th width="150px">{subscribers.nameSubscriber}</th>
-									<f:for each="{survey.appiontments}" as="appiontment" >
-										<f:for each="{appiontment.timeOfDay}" as="timeofday" >
-											<f:for each="{subscribers.subcheck}" as="subcheck">
-												<f:for each="{timeofday.timecheck}" as="poll" >
-													<f:if condition="{poll.uid}=={subcheck.uid}">
-														<f:then>
-															<f:if condition="{poll.poll}==1">																
-																<f:then>
-																	<td bgcolor=green >																	
-																	</td>
-																</f:then>																										
-															</f:if>	
-															<f:if condition="{poll.poll}==0">
-																<f:then>
-																	<td bgcolor=darkred>																		
-																	</td>
-																</f:then>
-															</f:if>
-														</f:then>														
-													</f:if>
-												</f:for>
-											</f:for>
-										</f:for>
-									</f:for>
-								</tr>
-							</tbody>
-						</f:for>
-					
-					</table>
-				</li>
-			
-		</ul>
-	</f:if>	
-	<br />
-	<ul class="list-group">
-	<label>Kommentare</label>
-		<f:for each="{survey.subscribers}" as="subscriber" >
-			<f:for each="{subscriber.comments}" as="comment" reverse="TRUE">			
-				<li class="list-group-item">
-					{subscriber.nameSubscriber} <br />
-					{comment.comment}
-					<span class="text-muted">
-						(<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
-					</span>
-				</li>			
-			</f:for>
-		</f:for>
-	</ul>
-	<br />
-	<f:link.action action="registerForm" class="btn btn-primary" arguments="{survey:survey, subscriber:subscriber}">abstimmen</f:link.action>
-	<br />
-	<br />
-	<f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
-	
-	
+    <h1>{survey.title}</h1>
+
+    <dl class="dl-horizontal">
+        <dt>Beschreibung:</dt>
+        <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
+    </dl>
+
+    <f:if condition="{survey.appiontments}" >
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <table class="table table-bordered table-sm">				
+                    <thead>							
+                        <tr>							
+                            <th rowspan="2"></th>
+                    <f:for each="{survey.appiontments}" as="appiontment" >								
+                        <th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+                    </f:for>
+                    </tr>
+                    <tr>
+                    <f:for each="{survey.appiontments}" as="appiontment" >
+                        <f:for each="{appiontment.timeOfDay}" as="timeofdays" >
+                            <th >{timeofdays.timevalue} Uhr</th>
+                        </f:for>
+                    </f:for>
+                    </tr>							
+                    </thead>
+
+                    <f:for each="{survey.subscribers}" as="subscribers" >
+                        <tbody>		
+                            <tr>
+                                <th width="150px">{subscribers.nameSubscriber}</th>
+                        <f:for each="{survey.appiontments}" as="appiontment" >
+                            <f:for each="{appiontment.timeOfDay}" as="timeofday" >
+                                <f:for each="{subscribers.subcheck}" as="subcheck">
+                                    <f:for each="{timeofday.timecheck}" as="poll" >
+                                        <f:if condition="{poll.uid}=={subcheck.uid}">
+                                            <f:then>
+                                                <f:if condition="{poll.poll}==1">																
+                                                    <f:then>
+                                                        <td bgcolor=green >																	
+                                                        </td>
+                                                    </f:then>																										
+                                                </f:if>	
+                                                <f:if condition="{poll.poll}==0">
+                                                    <f:then>
+                                                        <td bgcolor=darkred>																		
+                                                        </td>
+                                                    </f:then>
+                                                </f:if>
+                                            </f:then>														
+                                        </f:if>
+                                    </f:for>
+                                </f:for>
+                            </f:for>
+                        </f:for>
+                        </tr>
+                        </tbody>
+                    </f:for>
+
+                </table>
+            </li>
+
+        </ul>
+    </f:if>	
+    <br />
+    <ul class="list-group">
+        <label>Kommentare</label>
+        <f:for each="{survey.subscribers}" as="subscriber" >
+            <f:for each="{subscriber.comments}" as="comment" reverse="TRUE">			
+                <li class="list-group-item">
+                    {subscriber.nameSubscriber} <br />
+                    {comment.comment}
+                    <span class="text-muted">
+                        (<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
+                    </span>
+                </li>			
+            </f:for>
+        </f:for>
+    </ul>
+    <br />
+    <f:link.action action="registerForm" class="btn btn-primary" arguments="{survey:survey, subscriber:subscriber}">abstimmen</f:link.action>
+    <br />
+    <br />
+    <f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
+
+
 </f:section>
-	
+

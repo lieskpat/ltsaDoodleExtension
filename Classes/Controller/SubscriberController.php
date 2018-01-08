@@ -42,7 +42,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * timeofdayRepository
 	 *
-     * @var \Schmidtch\Survey\Domain\Repository\TimeofdayRepository
+     * @var \Schmidtch\Survey\Domain\Repository\TimeOfDayRepository
 	 * @inject
      */
     protected $timeofdayRepository;
@@ -50,7 +50,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	/**
 	 * pollRepository
 	 *
-	 * @var \Schmidtch\Survey\Domain\Repository\pollRepository
+	 * @var \Schmidtch\Survey\Domain\Repository\PollRepository
 	 * @inject
 	 */
     protected $pollRepository;	

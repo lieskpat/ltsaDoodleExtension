@@ -1,41 +1,41 @@
 <f:layout name="Default" />
 
 <f:section name="content">	
-		
-	<h2>{survey.title}</h2>
 
-	<f:form action="ajaxAdd" object="{timeofday}" name="timeofday" arguments="{appiontment:appiontment}">
-	
-		<label><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></label>
-		<br />
-		<label>Uhrzeit wählen</label>
-		
-		<f:form.textfield property="timevalue" type="time" id="timevaluefield" /> Uhr 
-		<br />
-		<br />
-		<f:form.submit value="Uhrzeit hinzufügen" class="btn btn-primary btn-xs" id="timeofdaysubmit" />
-		
-	</f:form>
-	
-	<ul class="list-group" id="timeofdays">
-        
-		<f:for each="{appiontment.timeOfDay}" as="timeofday" >
-			<li class="list-group-item">
-				{timeofday.timevalue} Uhr &nbsp; &nbsp;
-			</li>
-		</f:for>
-			
-	</ul>
-	
-	<script type="text/javascript">
-        $(document).ready(function(){
-            $('#timeofdaysubmit').click(function(){
+    <h2>{survey.title}</h2>
+
+    <f:form action="ajaxAdd" object="{timeofday}" name="timeofday" arguments="{appiontment:appiontment}">
+
+        <label><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></label>
+        <br />
+        <label>Uhrzeit wählen</label>
+
+        <f:form.textfield property="timevalue" type="time" id="timevaluefield" /> Uhr 
+        <br />
+        <br />
+        <f:form.submit value="Uhrzeit hinzufügen" class="btn btn-primary btn-xs" id="timeofdaysubmit" />
+
+    </f:form>
+
+    <ul class="list-group" id="timeofdays">
+
+        <f:for each="{appiontment.timeOfDay}" as="timeofday" >
+            <li class="list-group-item">
+                {timeofday.timevalue} Uhr &nbsp; &nbsp;
+            </li>
+        </f:for>
+
+    </ul>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#timeofdaysubmit').click(function () {
                 var ajaxURL = '<f:uri.action action="ajaxAdd" controller="Appiontment" pageType="999" arguments="{appiontment:appiontment}" />';
                 var form = $('form');
-                $.post(ajaxURL, form.serialize(), function(response) {
+                $.post(ajaxURL, form.serialize(), function (response) {
                     console.log(response);
                     var items = [];
-                    $.each(response, function(key, val) {
+                    $.each(response, function (key, val) {
                         items.push('<li class="list-group-item">' + val.timevalue + ' ' + '</li>');
                     });
                     $('#timeofdays').html(items.join(''));
@@ -46,14 +46,14 @@
         });
     </script>
 
-	
 
-	
-	<f:link.action action="addFormDate" controller="Appiontment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
-	<br />	
-	<br />
-	<f:link.action action="updateForm" controller="Survey" arguments="{survey:survey}" class="btn btn-primary">Änderungen speichern</f:link.action>
-	
+
+
+    <f:link.action action="addFormDate" controller="Appiontment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
+    <br />	
+    <br />
+    <f:link.action action="updateForm" controller="Survey" arguments="{survey:survey}" class="btn btn-primary">Änderungen speichern</f:link.action>
+
 </f:section>
 
 
