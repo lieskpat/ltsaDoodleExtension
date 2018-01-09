@@ -120,7 +120,3 @@ commentAjax {
 	}
 	10 < tt_content.list.20.survey_surveylisting
 }
-
-
-
-

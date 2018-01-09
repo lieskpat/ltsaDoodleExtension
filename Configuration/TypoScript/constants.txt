@@ -1,4 +1,3 @@
-
 plugin.tx_survey_surveylisting {
 	view {
 		# cat=plugin.tx_survey_surveylisting/file; type=string; label=Path to template root (FE)
