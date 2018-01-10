@@ -47,7 +47,7 @@ page {
 		survey = EXT:survey/Resources/Public/Css/Survey.css
 		dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.css
 	}
-	includeJSlibs {
+	includeJS {
 		jquery = EXT:survey/Resources/Public/Bootstrap/js/jquery.js
 		jquery.external = 1
 		bootstrap = EXT:survey/Resources/Public/Bootstrap/js/bootstrap.min.js
@@ -106,7 +106,7 @@ ajaxAdd {
 		admPanel = 0
 		debug = 0
 	}
-	10 < tt_content.list.20.survey_surveylisting
+	100 < tt_content.list.20.survey_surveylisting
 }
 
 commentAjax = PAGE
@@ -118,5 +118,5 @@ commentAjax {
 		admPanel = 0
 		debug = 0
 	}
-	10 < tt_content.list.20.survey_surveylisting
+	100 < tt_content.list.20.survey_surveylisting
 }

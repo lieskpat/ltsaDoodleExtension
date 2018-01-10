@@ -104,24 +104,24 @@ class AppiontmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
-     * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday
+     * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay
      */
     public function ajaxAddAction(
-    \Schmidtch\Survey\Domain\Model\Appiontment $appiontment, \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday = NULL) {
+    \Schmidtch\Survey\Domain\Model\Appiontment $appiontment, \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay = NULL) {
         // Wenn das Feld leer ist, wird nicht persistiert
-        if ($timeofday->getTimevalue() == "")
+        if ($timeOfDay->getTimevalue() == "")
             return FALSE;
 
         // Uhrzeit zum Termin hinzufühgen
-        $appiontment->addTimeOfDay($timeofday);
+        $appiontment->addTimeOfDay($timeOfDay);
 
         $this->appiontmentRepository->update($appiontment);
         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
-        $timeofdays = $appiontment->getTimeOfDay();
-        foreach ($timeofdays as $timeofday) {
-            $json[$timeofday->getUid()] = array(
-                'timevalue' => $timeofday->getTimevalue()
+        $timeOfDays = $appiontment->getTimeOfDay();
+        foreach ($timeOfDays as $timeOfDay) {
+            $json[$timeOfDay->getUid()] = array(
+                'timevalue' => $timeOfDay->getTimevalue()
             );
         }
         return json_encode($json);
