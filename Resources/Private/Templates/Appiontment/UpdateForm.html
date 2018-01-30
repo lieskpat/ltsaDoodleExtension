@@ -30,8 +30,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#timeofdaysubmit').click(function () {
-                var ajaxURL = '<f:uri.action action="ajaxAdd" controller="Appiontment" pageType="999" arguments="{appiontment:appiontment}" />';
-                //var ajaxURL = 'http://192.168.60.128/index.php?id=33&tx_survey_surveylisting%5Bappiontment%5D=3&tx_survey_surveylisting%5Baction%5D=ajaxAdd&tx_survey_surveylisting%5Bcontroller%5D=Appiontment&cHash=6198401c351d08372f9c301e5bd5105b'
+                var ajaxURL = '<f:format.raw>{<f:uri.action action="ajaxAdd" controller="Appiontment" pageType="999" arguments="{appiontment:appiontment}" />}</f:format.raw>';
                 var form = $('form');
                 console.log(ajaxURL);
                 $.post(ajaxURL, form.serialize(), function (response) {
