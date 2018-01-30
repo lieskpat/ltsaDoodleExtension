@@ -27,17 +27,17 @@ namespace Schmidtch\Survey\Domain\Model;
  ***************************************************************/
 
 /**
- * Appiontment of the Survey
+ * Appointment of the Survey
  */
-class Appiontment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * date of the Appiontment
+     * date of the Appointment
      * 
      * @var \DateTime
      */
-    protected $appiontmentdate = null;
+    protected $appointmentdate = null;
     
     /**
      * timeOfDay
@@ -70,24 +70,24 @@ class Appiontment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
-     * Returns the appiontmentdate
+     * Returns the appointmentdate
      * 
-     * @return \DateTime $appiontmentdate
+     * @return \DateTime $appointmentdate
      */
-    public function getAppiontmentdate()
+    public function getAppointmentdate()
     {
-        return $this->appiontmentdate;
+        return $this->appointmentdate;
     }
     
     /**
-     * Sets the appiontmentdate
+     * Sets the appointmentdate
      * 
-     * @param \DateTime $appiontmentdate
+     * @param \DateTime $appointmentdate
      * @return void
      */
-    public function setAppiontmentdate(\DateTime $appiontmentdate)
+    public function setAppointmentdate(\DateTime $appointmentdate)
     {
-        $this->appiontmentdate = $appiontmentdate;
+        $this->appointmentdate = $appointmentdate;
     }
     
     /**

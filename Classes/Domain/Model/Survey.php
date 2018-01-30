@@ -58,6 +58,7 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * name of the organizer
      * 
      * @var string
+     * @validate NotEmpty
      */
     protected $organizername = '';
     
@@ -90,12 +91,12 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $organizer = null;
     
     /**
-     * appiontments
+     * appointments
      * 
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appiontment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appointment>
      * @cascade remove
      */
-    protected $appiontments = null;
+    protected $appointments = null;
     
     /**
      * comments
@@ -132,7 +133,7 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->appiontments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->appointments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->comments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->subscribers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
@@ -326,46 +327,46 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
-     * Adds a Appiontment
+     * Adds a Appointment
      * 
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @return void
      */
-    public function addAppiontment(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment)
+    public function addAppointment(\Schmidtch\Survey\Domain\Model\Appointment $appointment)
     {
-        $this->appiontments->attach($appiontment);
+        $this->appointments->attach($appointment);
     }
     
     /**
-     * Removes a Appiontment
+     * Removes a Appointment
      * 
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontmentToRemove The Appiontment to be removed
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointmentToRemove The Appointment to be removed
      * @return void
      */
-    public function removeAppiontment(\Schmidtch\Survey\Domain\Model\Appiontment $appiontmentToRemove)
+    public function removeAppointment(\Schmidtch\Survey\Domain\Model\Appointment $appointmentToRemove)
     {
-        $this->appiontments->detach($appiontmentToRemove);
+        $this->appointments->detach($appointmentToRemove);
     }
     
     /**
-     * Returns the appiontments
+     * Returns the appointments
      * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appiontment> $appiontments
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appointment> $appointments
      */
-    public function getAppiontments()
+    public function getAppointments()
     {
-        return $this->appiontments;
+        return $this->appointments;
     }
     
     /**
-     * Sets the appiontments
+     * Sets the appointments
      * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appiontment> $appiontments
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Appointment> $appointments
      * @return void
      */
-    public function setAppiontments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $appiontments)
+    public function setAppointments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $appointments)
     {
-        $this->appiontments = $appiontments;
+        $this->appointments = $appointments;
     }
     
     /**

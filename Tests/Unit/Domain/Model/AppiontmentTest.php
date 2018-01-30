@@ -37,13 +37,13 @@ namespace Schmidtch\Survey\Tests\Unit\Domain\Model;
 class AppiontmentTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
 	/**
-	 * @var \Schmidtch\Survey\Domain\Model\Appiontment
+	 * @var \Schmidtch\Survey\Domain\Model\Appointment
 	 */
 	protected $subject = NULL;
 
 	public function setUp()
 	{
-		$this->subject = new \Schmidtch\Survey\Domain\Model\Appiontment();
+		$this->subject = new \Schmidtch\Survey\Domain\Model\Appointment();
 	}
 
 	public function tearDown()
@@ -58,7 +58,7 @@ class AppiontmentTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	{
 		$this->assertEquals(
 			NULL,
-			$this->subject->getAppiontmentdate()
+			$this->subject->getAppointmentdate()
 		);
 	}
 
@@ -68,7 +68,7 @@ class AppiontmentTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	public function setAppiontmentdateForDateTimeSetsAppiontmentdate()
 	{
 		$dateTimeFixture = new \DateTime();
-		$this->subject->setAppiontmentdate($dateTimeFixture);
+		$this->subject->setAppointmentdate($dateTimeFixture);
 
 		$this->assertAttributeEquals(
 			$dateTimeFixture,

@@ -262,7 +262,7 @@ class SurveyTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->subject->getAppiontments()
+			$this->subject->getAppointments()
 		);
 	}
 
@@ -271,10 +271,10 @@ class SurveyTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function setAppiontmentsForObjectStorageContainingAppiontmentSetsAppiontments()
 	{
-		$appiontment = new \Schmidtch\Survey\Domain\Model\Appiontment();
+		$appiontment = new \Schmidtch\Survey\Domain\Model\Appointment();
 		$objectStorageHoldingExactlyOneAppiontments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneAppiontments->attach($appiontment);
-		$this->subject->setAppiontments($objectStorageHoldingExactlyOneAppiontments);
+		$this->subject->setAppointments($objectStorageHoldingExactlyOneAppiontments);
 
 		$this->assertAttributeEquals(
 			$objectStorageHoldingExactlyOneAppiontments,
@@ -288,12 +288,12 @@ class SurveyTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function addAppiontmentToObjectStorageHoldingAppiontments()
 	{
-		$appiontment = new \Schmidtch\Survey\Domain\Model\Appiontment();
+		$appiontment = new \Schmidtch\Survey\Domain\Model\Appointment();
 		$appiontmentsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$appiontmentsObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($appiontment));
 		$this->inject($this->subject, 'appiontments', $appiontmentsObjectStorageMock);
 
-		$this->subject->addAppiontment($appiontment);
+		$this->subject->addAppointment($appiontment);
 	}
 
 	/**
@@ -301,12 +301,12 @@ class SurveyTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function removeAppiontmentFromObjectStorageHoldingAppiontments()
 	{
-		$appiontment = new \Schmidtch\Survey\Domain\Model\Appiontment();
+		$appiontment = new \Schmidtch\Survey\Domain\Model\Appointment();
 		$appiontmentsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$appiontmentsObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($appiontment));
 		$this->inject($this->subject, 'appiontments', $appiontmentsObjectStorageMock);
 
-		$this->subject->removeAppiontment($appiontment);
+		$this->subject->removeAppointment($appiontment);
 
 	}
 

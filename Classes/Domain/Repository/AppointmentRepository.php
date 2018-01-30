@@ -29,7 +29,7 @@ namespace Schmidtch\Survey\Domain\Repository;
 /**
  * The repository for Appiontments
  */
-class AppiontmentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class AppointmentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     

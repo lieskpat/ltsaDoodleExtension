@@ -46,12 +46,12 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	/**
 	 * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday = NULL
 	 */
 	public function ajaxAddAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday = NULL )
 	{
 		// Wenn das Uhrzeitfeld leer ist, wird nicht persistiert
@@ -73,12 +73,12 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	/**
 	 * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday
 	 */
 	public function addFormTimeAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday = NULL)
 	{
 		$this->view->assign('survey', $survey);
@@ -87,38 +87,38 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	}
 	
 	/**
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 */
-	public function updateFormAction(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment)
+	public function updateFormAction(\Schmidtch\Survey\Domain\Model\Appointment $appiontment)
 	{
 		$this->view->assign('appiontment',$appiontment);
 	}
 	 
 	 /**
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 */
-	public function updateAction(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment)
+	public function updateAction(\Schmidtch\Survey\Domain\Model\Appointment $appiontment)
 	{
 		$this->appiontmentRepository->update($repository);
 		$this->redirect('list');
 	}
 	
 	/**
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 */
-	public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment)
+	public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Appointment $appiontment)
 	{
 		$this->view->assign('appiontment',$appiontment);
 	}
 	
 	/**
 	 * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday
 	 */
 	public function deleteAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday)
 	{
 		$appiontment->removeTimeOfDay($timeofday);
@@ -129,12 +129,12 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	/**
 	 * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday
 	 */
 	public function deleteUpdateSurveyAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday)
 	{
 		$appiontment->removeTimeOfDay($timeofday);
@@ -145,7 +145,7 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	public function deleteUpdateAppiontmentAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday)
 	{
 		$appiontment->removeTimeOfDay($timeofday);
@@ -156,7 +156,7 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	public function deleteAddAppiontmentAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment, 
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment, 
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday)
 	{
 		$appiontment->removeTimeOfDay($timeofday);
@@ -167,12 +167,12 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	
 	/**
 	 * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-	 * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+	 * @param \Schmidtch\Survey\Domain\Model\Appointment $appiontment
 	 * @param \Schmidtch\Survey\Domain\Model\Timeofday $timeofday
 	 */
 	public function showAction(
 		\Schmidtch\Survey\Domain\Model\Survey $survey,
-		\Schmidtch\Survey\Domain\Model\Appiontment $appiontment,
+		\Schmidtch\Survey\Domain\Model\Appointment $appiontment,
 		\Schmidtch\Survey\Domain\Model\Timeofday $timeofday)
 	{
 		$this->view->assign('survey',$survey);

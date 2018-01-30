@@ -1,0 +1,34 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+
+    <f:render partial="Error" arguments="{object:'appointment'}" /> 
+
+    <h1>{survey.title}</h1>
+
+    <h3>Termin wählen</h3>
+
+    <!--f:if condition="{survey.appointments}">
+        <ul class="list-group">
+            <f:for each="{survey.appointments}" as="appointment">
+                <li class="list-group-item">
+                    <label><f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date></label>
+                <f:for each="{appointment.timeOfDay}" as="timeofday">
+                    <dd>
+                        {timeofday.timevalue} Uhr
+                    </dd>
+                </f:for>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>-->
+
+    <f:form action="add" object="{appointment}" name="appointment" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >		
+
+        <f:form.textfield type="date" property="appointmentdate" class="form-control" style="width:30%"  value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
+
+        <f:form.submit value="weiter" class="btn btn-primary" />
+
+    </f:form>
+
+</f:section>

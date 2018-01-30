@@ -28,14 +28,14 @@ namespace Schmidtch\Survey\Controller;
  * ************************************************************* */
 
 /**
- * AppiontmentController
+ * AppointmentController
  */
-class AppiontmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
     /**
-     * @var \Schmidtch\Survey\Domain\Repository\AppiontmentRepository
+     * @var \Schmidtch\Survey\Domain\Repository\AppointmentRepository
      */
-    protected $appiontmentRepository;
+    protected $appointmentRepository;
 
     /**
      * @var \Schmidtch\Survey\Domain\Repository\TimeOfDayRepository
@@ -45,10 +45,10 @@ class AppiontmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     protected $timeOfDayRepository;
 
     /**
-     * @param \Schmidtch\Survey\Domain\Repository\AppiontmentRepository $appiontmentRepository
+     * @param \Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository
      */
-    public function injectAppiontmentRepository(\Schmidtch\Survey\Domain\Repository\AppiontmentRepository $appiontmentRepository) {
-        $this->appiontmentRepository = $appiontmentRepository;
+    public function injectAppointmentRepository(\Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository) {
+        $this->appointmentRepository = $appointmentRepository;
     }
 
     /**
@@ -57,68 +57,68 @@ class AppiontmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return void
      */
     public function initializeAddAction() {
-        $this->arguments['appiontment']
-                ->getPropertyMappingConfiguration()
-                ->forProperty('*')
-                ->setTypeConverterOption(
-                        'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
+        $this->arguments['appointment']
+            ->getPropertyMappingConfiguration()
+            ->forProperty('*')
+            ->setTypeConverterOption(
+                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function addAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
-        //$this->appiontmentRepository->add($appiontment);	
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        //$this->appointmentRepository->add($appointment);	
 
-        $survey->addAppiontment($appiontment);
+        $survey->addAppointment($appointment);
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\SurveyRepository')->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
-        $this->redirect('addFormTime', 'Appiontment', NULL, array('appiontment' => $appiontment, 'survey' => $survey));
+        $this->redirect('addFormTime', 'Appointment', NULL, array('appointment' => $appointment, 'survey' => $survey));
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function addFormDateAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment = NULL) {
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment = NULL) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appiontments', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\AppiontmentRepository')->findAll());
+        $this->view->assign('appointments', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\AppointmentRepository')->findAll());
         //$this->view->assign('timeOfDay', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\TimeofdayRepository')->findAll());
         $this->view->assign('timeOfDay', $this->timeOfDayRepository->findAll());
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function addFormTimeAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appiontment', $appiontment);
+        $this->view->assign('appointment', $appointment);
         $this->view->assign('timeofday', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\TimeofdayRepository')->findAll());
     }
 
     /**
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @param \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay
      */
     public function ajaxAddAction(
-    \Schmidtch\Survey\Domain\Model\Appiontment $appiontment, \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay = NULL) {
+    \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay = NULL) {
         // Wenn das Feld leer ist, wird nicht persistiert
         if ($timeOfDay->getTimevalue() == "")
             return FALSE;
 
         // Uhrzeit zum Termin hinzufühgen
-        $appiontment->addTimeOfDay($timeOfDay);
+        $appointment->addTimeOfDay($timeOfDay);
 
-        $this->appiontmentRepository->update($appiontment);
+        $this->appointmentRepository->update($appointment);
         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
-        $timeOfDays = $appiontment->getTimeOfDay();
+        $timeOfDays = $appointment->getTimeOfDay();
         foreach ($timeOfDays as $timeOfDay) {
             $json[$timeOfDay->getUid()] = array(
                 'timevalue' => $timeOfDay->getTimevalue()
@@ -129,63 +129,63 @@ class AppiontmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function updateFormAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appiontment', $appiontment);
+        $this->view->assign('appointment', $appointment);
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
-    public function updateFormAppiontmentAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
+    public function updateFormAppointmentAction(
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appiontment', $appiontment);
+        $this->view->assign('appointment', $appointment);
     }
 
     /**
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
-    public function updateAction(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
-        $this->appiontmentRepository->update($repository);
+    public function updateAction(\Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        $this->appointmentRepository->update($repository);
         $this->redirect('list');
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
-    public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
-        $this->view->assign('appiontment', $appiontment);
+    public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        $this->view->assign('appointment', $appointment);
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function deleteAction(
-    \Schmidtch\Survey\Domain\Model\Appiontment $appiontment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
+    \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->addFlashMessage(
-                'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+            'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\surveyRepository')->update($survey);
-        $this->appiontmentRepository->remove($appiontment);
+        $this->appointmentRepository->remove($appointment);
         $this->redirect('show', 'Survey', NULL, array('survey' => $survey));
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appiontment $appiontment
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
     public function showAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appiontment $appiontment) {
+    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appiontment', $appiontment);
+        $this->view->assign('appointment', $appointment);
     }
 
 }
