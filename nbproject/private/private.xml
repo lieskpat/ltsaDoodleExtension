@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Classes/Domain/Model/Survey.php</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Classes/Controller/SurveyController.php</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Configuration/TypoScript/setup.txt</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Classes/Domain/Model/Appointment.php</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Classes/Controller/AppointmentController.php</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Resources/Private/Templates/Appointment/AddFormTime.html</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Resources/Private/Templates/Survey/AddFormTitle.html</file>
+            <file>file:/C:/Users/lieske/Documents/NetBeansProjects/ltsaDoodleExtension/Resources/Private/Templates/Appointment/AddFormDate.html</file>
+        </group>
     </open-files>
 </project-private>
