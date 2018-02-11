@@ -34,7 +34,7 @@
         <f:form.button class="btn btn-primary btn-xs" id="deleteNewDateField">Löschen</f:form.button>
 
         <f:form.button style="width:10%" class="btn btn-primary" id="addNewDateField">Hinzufügen</f:form.button>
-        
+
         <div>
             <f:form.submit value="Weiter" class="btn btn-primary btn-xs" id="timeofdaysubmit" />
         </div>
@@ -55,5 +55,64 @@
             });
         });
     </script>
+
+    <f:comment>
+        http://www.phpcodify.com/add-remove-input-fields-dynamically-using-jquery-bootstrap/
+    </f:comment>
+    <f:comment>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add Remove input fields Dynamically using jQuery Bootstrap</div>
+                <div class="panel-body">
+
+                    <form action="" >
+                        <div class="input-group control-group after-add-more">
+                            <input type="text" name="addmore[]" class="form-control" placeholder="Enter Name Here">
+                            <div class="input-group-btn"> 
+                                <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Copy Fields-These are the fields which we get through jquery and then add after the above input,-->
+                    <!-- bleiben verborgen class="hide", durch Leerueichen getrennt, können mehrere Klassen gesetzt werden-->
+                    <div class="copy-fields hide">
+                        <div class="control-group input-group" style="margin-top:10px">
+                            <input type="text" name="addmore[]" class="form-control" placeholder="Enter Name Here">
+                            <div class="input-group-btn"> 
+                                <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:comment>
+    <f:comment>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                //here first get the contents of the div with name class 
+                //copy-fields and add it to after "after-add-more" div class.
+                //Button mit class="add-more"
+                $(".add-more").click(function () {
+                    //speichere in var html html codeschnippzell innerhalb von class copy-fields
+                    var html = $(".copy-fields").html();
+                    //füge html codeschnippzell nach div mit class after-add-more ein
+                    $(".after-add-more").after(html);
+                });
+                //here it will remove the current value 
+                //of the remove button which has been pressed
+                $("body").on("click", ".remove", function () {
+                    $(this).parents(".control-group").remove();
+                });
+
+            });
+
+        </script>
+
+
+    </f:comment>
 
 </f:section>
