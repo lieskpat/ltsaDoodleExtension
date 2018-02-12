@@ -66,11 +66,11 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * @param $appointment
      */
     public function addAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
-        //$this->appointmentRepository->add($appointment);	
+    \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointment) {
+        //$this->appointmentRepository->add($appointment);
 
         $survey->addAppointment($appointment);
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\SurveyRepository')->update($survey);
@@ -86,9 +86,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function addFormDateAction(
     \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment = NULL) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appointments', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\AppointmentRepository')->findAll());
-        //$this->view->assign('timeOfDay', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\TimeofdayRepository')->findAll());
-        $this->view->assign('timeOfDay', $this->timeOfDayRepository->findAll());
     }
 
     /**

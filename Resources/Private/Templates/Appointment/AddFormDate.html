@@ -25,94 +25,49 @@
         </f:if>
     </f:comment>
 
-    <f:form action="add" object="{appointment}" name="appointment" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >		
+    <f:form action="add" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
+        <div class="after-add-more">
+            <f:form.textfield type="date" name="appointment[]" property="appointmentdate" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
 
-        <f:form.textfield id="dateField" type="date" property="appointmentdate" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
+            <f:form.textfield type="time" name="appointment[]" property="{timeOfDay.timevalue}" style="width:10%" />
 
-        <f:comment><f:form.textfield type="time" property="timevalue" style="width:10%"  id="timevaluefield" /></f:comment>
+            <f:comment><f:form.button class="btn btn-primary btn-xs">Löschen</f:form.button></f:comment>
 
-        <f:form.button class="btn btn-primary btn-xs" id="deleteNewDateField">Löschen</f:form.button>
-
-        <f:form.button style="width:10%" class="btn btn-primary" id="addNewDateField">Hinzufügen</f:form.button>
-
+            <f:form.button class="btn btn-primary add-more" type="button" style="width:10%" >Hinzufügen</f:form.button>
+        </div>
         <div>
+            <br />
             <f:form.submit value="Weiter" class="btn btn-primary btn-xs" id="timeofdaysubmit" />
         </div>
-
     </f:form>
 
-
-
-
+    <div class="copy-fields" style="display: none!important;">
+        <div class="control-group" style="margin-top:10px" object="{appointment}" >
+            <f:form.textfield type="date" name="appointment[]" property="appointmentdate" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
+            <f:form.textfield type="time" name="appointment[]" property="timevalue" style="width:10%" />
+            <f:form.button class="btn btn-primary remove" type="button" style="width:10%">Löschen</f:form.button>
+        </div>
+    </div>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
-            $('#addNewDateField').click(function () {
-                $(this).attr('disabled', true);
-                $(this).after('<div><f:form.textfield id="dateField" type="date" property="appointmentdate" class="form-control" />\n\
-                        <f:form.button class="btn btn-primary btn-xs" id="deleteNewDateField">Löschen</f:form.button>\n\
-                        <f:form.button style="width:10%" class="btn btn-primary" id="addNewDateField">Hinzufügen</f:form.button> </div>');
+            //Button mit class="add-more" auswählen
+            $(".add-more").click(function () {
+                //speichere in var html html codeschnipsel innerhalb von class copy-fields
+                var html = $(".copy-fields").html();
+                //füge html codeschnipsel nach div mit class after-add-more ein
+                $(".after-add-more").after(html);
             });
+            //bei click auf Löschen button 
+            //wird eingefügtes div mit class="copy-fields", welche die Eltern 
+            //von class="control-group ist, entfernt"
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".control-group").remove();
+            });
+
         });
+
     </script>
-
-    <f:comment>
-        http://www.phpcodify.com/add-remove-input-fields-dynamically-using-jquery-bootstrap/
-    </f:comment>
-    <f:comment>
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading">Add Remove input fields Dynamically using jQuery Bootstrap</div>
-                <div class="panel-body">
-
-                    <form action="" >
-                        <div class="input-group control-group after-add-more">
-                            <input type="text" name="addmore[]" class="form-control" placeholder="Enter Name Here">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                    <!-- Copy Fields-These are the fields which we get through jquery and then add after the above input,-->
-                    <!-- bleiben verborgen class="hide", durch Leerueichen getrennt, können mehrere Klassen gesetzt werden-->
-                    <div class="copy-fields hide">
-                        <div class="control-group input-group" style="margin-top:10px">
-                            <input type="text" name="addmore[]" class="form-control" placeholder="Enter Name Here">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </f:comment>
-    <f:comment>
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-
-                //here first get the contents of the div with name class 
-                //copy-fields and add it to after "after-add-more" div class.
-                //Button mit class="add-more"
-                $(".add-more").click(function () {
-                    //speichere in var html html codeschnippzell innerhalb von class copy-fields
-                    var html = $(".copy-fields").html();
-                    //füge html codeschnippzell nach div mit class after-add-more ein
-                    $(".after-add-more").after(html);
-                });
-                //here it will remove the current value 
-                //of the remove button which has been pressed
-                $("body").on("click", ".remove", function () {
-                    $(this).parents(".control-group").remove();
-                });
-
-            });
-
-        </script>
-
-
-    </f:comment>
 
 </f:section>
