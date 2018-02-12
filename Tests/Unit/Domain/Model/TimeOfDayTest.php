@@ -58,7 +58,7 @@ class TimeOfDayTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	{
 		$this->assertSame(
 			'',
-			$this->subject->getTimevalue()
+			$this->subject->getTimeValue()
 		);
 	}
 
@@ -67,7 +67,7 @@ class TimeOfDayTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 */
 	public function setTimevalueForStringSetsTimevalue()
 	{
-		$this->subject->setTimevalue('Conceived at T3CON10');
+		$this->subject->setTimeValue('Conceived at T3CON10');
 
 		$this->assertAttributeEquals(
 			'Conceived at T3CON10',

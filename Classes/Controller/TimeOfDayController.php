@@ -55,7 +55,7 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 		\Schmidtch\Survey\Domain\Model\TimeOfDay $timeofday = NULL )
 	{
 		// Wenn das Uhrzeitfeld leer ist, wird nicht persistiert
-        if ($timeofday->getTimevalue()=="") return FALSE;
+        if ($timeofday->getTimeValue()=="") return FALSE;
 		
         // Uhrzeit zum Termin hinzufügen hinzufügen
         $appiontment->addTimeOfDay($timeofday);
@@ -65,7 +65,7 @@ class TimeofdayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $timeofdays = $appiontment->getTimeOfDay();
         foreach ($timeofdays as $timeofday){
             $json[$timeofday->getUid()] = array(
-                'timevalue'=>$timeofday->getTimevalue(),
+                'timevalue'=>$timeofday->getTimeValue(),
             );
         }
         return json_encode($json);	

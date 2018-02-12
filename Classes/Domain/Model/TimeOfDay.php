@@ -37,7 +37,7 @@ class TimeOfDay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @var string
      */
-    protected $timevalue = '';
+    protected $timeValue = '';
     
     /**
      * timecheck
@@ -45,7 +45,7 @@ class TimeOfDay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Poll>
      * @cascade remove
      */
-    protected $timecheck = null;
+    protected $timeCheck = null;
     
     /**
      * __construct
@@ -66,7 +66,7 @@ class TimeOfDay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->timecheck = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->timeCheck = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
     
     /**
@@ -74,31 +74,31 @@ class TimeOfDay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @return string $timevalue
      */
-    public function getTimevalue()
+    public function getTimeValue()
     {
-        return $this->timevalue;
+        return $this->timeValue;
     }
     
     /**
      * Sets the timevalue
      * 
-     * @param string $timevalue
+     * @param string $timeValue
      * @return void
      */
-    public function setTimevalue($timevalue)
+    public function setTimeValue($timeValue)
     {
-        $this->timevalue = $timevalue;
+        $this->timeValue = $timeValue;
     }
     
     /**
      * Adds a Poll
      * 
-     * @param \Schmidtch\Survey\Domain\Model\Poll $timecheck
+     * @param \Schmidtch\Survey\Domain\Model\Poll $timeCheck
      * @return void
      */
-    public function addTimecheck(\Schmidtch\Survey\Domain\Model\Poll $timecheck)
+    public function addTimecheck(\Schmidtch\Survey\Domain\Model\Poll $timeCheck)
     {
-        $this->timecheck->attach($timecheck);
+        $this->timeCheck->attach($timeCheck);
     }
     
     /**
@@ -109,28 +109,28 @@ class TimeOfDay extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function removeTimecheck(\Schmidtch\Survey\Domain\Model\Poll $timecheckToRemove)
     {
-        $this->timecheck->detach($timecheckToRemove);
+        $this->timeCheck->detach($timecheckToRemove);
     }
     
     /**
      * Returns the timecheck
      * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Poll> $timecheck
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Poll> $timeCheck
      */
     public function getTimecheck()
     {
-        return $this->timecheck;
+        return $this->timeCheck;
     }
     
     /**
      * Sets the timecheck
      * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Poll> $timecheck
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Schmidtch\Survey\Domain\Model\Poll> $timeCheck
      * @return void
      */
-    public function setTimecheck(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $timecheck)
+    public function setTimecheck(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $timeCheck)
     {
-        $this->timecheck = $timecheck;
+        $this->timeCheck = $timeCheck;
     }
 
 }

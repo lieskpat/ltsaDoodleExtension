@@ -27,9 +27,9 @@
 
     <f:form action="add" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
         <div class="after-add-more">
-            <f:form.textfield type="date" name="appointment[]" property="appointmentdate" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
+            <f:form.textfield type="date" name="tx_[appointment][appointmentdate][]" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
 
-            <f:form.textfield type="time" name="appointment[]" property="{timeOfDay.timevalue}" style="width:10%" />
+            <f:form.textfield type="time" name="tx_[appointment][timevalue][]" style="width:10%" />
 
             <f:comment><f:form.button class="btn btn-primary btn-xs">Löschen</f:form.button></f:comment>
 
@@ -43,8 +43,8 @@
 
     <div class="copy-fields" style="display: none!important;">
         <div class="control-group" style="margin-top:10px" object="{appointment}" >
-            <f:form.textfield type="date" name="appointment[]" property="appointmentdate" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
-            <f:form.textfield type="time" name="appointment[]" property="timevalue" style="width:10%" />
+            <f:form.textfield type="date" name="tx_[appointment][appointmentdate][]" class="form-control" value="{survey.appointmentdate->f:format.date(format: '{f:translate(key: \'tx_myext.format.datetime\')}')}"/>
+            <f:form.textfield type="time" name="tx_[appointment][timevalue][]" style="width:10%" />
             <f:form.button class="btn btn-primary remove" type="button" style="width:10%">Löschen</f:form.button>
         </div>
     </div>

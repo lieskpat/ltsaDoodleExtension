@@ -68,7 +68,7 @@ class AppiontmentTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	public function setAppiontmentdateForDateTimeSetsAppiontmentdate()
 	{
 		$dateTimeFixture = new \DateTime();
-		$this->subject->setAppointmentdate($dateTimeFixture);
+		$this->subject->setAppointmentDate($dateTimeFixture);
 
 		$this->assertAttributeEquals(
 			$dateTimeFixture,

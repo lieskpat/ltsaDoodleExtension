@@ -85,7 +85,7 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \DateTime $appointmentdate
      * @return void
      */
-    public function setAppointmentdate(\DateTime $appointmentdate)
+    public function setAppointmentDate(\DateTime $appointmentdate)
     {
         $this->appointmentdate = $appointmentdate;
     }

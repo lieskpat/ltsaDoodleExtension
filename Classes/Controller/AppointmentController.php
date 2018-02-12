@@ -47,7 +47,8 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     /**
      * @param \Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository
      */
-    public function injectAppointmentRepository(\Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository) {
+    public function injectAppointmentRepository(
+    \Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository) {
         $this->appointmentRepository = $appointmentRepository;
     }
 
@@ -58,25 +59,31 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function initializeAddAction() {
         $this->arguments['appointment']
-            ->getPropertyMappingConfiguration()
-            ->forProperty('*')
-            ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
+                ->getPropertyMappingConfiguration()
+                ->forProperty('*')
+                ->setTypeConverterOption(
+                        'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param $appointment
+     * @param $appointmentArray
      */
     public function addAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointment) {
-        //$this->appointmentRepository->add($appointment);
+    \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentArray = array()) {
 
-        $survey->addAppointment($appointment);
+        foreach ($appointmentArray as $value) {
+            $appointmentObject = new \Schmidtch\Survey\Domain\Model\Appointment();
+            $appointmentObject->setAppointmentDate($value['appointmentdate']);
+            $timeOfDayObject = new \Schmidtch\Survey\Domain\Model\TimeOfDay();
+            $timeOfDayObject->setTimeValue($value['timevalue']);
+            $appointmentObject->addTimeOfDay($timeOfDayObject);
+            $survey->addAppointment($appointmentObject);
+        }
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\SurveyRepository')->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
-        $this->redirect('addFormTime', 'Appointment', NULL, array('appointment' => $appointment, 'survey' => $survey));
+        $this->redirect('addFormTime', 'Appointment', NULL, array('appointment' => $appointmentArray, 'survey' => $survey));
     }
 
     /**
@@ -106,7 +113,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function ajaxAddAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\TimeOfDay $timeOfDay = NULL) {
         // Wenn das Feld leer ist, wird nicht persistiert
-        if ($timeOfDay->getTimevalue() == "")
+        if ($timeOfDay->getTimeValue() == "")
             return FALSE;
 
         // Uhrzeit zum Termin hinzufühgen
@@ -118,7 +125,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $timeOfDays = $appointment->getTimeOfDay();
         foreach ($timeOfDays as $timeOfDay) {
             $json[$timeOfDay->getUid()] = array(
-                'timevalue' => $timeOfDay->getTimevalue()
+                'timevalue' => $timeOfDay->getTimeValue()
             );
         }
         return json_encode($json);
@@ -167,7 +174,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function deleteAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->addFlashMessage(
-            'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+                'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\surveyRepository')->update($survey);
