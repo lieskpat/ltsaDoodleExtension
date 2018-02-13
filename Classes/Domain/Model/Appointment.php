@@ -37,7 +37,7 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @var \DateTime
      */
-    protected $appointmentdate = null;
+    protected $appointmentDate = null;
     
     /**
      * timeOfDay
@@ -72,22 +72,22 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the appointmentdate
      * 
-     * @return \DateTime $appointmentdate
+     * @return \DateTime $appointmentDate
      */
-    public function getAppointmentdate()
+    public function getAppointmentDate()
     {
-        return $this->appointmentdate;
+        return $this->appointmentDate;
     }
     
     /**
      * Sets the appointmentdate
      * 
-     * @param \DateTime $appointmentdate
+     * @param \DateTime $appointmentDate
      * @return void
      */
-    public function setAppointmentDate(\DateTime $appointmentdate)
+    public function setAppointmentDate(\DateTime $appointmentDate)
     {
-        $this->appointmentdate = $appointmentdate;
+        $this->appointmentDate = $appointmentDate;
     }
     
     /**
