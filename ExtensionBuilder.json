@@ -172,7 +172,7 @@
                             "lazyLoading": false,
                             "propertyIsExcludeField": false,
                             "relationDescription": "",
-                            "relationName": "appiontments",
+                            "relationName": "appointments",
                             "relationType": "zeroToMany",
                             "relationWire": "[wired]",
                             "uid": "1060405408840"
@@ -289,14 +289,14 @@
                     "_default4_delete": false,
                     "customActions": []
                 },
-                "name": "Appiontment",
+                "name": "Appointment",
                 "objectsettings": {
                     "addDeletedField": true,
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
                     "aggregateRoot": true,
                     "categorizable": false,
-                    "description": "Appiontment of the Survey",
+                    "description": "Appointment of the Survey",
                     "mapToTable": "",
                     "parentClass": "",
                     "sorting": false,
@@ -308,10 +308,10 @@
                         {
                             "allowedFileTypes": "",
                             "maxItems": "1",
-                            "propertyDescription": "date of the Appiontment",
+                            "propertyDescription": "date of the Appointment",
                             "propertyIsExcludeField": false,
                             "propertyIsRequired": false,
-                            "propertyName": "appiontmentdate",
+                            "propertyName": "appointmentdate",
                             "propertyType": "NativeDateTime",
                             "uid": "86288770747"
                         }
@@ -369,7 +369,7 @@
                         {
                             "allowedFileTypes": "",
                             "maxItems": "1",
-                            "propertyDescription": "time of the Appiontment",
+                            "propertyDescription": "time of the Appointment",
                             "propertyIsExcludeField": false,
                             "propertyIsRequired": false,
                             "propertyName": "timevalue",

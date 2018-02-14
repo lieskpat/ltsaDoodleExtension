@@ -53,7 +53,7 @@ CREATE TABLE tx_survey_domain_model_survey (
 	visible tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	comment_visible tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	organizer int(11) unsigned DEFAULT '0',
-	appiontments int(11) unsigned DEFAULT '0' NOT NULL,
+	appointments int(11) unsigned DEFAULT '0' NOT NULL,
 	comments int(11) unsigned DEFAULT '0' NOT NULL,
 	subscribers int(11) unsigned DEFAULT '0' NOT NULL,
 
@@ -130,16 +130,16 @@ CREATE TABLE tx_survey_domain_model_subscriber (
 );
 
 #
-# Table structure for table 'tx_survey_domain_model_appiontment'
+# Table structure for table 'tx_survey_domain_model_appointment'
 #
-CREATE TABLE tx_survey_domain_model_appiontment (
+CREATE TABLE tx_survey_domain_model_appointment (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	survey int(11) unsigned DEFAULT '0' NOT NULL,
 
-	appiontmentdate datetime DEFAULT '0000-00-00 00:00:00',
+	appointmentdate datetime DEFAULT '0000-00-00 00:00:00',
 	time_of_day int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE tx_survey_domain_model_timeofday (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	appiontment int(11) unsigned DEFAULT '0' NOT NULL,
+	appointment int(11) unsigned DEFAULT '0' NOT NULL,
 
 	timevalue text NOT NULL,
 	timecheck int(11) unsigned DEFAULT '0' NOT NULL,
@@ -299,9 +299,9 @@ CREATE TABLE tx_survey_domain_model_poll (
 );
 
 #
-# Table structure for table 'tx_survey_domain_model_appiontment'
+# Table structure for table 'tx_survey_domain_model_appointment'
 #
-CREATE TABLE tx_survey_domain_model_appiontment (
+CREATE TABLE tx_survey_domain_model_appointment (
 
 	survey  int(11) unsigned DEFAULT '0' NOT NULL,
 
@@ -348,7 +348,7 @@ CREATE TABLE tx_survey_domain_model_poll (
 #
 CREATE TABLE tx_survey_domain_model_timeofday (
 
-	appiontment  int(11) unsigned DEFAULT '0' NOT NULL,
+	appointment  int(11) unsigned DEFAULT '0' NOT NULL,
 
 );
 

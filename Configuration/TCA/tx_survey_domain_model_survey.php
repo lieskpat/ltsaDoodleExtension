@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,description,postdate,organizername,deadline,visible,comment_visible,organizer,appiontments,comments,subscribers,',
+		'searchFields' => 'title,description,postdate,organizername,deadline,visible,comment_visible,organizer,appointments,comments,subscribers,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('survey') . 'Resources/Public/Icons/tx_survey_domain_model_survey.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, postdate, organizername, deadline, visible, comment_visible, organizer, appiontments, comments, subscribers',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, postdate, organizername, deadline, visible, comment_visible, organizer, appointments, comments, subscribers',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description, postdate, organizername, deadline, visible, comment_visible, organizer, appiontments, comments, subscribers, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description, postdate, organizername, deadline, visible, comment_visible, organizer, appointments, comments, subscribers, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -195,14 +195,14 @@ return array(
 				'maxitems' => 1,
 			),
 		),
-		'appiontments' => array(
+		'appointments' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_survey.appiontments',
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_survey.appointments',
 			'config' => array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_survey_domain_model_appiontment',
+				'foreign_table' => 'tx_survey_domain_model_appointment',
 				'foreign_field' => 'survey',
-				'foreign_sortby' => 'appiontmentdate',
+				'foreign_sortby' => 'appointmentdate',
 				'maxitems' => 9999,
 				'appearance' => array(
 					'collapseAll' => 0,

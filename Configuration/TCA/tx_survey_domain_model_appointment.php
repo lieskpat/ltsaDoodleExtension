@@ -1,8 +1,8 @@
 <?php
 return array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appiontment',
-		'label' => 'appiontmentdate',
+		'title'	=> 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appointment',
+		'label' => 'appointmentdate',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'appiontmentdate,time_of_day,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('survey') . 'Resources/Public/Icons/tx_survey_domain_model_appiontment.gif'
+		'searchFields' => 'appointmentdate,time_of_day,',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('survey') . 'Resources/Public/Icons/tx_survey_domain_model_appointment.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, appiontmentdate, time_of_day',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, appointmentdate, time_of_day',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, appiontmentdate, time_of_day, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, appointmentdate, time_of_day, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -57,8 +57,8 @@ return array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_survey_domain_model_appiontment',
-				'foreign_table_where' => 'AND tx_survey_domain_model_appiontment.pid=###CURRENT_PID### AND tx_survey_domain_model_appiontment.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_survey_domain_model_appointment',
+				'foreign_table_where' => 'AND tx_survey_domain_model_appointment.pid=###CURRENT_PID### AND tx_survey_domain_model_appointment.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -116,9 +116,9 @@ return array(
 			),
 		),
 
-		'appiontmentdate' => array(
+		'appointmentdate' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appiontment.appiontmentdate',
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appointment.appointmentdate',
 			'config' => array(
 				'dbType' => 'datetime',
 				'type' => 'input',
@@ -130,11 +130,11 @@ return array(
 		),
 		'time_of_day' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appiontment.time_of_day',
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appointment.time_of_day',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_survey_domain_model_timeofday',
-				'foreign_field' => 'appiontment',
+				'foreign_field' => 'appointment',
 				'foreign_sortby' => 'timevalue',
 				'maxitems' => 9999,
 				'appearance' => array(

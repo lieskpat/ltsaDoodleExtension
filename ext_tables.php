@@ -20,8 +20,8 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_survey_domain_model_subscriber', 'EXT:survey/Resources/Private/Language/locallang_csh_tx_survey_domain_model_subscriber.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_survey_domain_model_subscriber');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_survey_domain_model_appiontment', 'EXT:survey/Resources/Private/Language/locallang_csh_tx_survey_domain_model_appiontment.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_survey_domain_model_appiontment');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_survey_domain_model_appointment', 'EXT:survey/Resources/Private/Language/locallang_csh_tx_survey_domain_model_appointment.xlf');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_survey_domain_model_appointment');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_survey_domain_model_timeofday', 'EXT:survey/Resources/Private/Language/locallang_csh_tx_survey_domain_model_timeofday.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_survey_domain_model_timeofday');
