@@ -332,8 +332,9 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @return void
      */
-    public function addAppointment(\Schmidtch\Survey\Domain\Model\Appointment $appointment)
-    {
+    public function addAppointment(\Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appointment);
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->$appointments);
         $this->appointments->attach($appointment);
     }
     

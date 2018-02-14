@@ -25,11 +25,11 @@
         </f:if>
     </f:comment>
 
-    <f:form action="add" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
+    <f:form controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
         <div class="after-add-more">
-            <f:form.textfield type="date" name="appointment[appointmentdate]" class="form-control" value="" />
+            <input type="date" name="tx_survey_surveylisting[appointments][appointmentdate][]" class="form-control" value="" />
 
-            <f:form.textfield type="time" name="appointment[timeOfDay][timeValue]" style="width:10%" />
+            <input type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" />
 
             <f:comment><f:form.button class="btn btn-primary btn-xs">Löschen</f:form.button></f:comment>
 
@@ -43,8 +43,8 @@
 
     <div class="copy-fields" style="display: none!important;">
         <div class="control-group" style="margin-top:10px" >
-            <f:form.textfield type="date" name="tx_survey_surveylisting[appointment][appointmentdate][]" class="form-control" value=""/>
-            <f:form.textfield type="time" name="tx_survey_surveylisting[appointment][timevalue][]" style="width:10%" />
+            <f:form.textfield type="date" name="tx_survey_surveylisting[appointments][appointmentdate][]" class="form-control" value=""/>
+            <f:form.textfield type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" />
             <f:form.button class="btn btn-primary remove" type="button" style="width:10%">Löschen</f:form.button>
         </div>
     </div>
