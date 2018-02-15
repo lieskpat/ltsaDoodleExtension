@@ -58,12 +58,12 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return void
      */
     public function initializeAddAction() {
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointments'));
-        //if ($this->arguments->hasArgument('appointments')) {
-        //    $this->arguments->getArgument('appointments')
-        //        ->getPropertyMappingConfiguration()
-        //        ->allowProperties('appointmentdate', 'timevalue');
-        //}
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointments'));
+        if ($this->arguments->hasArgument('appointments')) {
+            $this->arguments->getArgument('appointments')
+                ->getPropertyMappingConfiguration()
+                ->skipProperties('appointmentDate', 'timevalue');
+        }
         //$appArray = $this->arguments->getArgument('appointment');
         //foreach ($appArray as $value) {
         //    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appArray);
