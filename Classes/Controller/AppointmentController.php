@@ -58,12 +58,12 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return void
      */
     public function initializeAddAction() {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointments'));
-        if ($this->arguments->hasArgument('appointments')) {
-            $this->arguments->getArgument('appointments')
-                ->getPropertyMappingConfiguration()
-                ->skipProperties('appointmentDate', 'timevalue');
-        }
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointment'));
+        //if ($this->arguments->hasArgument('appointments')) {
+        //    $this->arguments->getArgument('appointments')
+        //        ->getPropertyMappingConfiguration()
+        //        ->skipProperties('appointmentDate', 'timevalue');
+        //}
         //$appArray = $this->arguments->getArgument('appointment');
         //foreach ($appArray as $value) {
         //    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appArray);
@@ -84,22 +84,15 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * Update the survey object with appointments.
      * 
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param array $appointments
+     * 
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * 
      * 
      */
-    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointments = array()) {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointments'));
+    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
 
-        foreach ($appointments as $value) {
-            $appointmentObject = new \Schmidtch\Survey\Domain\Model\Appointment();
-            $appointmentObject->setAppointmentDate(new \DateTime($value['appointmentdate']));
-            $timeOfDayObject = new \Schmidtch\Survey\Domain\Model\TimeOfDay();
-            $timeOfDayObject->setTimeValue($value['timevalue']);
-            $appointmentObject->addTimeOfDay($timeOfDayObject);
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appointmentObject);
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
-            $survey->addAppointment($appointmentObject);
-        }
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\SurveyRepository')->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();

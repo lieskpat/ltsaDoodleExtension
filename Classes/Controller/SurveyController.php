@@ -62,12 +62,14 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
         // $survey->setAuthor($this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\AuthorRepository')->findOneByUid( $GLOBALS['TSFE']->fe_user->user['uid']));
         // $survey->setFe_user_uid
+       
 
         $survey->setPostdate(new \DateTime());
         $this->surveyRepository->add($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
         $this->redirect('addFormDate', 'Appointment', NULL, array('survey' => $survey));
+        
     }
 
     /**
