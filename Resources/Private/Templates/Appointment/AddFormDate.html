@@ -28,7 +28,8 @@
     <f:form controller="Appointment" action="add" name="appointment" object="{appointment}" arguments="{survey:survey, appointment:appointment}" additionalAttributes="{role: 'form'}" >
         <div class="after-add-more">
             <div>
-                <f:form.textfield type="date" name="appointment[appointmentDate]" />
+		<f:comment><f:form.textfield type="date" name="appointment[appointmentDate]" /></f:comment>
+		<f:form.textfield type="date" property="survey.appointments.0.appointment.appointmentDate" />
             </div>
             <div>
                 <f:form.textfield type="date" name="appointment[appointmentDate]" />
