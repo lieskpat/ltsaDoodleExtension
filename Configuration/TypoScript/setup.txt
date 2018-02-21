@@ -48,9 +48,9 @@ page {
 		//dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.css
 	}
 	includeJS {
-		jquery = EXT:survey/Resources/Public/Bootstrap/js/jquery.js
+		jquery = web/typo3conf/ext/survey/Resources/Public/Bootstrap/js/jquery.js
 		jquery.external = 1
-		bootstrap = EXT:survey/Resources/Public/Bootstrap/js/bootstrap.min.js
+		bootstrap = web/typo3conf/ext/survey/Resources/Public/Bootstrap/js/bootstrap.min.js
 		dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.js
 	}
 }
