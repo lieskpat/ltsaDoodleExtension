@@ -61,7 +61,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**
      * 
-     * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository 
+     * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
      * 
      */
     public function injectSurveyRepository(\Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
@@ -96,12 +96,13 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
 
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->surveyRepository);
 
         $this->surveyRepository->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
 
-        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
@@ -118,6 +119,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * 
      */
     public function addFormTimeAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        
         $this->view->assign('survey', $survey);
     }
 
