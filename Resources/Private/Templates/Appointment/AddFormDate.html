@@ -25,22 +25,21 @@
         </f:if>
     </f:comment>
 
-    <f:form controller="Appointment" action="add" name="appointment" object="{appointment}" arguments="{survey:survey, appointment:appointment}" additionalAttributes="{role: 'form'}" >
+    <f:form controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
         <div class="after-add-more">
             <div>
-		<f:comment><f:form.textfield type="date" name="appointment[appointmentDate]" /></f:comment>
-		<f:form.textfield type="date" property="survey.appointments.0.appointment.appointmentDate" />
+		<f:form.textfield type="datetime" property="appointments.0.appointmentDate" />
+                <br />
             </div>
             <div>
-                <f:form.textfield type="date" name="appointment[appointmentDate]" />
+                <f:form.textfield type="datetime" property="appointments.1.appointmentDate" />
+                <br />
             </div>
-            <f:comment><f:form.textfield type="time" name="survey[appointments][appointment][timeOfDay][timeOfDay][timeValue]" />
-                <input type="date" name="tx_survey_surveylisting[appointments][appointmentDate][]" class="form-control" value="" />
-
-                <input type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" /></f:comment>
-
-            <f:comment><f:form.button class="btn btn-primary btn-xs">Löschen</f:form.button></f:comment>
-
+            <div>
+                <f:form.textfield type="datetime" property="appointments.2.appointmentDate" />
+                <br />
+            </div>
+            
             <f:form.button class="btn btn-primary add-more" type="button" style="width:10%" >Hinzufügen</f:form.button>
         </div>
         <div>

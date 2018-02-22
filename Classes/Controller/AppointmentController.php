@@ -45,6 +45,13 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     protected $timeOfDayRepository;
 
     /**
+     * 
+     * @var \Schmidtch\Survey\Domain\Repository\SurveyRepository 
+     * 
+     */
+    protected $surveyRepository;
+
+    /**
      * @param \Schmidtch\Survey\Domain\Repository\AppointmentRepository $appointmentRepository
      */
     public function injectAppointmentRepository(
@@ -53,31 +60,28 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     }
 
     /**
+     * 
+     * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository 
+     * 
+     */
+    public function injectSurveyRepository(\Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+        $this->surveyRepository = $surveyRepository;
+    }
+
+    /**
      * action initialize
      * reset default date format
      * @return void
      */
     public function initializeAddAction() {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('appointment'));
-        //if ($this->arguments->hasArgument('appointments')) {
-        //    $this->arguments->getArgument('appointments')
-        //        ->getPropertyMappingConfiguration()
-        //        ->skipProperties('appointmentDate', 'timevalue');
-        //}
-        //$appArray = $this->arguments->getArgument('appointment');
-        //foreach ($appArray as $value) {
-        //    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appArray);
-        //}
-        //$this->arguments->getArgument($appointmentArray)
-        //    ->getPropertyMappingConfiguration()
-        //    ->forProperty('appointmentDate')
-        //    ->setTypeConverterOption(
-        //        'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
-        //$this->arguments['appointment']
-        //    ->getPropertyMappingConfiguration()
-        //    ->forProperty('*')
-        //    ->setTypeConverterOption(
-        //        'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('survey'));
+        if ($this->arguments->hasArgument('survey')) {
+            $this->arguments->getArgument('survey')
+                ->getPropertyMappingConfiguration()
+                ->forProperty('survey.appointments.appointmentDate')
+                ->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', 
+                    \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
+        }
     }
 
     /**
@@ -85,19 +89,19 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * 
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      * 
-     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * 
      * 
      * 
      */
-    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
-        
+    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
 
-        $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\SurveyRepository')->update($survey);
+        $this->surveyRepository->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
 
-        $this->redirect('addFormTime', 'Appointment', NULL, array('appointment' => $appointments, 'survey' => $survey));
+        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
@@ -111,13 +115,10 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * 
      */
-    public function addFormTimeAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+    public function addFormTimeAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->view->assign('survey', $survey);
-        $this->view->assign('appointment', $appointment);
-        $this->view->assign('timeofday', $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\TimeofdayRepository')->findAll());
     }
 
     /**
