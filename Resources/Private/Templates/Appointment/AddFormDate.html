@@ -28,17 +28,27 @@
     <f:form controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
         <f:form.validationResults for="survey">
             <f:if condition="{validationResults.flattenedErrors}">
-                <f:for each="{validationResults.flattenedErrors}" as="errors" key="fieldTitle">
-                    <f:for each="{errors}" as="error">
-                        {error.code}: {error}
-                    </f:for>
+                <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+                    {proppertyPath}
+                    <ul>
+
+                        <f:for each="{errors}" as="error">
+                            <li>
+                                {error.code} | {error} | Argumente: 
+                            <f:for each="{error.arguments}" as="argument">
+                                {argument},
+                            </f:for>
+                            </li>
+                        </f:for>
+                    </ul>
                 </f:for>
             </f:if>
         </f:form.validationResults>
 
         <div class="after-add-more">
             <div>
-                <f:form.textfield type="date" placeholder="Y-m-d" property="appointments.0.appointmentDate" />
+                <f:form.textfield type="text" placeholder="Y-m-d" property="appointments.0.appointmentDate" 
+                                  value="{appointmentDate-> f:format.date( format: 'd-m-Y')}" />
                 <br />
             </div>
             <f:comment><div>

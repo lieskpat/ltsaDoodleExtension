@@ -74,17 +74,20 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return void
      */
     public function initializeAddAction() {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('survey'));
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('survey'));
         if ($this->arguments->hasArgument('survey')) {
             $proppertyMappingConfiguration = $this->arguments->getArgument('survey')
                     ->getPropertyMappingConfiguration();
-
-            $proppertyMappingConfiguration->forProperty('appointments.*.appointmentDate');
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments['survey']);
+            
+            $proppertyMappingConfiguration->forProperty('appointmentDate');
+            
 
             $proppertyMappingConfiguration->setTypeConverterOption(
                     \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
                     \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
-                    'Y-m-d');
+                    'd-m-Y');
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($proppertyMappingConfiguration);
         }
     }
 
