@@ -84,7 +84,8 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             
 
             $proppertyMappingConfiguration->setTypeConverterOption(
-                    \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
+                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    //\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
                     \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
                     'd-m-Y');
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($proppertyMappingConfiguration);
