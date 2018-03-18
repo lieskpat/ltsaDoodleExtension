@@ -45,7 +45,7 @@ page {
 	includeCSS {
 		bootstrap = EXT:survey/Resources/Public/Bootstrap/css/bootstrap.min.css
 		//survey = EXT:survey/Resources/Public/Css/Survey.css
-                survey = web/typo3conf/ext/survey/Resources/Public/Css/my-survey-css.css
+                survey = typo3conf/ext/survey/Resources/Public/Css/my-survey-css.css
 		//dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.css
 	}
 	includeJS {
