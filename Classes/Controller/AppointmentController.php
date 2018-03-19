@@ -75,10 +75,29 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function initializeAddAction() {
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgument('survey'));
+        $surveyRequestArray = $this->request->getArgument('survey');
+        $converter = new \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter();
+        $dateTimeObject = \DateTime::createFromFormat('Y-m-d', $surveyRequestArray['appointments'][0]['appointmentDate']);
+        //$dateTimeObject = \DateTime::createFromFormat('Y-m-d', '2018-03-13');
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($dateTimeObject);
+        
+        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($surveyRequestArray['appointments'][0]['appointmentDate']);
+        
+        $bool = $converter->canConvertFrom($surveyRequestArray, 'DateTime');
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($bool);
+        if ($bool) {
+          $dateTime = $converter->convertFrom($surveyRequestArray['appointments'][0]['appointmentDate'], 'DateTime');
+          \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($dateTime);
+        }
+        
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments->getArgumentNames());
+        
         if ($this->arguments->hasArgument('survey')) {
-            $proppertyMappingConfiguration = $this->arguments->getArgument('survey')
+            $survey = $this->arguments->getArgument('survey');
+            $proppertyMappingConfiguration = $survey
                     ->getPropertyMappingConfiguration();
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments['survey']);
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments['survey']);
             
             $proppertyMappingConfiguration->forProperty('appointmentDate');
             
@@ -87,7 +106,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
                     'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
                     //\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
                     \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
-                    'd-m-Y');
+                    'd-m-Y H:i');
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($proppertyMappingConfiguration);
         }
     }

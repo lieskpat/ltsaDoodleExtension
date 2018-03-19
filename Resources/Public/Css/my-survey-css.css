@@ -1,8 +1,27 @@
-.my-form {
-    
+.my-form input[type="submit"], .my-form button[type="button"] {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+}
+
+.my-form label{
+    display: block;
+    padding: 0px 0px 5px 0px;
+}
+
+.my-form input[type="text"], .my-form input[type="date"], .my-form textArea{
+    width:100%;
+    padding: 8px 0px 8px 0px;
 }
 
 .form-group {
     padding-bottom: 15px;
+}
+
+.layout1 {
+    border: 1px solid #80808075;
+    border-radius: 5px;
+    padding:10px;
 }
 
