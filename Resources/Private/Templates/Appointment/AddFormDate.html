@@ -8,23 +8,6 @@
 
     <h3>Termin wählen</h3>
 
-    <f:comment>
-        <f:if condition="{survey.appointments}">
-            <ul class="list-group">
-                <f:for each="{survey.appointments}" as="appointment">
-                    <li class="list-group-item">
-                        <label><f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date></label>
-                    <f:for each="{appointment.timeOfDay}" as="timeofday">
-                        <dd>
-                            {timeofday.timevalue} Uhr
-                        </dd>
-                    </f:for>
-                    </li>
-                </f:for>
-            </ul>
-        </f:if>
-    </f:comment>
-
     <f:form class="my-form" controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
         <f:form.validationResults for="survey">
             <f:if condition="{validationResults.flattenedErrors}">
@@ -47,8 +30,7 @@
 
         <div class="after-add-more">
             <div>
-                <f:form.textfield type="date" placeholder="Y-m-d" property="appointments.0.appointmentDate" 
-                                  value="{appointmentDate-> f:format.date( format: 'd-m-Y')}" />
+                <f:form.textfield placeholder="Y-m-d" property="appointments.0.appointmentDate" />
             </div>
             <f:comment><div>
                     <f:form.textfield type="date" placeholder="d.m.Y" property="appointments.1.appointmentDate" />
