@@ -75,10 +75,24 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return void
      */
     public function initializeAddAction() {
-        $this->arguments->getArgument('survey')
+        echo "hier";
+        /**$this->arguments['survey']
             ->getPropertyMappingConfiguration()->forProperty('appointmentDate')
             ->setTypeConverterOption(\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
-            \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');        
+            \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd-m-Y');    
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($configuration->);*/
+       $this->arguments['survey']
+     ->getPropertyMappingConfiguration()->forProperty('*')   
+     ->setTypeConverterOption('\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments['survey']);
+        
+        /**$this->arguments['appiontment']
+		->getPropertyMappingConfiguration()
+		->forProperty('*')
+		->setTypeConverterOption(
+			'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', 
+			\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
+			'd.m.Y');*/
     }
 
     /**
@@ -91,7 +105,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * 
      */
     public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
-
+        
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->surveyRepository);
 
