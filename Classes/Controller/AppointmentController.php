@@ -93,6 +93,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 			'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', 
 			\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
 			'd.m.Y');*/
+        //Funktioniert nicht
     }
 
     /**
