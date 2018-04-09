@@ -68,55 +68,33 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->surveyRepository = $surveyRepository;
     }
 
-    /**
-     * action initialize
-     * reset default date format
-     * @param void
-     * @return void
-     */
-    public function initializeAddAction() {
-        echo "hier";
-        /**$this->arguments['survey']
-            ->getPropertyMappingConfiguration()->forProperty('appointmentDate')
-            ->setTypeConverterOption(\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::class, 
-            \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd-m-Y');    
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($configuration->);*/
-       $this->arguments['survey']
-     ->getPropertyMappingConfiguration()->forProperty('*')   
-     ->setTypeConverterOption('\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->arguments['survey']);
-        
-        /**$this->arguments['appiontment']
-		->getPropertyMappingConfiguration()
-		->forProperty('*')
-		->setTypeConverterOption(
-			'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', 
-			\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 
-			'd.m.Y');*/
-    }
-
+    
     /**
      * Update the survey object with appointments.
      * 
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @dontvalidate $survey
-     * 
-     * 
-     * 
+     * @param \array $appointmentDate
+     *
      */
-    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
         
+        foreach ($appointmentDate as $key => $value) {
+            $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
+            $appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
+            $this->appointmentRepository->add($appointment);
+            $survey->addAppointment($appointment);
+            
+        }
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->surveyRepository);
+        
 
         $this->surveyRepository->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
 
-        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
-        $this->redirect('addFormTime', 'Appointment');
-        //$survey2 = $this->surveyRepository->findByUid(4);
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey2);
+        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        //$this->redirect('addFormTime', 'Appointment');
+        
     }
 
     /**
