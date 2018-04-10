@@ -84,7 +84,8 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         //wo sie im Code notiert sind
         foreach ($appointmentDate as $key => $value) {
             $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
-            $appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
+            //$appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
+            $appointment->setAppointmentDate(new \DateTime());
             $survey->addAppointment($appointment);
         }
         
