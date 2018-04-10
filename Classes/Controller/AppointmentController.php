@@ -77,44 +77,41 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      *
      */
     public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
-        
+        //Hinweis
+        //schreibende Zugriffe auf das Repository(z.B. add) 
+        //erfolgen immer am Ende der Action
+        //lesende Zugriffe(z.B.findAll) erfolgen immer an der Stelle,
+        //wo sie im Code notiert sind
         foreach ($appointmentDate as $key => $value) {
             $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
             $appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
-            $this->appointmentRepository->add($appointment);
             $survey->addAppointment($appointment);
-            
         }
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
         
-
+        //Manueller Aufruf und manuelle Speicherung mithilfe von PersistenceManager
+        //Sonst würde redirect vor Persistierung aufgerufen
         $this->surveyRepository->update($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
 
+        //$this->forward('addFormTime', 'Appointment',NULL, array('survey' => $survey));
         $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
-        //$this->redirect('addFormTime', 'Appointment');
-        
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * 
      */
-    public function addFormDateAction(
-    \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment = NULL) {
+    public function addFormDateAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->view->assign('survey', $survey);
     }
 
     /**
      *
-     * 
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
-    public function addFormTimeAction() {
-
-        $survey = $this->surveyRepository->findAll();
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
-        //$this->view->assign('survey', $survey);
+    public function addFormTimeAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->view->assign('survey', $this->surveyRepository->findByUid($survey->getUid()));
     }
 
     /**

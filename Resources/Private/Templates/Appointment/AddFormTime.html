@@ -31,8 +31,9 @@
         <f:then>
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment">
-                    <li class="list-group-item">					
-                        <p>Termin: <f:format.date>{appointment.appointmentDate}</f:format.date></p>
+                    <li>
+                    <f:comment><f:debug title="SURVEY">{survey}</f:debug></f:comment>
+                    <p>Termin: <f:format.date>{appointment.appointmentDate}</f:format.date></p>
                     </li>
                 </f:for>
             </ul>

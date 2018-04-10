@@ -7,26 +7,26 @@ plugin.tx_survey_surveylisting {
 	}
 	
 	persistence {
-		storagePid = 63, 47
+		storagePid = 34, 35
 		recursive = 1
 		classes {
 			Schmidtch\Survey\Domain\Model\Survey {
-				newRecordStoragePid = 64
+				newRecordStoragePid = 35
 			}
 			Schmidtch\Survey\Domain\Model\Organizer {
-				newRecordStoragePid = 65
+				newRecordStoragePid = 38
 			}
 			Schmidtch\Survey\Domain\Model\Appiontment {
-				newRecordStoragePid = 66
+				newRecordStoragePid = 36
 			}
 			Schmidtch\Survey\Domain\Model\TimeOfDay {
-				newRecordStoragePid = 67
+				newRecordStoragePid = 41
 			}
 			Schmidtch\Survey\Domain\Model\Subscriber {
-				newRecordStoragePid = 68
+				newRecordStoragePid = 40
 			}
 			Schmidtch\Survey\Domain\Model\Comment {
-				newRecordStoragePid = 69
+				newRecordStoragePid = 39
 			}
 			Schmidtch\Survey\Domain\Model\Organizer {
 				mapping {
