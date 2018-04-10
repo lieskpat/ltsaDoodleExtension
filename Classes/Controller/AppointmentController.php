@@ -84,9 +84,9 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         //wo sie im Code notiert sind
         foreach ($appointmentDate as $key => $value) {
             $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
-            //$appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
-            $appointment->setAppointmentDate(new \DateTime());
+            $appointment->setAppointmentDate(\DateTime::createFromFormat('Y-m-d',$value));
             $survey->addAppointment($appointment);
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getAppointments());
         }
         
         //Manueller Aufruf und manuelle Speicherung mithilfe von PersistenceManager
@@ -96,7 +96,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $persistenceManager->persistAll();
 
         //$this->forward('addFormTime', 'Appointment',NULL, array('survey' => $survey));
-        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
