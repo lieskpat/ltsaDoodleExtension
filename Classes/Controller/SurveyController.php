@@ -64,10 +64,11 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         // $survey->setFe_user_uid
        
         $survey->setPostdate(new \DateTime());
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getPostdate());
         $this->surveyRepository->add($survey);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
-        $this->redirect('addFormDate', 'Appointment', NULL, array('survey' => $survey));
+        //$this->redirect('addFormDate', 'Appointment', NULL, array('survey' => $survey));
         
     }
 
