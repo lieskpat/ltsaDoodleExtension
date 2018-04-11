@@ -66,7 +66,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $persistenceManager = $this->objectManager->get(
                 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
-        $this->redirect('addFormDate', 'Appointment', NULL, array('survey' => $survey));
+        $this->redirect('newAppointment', 'Appointment', NULL, array('survey' => $survey));
         
     }
 
