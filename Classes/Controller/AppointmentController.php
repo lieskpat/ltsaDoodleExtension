@@ -88,6 +88,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $survey->addAppointment($appointment);
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getAppointments());
         }
+        //bei Aufruf von redirect wird automatisch vorher persistiert
         $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
