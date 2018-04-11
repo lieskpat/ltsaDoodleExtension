@@ -85,7 +85,8 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \array $appointmentDate
      *
      */
-    public function createAppointmentAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
+    public function createAppointmentAction(
+            \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
         //Hinweis
         //schreibende Zugriffe auf das Repository(z.B. add) 
         //erfolgen immer am Ende der Action
@@ -98,7 +99,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getAppointments());
         }
         //bei Aufruf von redirect wird automatisch vorher persistiert
-        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
