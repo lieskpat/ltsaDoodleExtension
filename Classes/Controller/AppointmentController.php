@@ -64,8 +64,17 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
      * 
      */
-    public function injectSurveyRepository(\Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+    public function injectSurveyRepository(
+            \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
         $this->surveyRepository = $surveyRepository;
+    }
+    
+    /**
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * 
+     */
+    public function newAppointmentAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->view->assign('survey', $survey);
     }
 
     
@@ -76,7 +85,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \array $appointmentDate
      *
      */
-    public function addAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
+    public function createAppointmentAction(\Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
         //Hinweis
         //schreibende Zugriffe auf das Repository(z.B. add) 
         //erfolgen immer am Ende der Action
@@ -90,14 +99,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         }
         //bei Aufruf von redirect wird automatisch vorher persistiert
         $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
-    }
-
-    /**
-     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
-     * 
-     */
-    public function addFormDateAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
-        $this->view->assign('survey', $survey);
     }
 
     /**

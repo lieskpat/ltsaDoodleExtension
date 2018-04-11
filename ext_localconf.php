@@ -8,7 +8,7 @@ if (!defined('TYPO3_MODE')) {
 	'Surveylisting',
 	array(
 		'Survey' => 'newSurvey, createSurvey, addFormDate, list, show, updateForm, update, deleteConfirm, delete',
-		'Appointment' => 'list,addFormDate,addFormTime, add, ajaxAdd, show, updateForm, updateFormAppointment, update, deleteConfirm, delete',
+		'Appointment' => 'list, newAppointment,addFormTime, createAppointment, ajaxAdd, show, updateForm, updateFormAppointment, update, deleteConfirm, delete',
 		'TimeOfDay' => 'list,addFormTime, add, ajaxAdd, show, updateForm, update, deleteConfirm, delete, deleteUpdateSurvey, deleteUpdateAppointment, deleteAddAppointment',
 		'Subscriber' => 'list, add, addForm, show, showAfter, updateForm, update, deleteConfirm, delete, register, registerForm,, commentAjax',
 		'Comment' => 'delete',
@@ -16,7 +16,7 @@ if (!defined('TYPO3_MODE')) {
 	// non-cacheable actions
 	array(
 		'Survey' => 'newSurvey, createSurvey, addFormDate, list, show, updateForm, update, deleteConfirm, delete',
-		'Appointment' => 'list, addFormDate,addFormTime, add, ajaxAdd, show, updateForm, updateFormAppointment, update, deleteConfirm, delete',
+		'Appointment' => 'list, newAppointment, addFormTime, createAppointment, ajaxAdd, show, updateForm, updateFormAppointment, update, deleteConfirm, delete',
 		'TimeOfDay' => 'list,addFormTime, add, ajaxAdd, show, updateForm, update, deleteConfirm, delete, deleteUpdateSurvey, deleteUpdateAppointment, deleteAddAppointment',
 		'Subscriber' => 'list, add, addForm, show, showAfter, updateForm, update, deleteConfirm, delete, register, registerForm, commentAjax',
 		'Comment' => 'delete',

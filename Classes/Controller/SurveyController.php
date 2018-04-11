@@ -43,7 +43,8 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
      */
-    public function injectSurveyRepository(\Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+    public function injectSurveyRepository(
+            \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
         $this->surveyRepository = $surveyRepository;
     }
     
@@ -62,6 +63,9 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $survey->setPostdate(new \DateTime());
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getPostdate());
         $this->surveyRepository->add($survey);
+        $persistenceManager = $this->objectManager->get(
+                'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+        $persistenceManager->persistAll();
         $this->redirect('addFormDate', 'Appointment', NULL, array('survey' => $survey));
         
     }
