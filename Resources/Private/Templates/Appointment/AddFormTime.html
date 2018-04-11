@@ -33,7 +33,7 @@
                 <f:for each="{survey.appointments}" as="appointment">
                     <li>
                     <f:comment><f:debug title="SURVEY">{survey}</f:debug></f:comment>
-                    <p>Termin: <f:format.date>{appointment.appointmentDate}</f:format.date></p>
+                    <p>Termin: {appointment.appointmentDate}</p>
                     </li>
                 </f:for>
             </ul>
