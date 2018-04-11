@@ -96,7 +96,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $persistenceManager->persistAll();
 
         //$this->forward('addFormTime', 'Appointment',NULL, array('survey' => $survey));
-        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
