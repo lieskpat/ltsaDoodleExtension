@@ -47,6 +47,7 @@ CREATE TABLE tx_survey_domain_model_survey (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
+
 	postdate datetime DEFAULT '0000-00-00 00:00:00',
 	organizername varchar(255) DEFAULT '' NOT NULL,
 	deadline datetime DEFAULT '0000-00-00 00:00:00',
@@ -295,68 +296,5 @@ CREATE TABLE tx_survey_domain_model_poll (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_appointment'
-#
-CREATE TABLE tx_survey_domain_model_appointment (
-
-	survey  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_comment'
-#
-CREATE TABLE tx_survey_domain_model_comment (
-
-	survey  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_subscriber'
-#
-CREATE TABLE tx_survey_domain_model_subscriber (
-
-	survey  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_comment'
-#
-CREATE TABLE tx_survey_domain_model_comment (
-
-	subscriber  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_poll'
-#
-CREATE TABLE tx_survey_domain_model_poll (
-
-	subscriber  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_timeofday'
-#
-CREATE TABLE tx_survey_domain_model_timeofday (
-
-	appointment  int(11) unsigned DEFAULT '0' NOT NULL,
-
-);
-
-#
-# Table structure for table 'tx_survey_domain_model_poll'
-#
-CREATE TABLE tx_survey_domain_model_poll (
-
-	timeofday  int(11) unsigned DEFAULT '0' NOT NULL,
 
 );
