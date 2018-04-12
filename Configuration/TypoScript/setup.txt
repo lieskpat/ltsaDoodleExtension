@@ -11,7 +11,7 @@ plugin.tx_survey_surveylisting {
 		recursive = 1
 		classes {
 			Schmidtch\Survey\Domain\Model\Survey {
-				newRecordStoragePid = 35
+				newRecordStoragePid = 15
 			}
 			Schmidtch\Survey\Domain\Model\Organizer {
 				newRecordStoragePid = 38
