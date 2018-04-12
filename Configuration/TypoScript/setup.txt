@@ -7,7 +7,7 @@ plugin.tx_survey_surveylisting {
 	}
 	
 	persistence {
-		storagePid = 34, 35
+		storagePid = 14, 15
 		recursive = 1
 		classes {
 			Schmidtch\Survey\Domain\Model\Survey {
