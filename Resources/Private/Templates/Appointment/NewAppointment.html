@@ -57,7 +57,7 @@
     <hr />
     <br />
 
-    <f:form class="my-form" controller="Appointment" action="add" method="post" arguments="{survey: survey, appointmentDate: appointmentdate}">
+    <f:form class="my-form" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentdate}">
         <div class="after-add-more">
             <div>
                 <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
