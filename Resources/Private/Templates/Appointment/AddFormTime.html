@@ -1,0 +1,52 @@
+<f:layout name="Default" />
+
+<f:section name="content">	
+
+    <h2>{survey.title}</h2>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#timeofdaysubmit').click(function () {
+                var ajaxURL = '<f:uri.action action="ajaxAdd" controller="Appiontment" pageType="999" arguments="{survey:survey,appiontment:appiontment}" />';
+                var form = $('form');
+                $.post(ajaxURL, form.serialize(), function (response) {
+                    console.log(response);
+                    var items = [];
+                    $.each(response, function (key, val) {
+                        items.push(
+                                '<li class="list-group-item">'
+                                + val.timevalue + ' Uhr' +
+                                '</li>'
+                                );
+                    });
+                    $('#timeofdays').html(items.join(''));
+                    $('#timevaluefield').val('');
+                });
+                return false;
+            });
+        });
+    </script>	
+
+    <f:if condition="{survey.appointments}">
+        <f:then>
+            <ul class="list-group">
+                <f:for each="{survey.appointments}" as="appointment">
+                    <li>
+                    <f:comment><f:debug title="SURVEY">{survey}</f:debug></f:comment>
+                    <p>Termin: {appointment.appointmentDate}</p>
+                    </li>
+                </f:for>
+            </ul>
+        </f:then>
+        <f:else>Keine Einträge vorhanden!!!!!</f:else>
+    </f:if>
+
+
+    <f:link.action action="addFormDate" controller="Appointment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
+    <br />
+    <br />
+    <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-primary">Umfrage erstellen</f:link.action>
+
+</f:section>
+
+

@@ -1,0 +1,17 @@
+<f:layout name="Default" />
+
+<f:section name="content">	
+
+	<f:form action="register" object="{subscriber}" name="subscriber" arguments="{subscriber:subscriber, survey:survey}">
+	
+		<label>Bitte tragen sie einen Namen ein</label>
+		<br />
+		
+		<f:form.textfield property="nameSubscriber" class="form-control" style="width:30%" />
+		<br />
+		<br />
+		<f:form.submit value="weiter" class="btn btn-primary btn-xs" />
+		
+	</f:form>
+	
+</f:section>

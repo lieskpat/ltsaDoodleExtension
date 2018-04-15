@@ -1,0 +1,123 @@
+
+plugin.tx_survey_surveylisting {
+	view {
+		templateRootPaths.0 = {$plugin.tx_survey_surveylisting.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_survey_surveylisting.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_survey_surveylisting.view.layoutRootPath}
+	}
+	
+	persistence {
+		storagePid = 63, 47
+		recursive = 1
+		classes {
+			Schmidtch\Survey\Domain\Model\Survey {
+				newRecordStoragePid = 64
+			}
+			Schmidtch\Survey\Domain\Model\Organizer {
+				newRecordStoragePid = 65
+			}
+			Schmidtch\Survey\Domain\Model\Appiontment {
+				newRecordStoragePid = 66
+			}
+			Schmidtch\Survey\Domain\Model\TimeOfDay {
+				newRecordStoragePid = 67
+			}
+			Schmidtch\Survey\Domain\Model\Subscriber {
+				newRecordStoragePid = 68
+			}
+			Schmidtch\Survey\Domain\Model\Comment {
+				newRecordStoragePid = 69
+			}
+			Schmidtch\Survey\Domain\Model\Organizer {
+				mapping {
+					tableName = fe_users
+						colums {
+							uid.mapOnProperty = fe_user_uid
+						}
+				}
+				
+		}
+	}
+    }
+}
+
+page {
+	includeCSS {
+		//bootstrap = EXT:survey/Resources/Public/Bootstrap/css/bootstrap.min.css
+		//survey = EXT:survey/Resources/Public/Css/Survey.css
+                survey = EXT:survey/Resources/Public/Css/my-survey-css.css
+		//dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.css
+	}
+	includeJS {
+		jquery = EXT:survey/Resources/Public/Bootstrap/js/jquery.js
+		jquery.external = 1
+		bootstrap = EXT:survey/Resources/Public/Bootstrap/js/bootstrap.min.js
+		dhtmlxCalendar = EXT:survey/Resources/Public/dhtmlxCalendar/codebase/dhtmlxcalendar.js
+	}
+}
+
+config.tx_extbase {
+	objects {
+		TYPO3\CMS\Fluid\Core\Parser\TemplateParser {
+			className = Schmidtch\Survey\View\TemplateParser
+		}
+	}
+}
+
+plugin.tx_survey._CSS_DEFAULT_STYLE (
+textarea.f3-form-error {
+background-color:#FF9F9F;
+border: 1px #FF0000 solid;
+}
+
+input.f3-form-error {
+background-color:#FF9F9F;
+border: 1px #FF0000 solid;
+}
+
+.tx-survey table {
+border-collapse:separate;
+border-spacing:10px;
+}
+
+.tx-survey table th {
+font-weight:bold;
+}
+
+.tx-survey table td {
+vertical-align:top;
+}
+
+.typo3-messages .message-error {
+color:red;
+}
+
+.typo3-messages .message-ok {
+color:green;
+}
+
+)
+
+ajaxAdd = PAGE
+ajaxAdd {
+	typeNum = 999
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/json
+		admPanel = 0
+		debug = 0
+	}
+	100 < tt_content.list.20.survey_surveylisting
+}
+
+commentAjax = PAGE
+commentAjax {
+	typeNum = 998
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/json
+		admPanel = 0
+		debug = 0
+	}
+	100 < tt_content.list.20.survey_surveylisting
+}

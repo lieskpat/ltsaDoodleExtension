@@ -1,0 +1,26 @@
+<h1>{headline}</h1>
+
+<f:render partial="Error" arguments="{object:'timeofday'}" /> 
+	
+<h3>{survey.title}</h3>
+
+<f:form action="{action}" object="{timeofday}" name="timeofday" arguments="{survey:survey, appiontment:appiontment}" additionalAttributes="{role:'form'}">
+	
+<f:for each="{survey.appiontments}" as="appiontments" >
+	<li class="list-group-item">
+		<label>{appiontments.appiontmentdate}</label>
+		<f:form.textfield type="time" class="form-control" name="tx_survey_surveylisting[timeofday][timevalue]" />
+		<f:form.hidden class="form-control" name="tx_survey_surveylisting[timeofday][appiontmentId]" value="{appiontments.uid}" />
+	</li>
+	
+</f:for>
+
+<f:form.submit value="{submitmessage}" class="btn btn-primary" />
+	
+</f:form>
+
+
+
+
+
+

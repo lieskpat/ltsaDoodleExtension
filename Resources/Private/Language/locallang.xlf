@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-09-27T10:24:54Z" product-name="survey">
+		<header/>
+		<body>
+			<trans-unit id="tx_survey_domain_model_organizer">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_organizer.fe_user_uid">
+				<source>Fe User Uid</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey">
+				<source>Survey</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.postdate">
+				<source>Postdate</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.organizername">
+				<source>Organizername</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.deadline">
+				<source>Deadline</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.visible">
+				<source>Visible</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.comment_visible">
+				<source>Comment Visible</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.organizer">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.subscribers">
+				<source>Subscribers</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.appointments">
+				<source>Appointments</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_survey.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_subscriber">
+				<source>Subscriber</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_subscriber.name_subscriber">
+				<source>Name Subscriber</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_subscriber.appointments">
+				<source>Appointments</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_subscriber.comments">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_appointment">
+				<source>Appointment</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_appointment.appointment_date">
+				<source>Appointment-Date</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_appointment.time_of_day">
+				<source>Time-Of-Day</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_timeofday">
+				<source>Time-Of-Day</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_timeofday.time_value">
+				<source>Timevalue</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_comment">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_comment.comment">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="tx_survey_domain_model_comment.comment_date">
+				<source>Commentdate</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,51 @@
+<f:layout name="Default" />
+
+<f:section name="content">	
+
+	<f:render partial="Error" arguments="{object:'timeofday'}" /> 
+		
+	<h1>{survey.title}</h1>
+	
+	<h3>Termin wählen</h3>
+
+	<f:form action="ajaxAdd" object="{timeofday}" name="timeofday" arguments="{survey:survey, appiontment:appiontment}">
+		
+		<label>{appiontment.appiontmentdate}</label>
+		<f:form.textfield property="timevalue" type="time" id="timevaluefield" class="form-control" /> 
+		<br />
+		<f:form.submit value="Uhrzeit hinzufügen" class="btn btn-primary" id="timeofdaysubmit" />
+		
+	</f:form>
+	
+	<ul class="list-group" id="timeofdays">
+        
+		<f:for each="{appiontment.timeOfDay}" as="timeofday" >
+			<li class="list-group-item">{timeofday.timevalue} Uhr</li>
+		</f:for>
+			
+	</ul>
+	
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $('#timeofdaysubmit').click(function(){
+                var ajaxURL = '<f:uri.action action="ajaxAdd" controller="Timeofday" pageType="999" arguments="{timeofday:timeofday}" />';
+                var form = $('form');
+                $.timeofday(ajaxURL, form.serialize(), function(response) {
+                    console.log(response);
+                    var items = [];
+                    $.each(response, function(key, val) {
+                        items.push('<li class="list-group-item">' + val.timevalue + ' </li>');
+                    });
+					$('#timeofdays').html(items.reverse()join(''));
+                    $('#timevaluefield').val('');
+                });
+                return false;
+            });
+        });
+    </script>
+
+	<f:link.action action="addFormDate" controller="Appiontment" arguments="{survey:survey}" class="btn btn-primary">weiteren Termin anlegen</f:link.action>
+
+</f:section>
+
+

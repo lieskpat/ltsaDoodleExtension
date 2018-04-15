@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2016-09-27T10:24:54Z" product-name="survey">
+        <header/>
+        <body>
+            <trans-unit id="title.description">
+                <source>title of the survey</source>
+            </trans-unit>
+            <trans-unit id="description.description">
+                <source>description of the survey</source>
+            </trans-unit>
+            <trans-unit id="postdate.description">
+                <source>postdate of the survey</source>
+            </trans-unit>
+            <trans-unit id="organizername.description">
+                <source>name of the organizer</source>
+            </trans-unit>
+            <trans-unit id="deadline.description">
+                <source>deadline of the survey</source>
+            </trans-unit>
+            <trans-unit id="visible.description">
+                <source>visible</source>
+            </trans-unit>
+            <trans-unit id="comment_visible.description">
+                <source>commentVisible</source>
+            </trans-unit>
+            <trans-unit id="organizer.description">
+                <source>organizer</source>
+            </trans-unit>
+            <trans-unit id="subscribers.description">
+                <source>subscribers</source>
+            </trans-unit>
+            <trans-unit id="appointments.description">
+                <source>appointments</source>
+            </trans-unit>
+            <trans-unit id="comments.description">
+                <source>comments</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

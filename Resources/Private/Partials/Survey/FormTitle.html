@@ -1,0 +1,30 @@
+
+
+<h1>{headline}</h1>
+
+<f:form action="{action}" object="{survey}" name="survey" additionalAttributes="{role: 'form'}">
+	
+	<div class="form-group">
+		<label>Umfrage-Titel</label>
+		<f:form.textfield property="title" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label>Beschreibung</label>
+		<f:form.textarea property="description" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label>Dürfen Teilnehmer andere Teilnehmer in der Umfrage sehen?</label>
+		<f:form.checkbox property="visible" value="1" class="checkbox" checked="true" />
+	</div>
+	
+	<div class="form-group">
+		<label>Dürfen Teilnehmer Kommentare erstellen?(nur Sie können die Kommentare sehen)</label>
+		<f:form.checkbox property="commentVisible" value="1" class="checkbox" checked="true" />
+	</div>
+	
+	<f:form.submit value="weiter" class="btn btn-primary" />
+	 
+</f:form>
+

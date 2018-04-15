@@ -1,0 +1,54 @@
+<f:layout name="Default" />
+	
+<f:section name="content">	
+
+	<h1>{survey.title}</h1>
+	
+	<f:flashMessages renderMode="div" class="alert alert-success" />
+	
+	<dl class="dl-horizontal">
+		<dt>Beschreibung:</dt>
+		<dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
+	</dl>
+	
+	<f:if condition="{survey.appiontments}" >
+		<ul class="list-group">
+			<f:for each="{survey.appiontments}" as="appiontment" >
+				<li class="list-group-item">
+					<table class="table table-bordered table-sm">									
+						<thead>					
+							<tr>
+								<th rowspan="2"></th>														
+								<th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+							</tr>
+							<tr>						
+								<f:for each="{appiontment.timeOfDay}" as="timeofday" >
+									<th>{timeofday.timevalue} Uhr</th>
+								</f:for>
+							</tr>
+						</thead>
+			
+						<tbody>		
+							<tr>
+								<th width="150px">{subscriber.nameSubscriber}</th>
+								<f:form action="add" object="subscriber" name="subscriber" arguments="{survey:survey, appionment:appiontment, timeofday:timeofday, subscriber:subscriber}" additionalAttributes="{role: 'form'}">
+									<f:for each="{appiontment.timeOfDay}" as="timeofday" >
+										<td>								
+											<f:form.checkbox name="poll" value="1" class="checkbox" checked="true"/>								
+										</td>
+									</f:for>
+								</f:form>
+							</tr>
+						</tbody>						
+					</table>
+				</li>
+			</f:for>
+		</ul>
+	</f:if>
+	
+	<br />
+	<br />
+	<f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
+	
+</f:section>
+	

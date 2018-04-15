@@ -1,0 +1,29 @@
+
+<label for="title">
+	<f:translate key="tx_survey_domain_model_survey.title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="title" /><br />
+<label for="description">
+	<f:translate key="tx_survey_domain_model_survey.description" />
+</label><br />
+	<f:form.textarea property="description" cols="40" rows="15" /><br />
+<label for="postdate">
+	<f:translate key="tx_survey_domain_model_survey.postdate" />
+</label><br />
+	<f:form.textfield property="postdate"  value="{survey.postdate->f:format.date()}" /><br />
+<label for="organizername">
+	<f:translate key="tx_survey_domain_model_survey.organizername" />
+</label><br />
+	<f:form.textfield property="organizername" /><br />
+<label for="deadline">
+	<f:translate key="tx_survey_domain_model_survey.deadline" />
+</label><br />
+	<f:form.textfield property="deadline"  value="{survey.deadline->f:format.date()}" /><br />
+<label for="visible">
+	<f:translate key="tx_survey_domain_model_survey.visible" />
+</label><br />
+	<f:form.textfield property="visible" /><br />
+<label for="commentVisible">
+	<f:translate key="tx_survey_domain_model_survey.comment_visible" />
+</label><br />
+	<f:form.textfield property="commentVisible" /><br />

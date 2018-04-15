@@ -1,0 +1,14 @@
+plugin.tx_survey_surveylisting {
+	view {
+		# cat=plugin.tx_survey_surveylisting/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:survey/Resources/Private/Templates/
+		# cat=plugin.tx_survey_surveylisting/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:survey/Resources/Private/Partials/
+		# cat=plugin.tx_survey_surveylisting/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:survey/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_survey_surveylisting//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

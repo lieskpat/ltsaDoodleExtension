@@ -1,0 +1,113 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+
+    <f:comment><f:render partial="Error" arguments="{object:'appointment'}" /></f:comment>
+
+    <h1>{survey.title}</h1>
+
+    <h3>Termin wählen</h3>
+
+    <f:comment>
+        <f:form class="my-form" controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
+            <f:form.validationResults for="survey">
+                <f:if condition="{validationResults.flattenedErrors}">
+                    <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+                        {proppertyPath}
+                        <ul>
+
+                            <f:for each="{errors}" as="error">
+                                <li>
+                                    {error.code} | {error} | Argumente: 
+                                <f:for each="{error.arguments}" as="argument">
+                                    {argument},
+                                </f:for>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </f:for>
+                </f:if>
+            </f:form.validationResults>
+
+
+            <div class="after-add-more">
+                <div>
+                    <f:form.textfield type="date" placeholder="d-m-Y" property="appointments.0.appointmentDate" />
+                </div>
+                <f:comment><div>
+                        <f:form.textfield type="date" placeholder="d.m.Y" property="appointments.1.appointmentDate" />
+                        <br />
+                    </div>
+                    <div>
+                        <f:form.textfield type="date" placeholder="d.m.Y" property="appointments.2.appointmentDate" />
+                        <br />
+                    </div></f:comment>
+
+                <f:form.button class="btn btn-primary add-more" type="button">Hinzufügen</f:form.button>
+            </div>
+            <div>
+                <br />
+                <f:form.submit value="Weiter" class="btn btn-primary btn-xs" />
+            </div>
+        </f:form>
+    </f:comment>
+
+
+    <br />
+    <hr />
+    <br />
+
+    <f:form class="my-form" controller="Appointment" action="add" method="post" arguments="{survey: survey, appointmentDate: appointmentdate}">
+        <div class="after-add-more">
+            <div>
+                <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+            </div>
+
+            <f:form.button class="btn btn-primary add-more" type="button">Hinzufügen</f:form.button>
+        </div>
+        <div>
+            <br />
+            <f:form.submit value="Weiter" class="btn btn-primary btn-xs" />
+        </div>
+    </f:form>
+
+    <f:comment>
+        <div class="copy-fields" style="display: none!important;">
+            <div class="control-group" style="margin-top:10px" >
+                <f:form.textfield type="date" name="appointment[appointmentDate]" class="form-control" value=""/>
+                <f:comment><f:form.textfield type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" /></f:comment>
+                <f:form.button class="btn btn-primary remove" type="button">Löschen</f:form.button>
+            </div>
+        </div>
+    </f:comment>
+
+    <div class="copy-fields" style="display: none!important;">
+        <div class="control-group" style="margin-top:10px" >
+            <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+            <f:form.button class="btn btn-primary remove" type="button">Löschen</f:form.button>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //Button mit class="add-more" auswählen
+            $(".add-more").click(function () {
+                //speichere in var html html codeschnipsel innerhalb von class copy-fields
+                var html = $(".copy-fields").html();
+                //füge html codeschnipsel nach div mit class after-add-more ein
+                $(".after-add-more").after(html);
+            });
+            //bei click auf Löschen button 
+            //wird eingefügtes div mit class="copy-fields", welche die Eltern 
+            //von class="control-group ist, entfernt"
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".control-group").remove();
+            });
+
+        });
+
+    </script>
+
+</f:section>
