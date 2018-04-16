@@ -65,10 +65,10 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * 
      */
     public function injectSurveyRepository(
-            \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+    \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
         $this->surveyRepository = $surveyRepository;
     }
-    
+
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      * 
@@ -77,7 +77,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->view->assign('survey', $survey);
     }
 
-    
     /**
      * Update the survey object with appointments.
      * 
@@ -86,7 +85,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      *
      */
     public function createAppointmentAction(
-            \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
+    \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
         //Hinweis
         //schreibende Zugriffe auf das Repository(z.B. add) 
         //erfolgen immer am Ende der Action
@@ -96,10 +95,10 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
             $appointment->setAppointmentDate(\DateTime::createFromFormat('!Y-m-d', $value));
             $survey->addAppointment($appointment);
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getAppointments());
         }
+        $this->surveyRepository->update($survey);
         //bei Aufruf von redirect wird automatisch vorher persistiert
-        //$this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+        $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
@@ -107,7 +106,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function addFormTimeAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
-        $this->view->assign('survey', $this->surveyRepository->findByUid($survey->getUid()));
+        $this->view->assign('survey', $survey);
     }
 
     /**
@@ -178,7 +177,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function deleteAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->addFlashMessage(
-                'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+            'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\surveyRepository')->update($survey);

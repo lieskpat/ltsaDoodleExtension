@@ -30,10 +30,13 @@
     <f:if condition="{survey.appointments}">
         <f:then>
             <ul class="list-group">
-                <f:for each="{survey.appointments}" as="appointment">
+                <f:for each="{survey.appointments}" as="appointment" iteration="i">
                     <li>
-                    <f:comment><f:debug title="SURVEY">{survey}</f:debug></f:comment>
-                    <p>Termin: {appointment.appointmentDate}</p>
+                    <f:form class="my-form" controller="TimeOfDay" action="createTimeOfDay" method="post" arguments="{survey: survey, timeValue: timeValue}">
+                        <f:comment><f:debug title="SURVEY">{appointment.appointmentDate}</f:debug></f:comment>
+                        <label>Termin: <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></label>
+                        <f:form.button class="btn btn-primary add-more button-{i.cycle}" type="button">Uhrzeiten Hinzufügen</f:form.button>
+                    </f:form>
                     </li>
                 </f:for>
             </ul>
