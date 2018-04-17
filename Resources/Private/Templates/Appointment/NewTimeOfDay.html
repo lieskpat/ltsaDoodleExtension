@@ -1,0 +1,49 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+    <label>Termin: <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></label>
+
+    <f:form class="my-form" controller="Appointment" action="createTimeOfDay" method="post" arguments="{survey: survey, appointment: appointment, timeOfDay: timeOfDay}">
+        <div class="after-add-more">
+            <div>
+                <input type="time" placeholder="00:00" name="tx_survey_surveylisting[timeOfDay][]" value="{newTimeOfDay.timeOfDay}" />
+            </div>
+
+            <f:form.button class="btn btn-primary add-more" type="button">Hinzufügen</f:form.button>
+        </div>
+        <div>
+            <br />
+            <f:form.submit value="Speichern" class="btn btn-primary btn-xs" />
+        </div>
+    </f:form>
+
+    <div class="copy-fields" style="display: none!important;">
+        <div class="control-group" style="margin-top:10px" >
+            <input type="time" placeholder="00:00" name="tx_survey_surveylisting[timeOfDay][]" value="{newTimeOfDay.timeOfDay}" />
+            <f:form.button class="btn btn-primary remove" type="button">Löschen</f:form.button>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //Button mit class="add-more" auswählen
+            $(".add-more").click(function () {
+                //speichere in var html html codeschnipsel innerhalb von class copy-fields
+                var html = $(".copy-fields").html();
+                //füge html codeschnipsel nach div mit class after-add-more ein
+                $(".after-add-more").after(html);
+            });
+            //bei click auf Löschen button 
+            //wird eingefügtes div mit class="copy-fields", welche die Eltern 
+            //von class="control-group ist, entfernt"
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".control-group").remove();
+            });
+
+        });
+
+    </script>
+
+</f:section>

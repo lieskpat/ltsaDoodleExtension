@@ -9,22 +9,22 @@
         <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
     </dl>
 
-    <f:if condition="{survey.appiontments}" >
+    <f:if condition="{survey.appointments}" >
         <f:form action="add" object="{poll}" name="poll" arguments="{survey:survey, timeofday:timeofday, subscriber:subscriber}">
             <f:form.hidden name="polls[subscriber][]" value="{subscriber.uid}" /> 
             <ul class="list-group">
-                <f:for each="{survey.appiontments}" as="appiontment" iteration="iterator" >
-                    <f:form.hidden name="polls[appiontment][]" value="{iterator.index}" /> 
-                    <li class="list-group-item">
+                <f:for each="{survey.appointments}" as="appointment" iteration="iterator" >
+                    <f:form.hidden name="polls[appointment][]" value="{iterator.index}" /> 
+                    <li class="list-group-item-">
                         <table class="table table-bordered table-sm">									
                             <thead>					
                                 <tr>
                                     <th rowspan="2"></th>														
-                                    <th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+                                    <th colspan="{appointment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></th>											
                             </tr>
                             <tr>						
-                            <f:for each="{appiontment.timeOfDay}" as="timeofday" >
-                                <th>{timeofday.timevalue} Uhr</th>
+                            <f:for each="{appointment.timeOfDay}" as="time" >
+                                <th>{time.timeValue} Uhr</th>
                             </f:for>
                             </tr>
                             </thead>
@@ -32,10 +32,10 @@
                             <tbody>		
                                 <tr>
                                     <th width="150px">{subscriber.nameSubscriber}</th>								
-                            <f:for each="{appiontment.timeOfDay}" as="timeofday" iteration="iteratorb" >
+                            <f:for each="{appointment.timeOfDay}" as="time" iteration="iteratorb" >
                                 <td>
                                 <f:form.checkbox name="polls[poll][{iterator.index}][{iteratorb.index}]" class="checkbox" checked="true" value="1" />
-                                <f:form.hidden name="polls[timeofday][{iterator.index}][{iteratorb.index}]" value="{timeofday.uid}" /> 
+                                <f:form.hidden name="polls[time][{iterator.index}][{iteratorb.index}]" value="{time.uid}" /> 
                                 </td>										
                             </f:for>									
                             </tr>

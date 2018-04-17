@@ -9,44 +9,46 @@
         <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
     </dl>
 
-    <f:if condition="{survey.appiontments}" >
+    <f:if condition="{survey.appointments}" >
         <ul class="list-group">
 
-            <li class="list-group-item">
+            <li class="list-group-item-">
                 <table class="table table-bordered table-sm">				
                     <thead>							
                         <tr>							
                             <th rowspan="2"></th>
-                    <f:for each="{survey.appiontments}" as="appiontment" >								
-                        <th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+                    <f:for each="{survey.appointments}" as="appointment" >								
+                        <th colspan="{appointment.timeOfDay -> f:count()}">
+                        <f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date>
+                        </th>											
                     </f:for>
                     </tr>
                     <tr>
-                    <f:for each="{survey.appiontments}" as="appiontment" >
-                        <f:for each="{appiontment.timeOfDay}" as="timeofdays" >
-                            <th >{timeofdays.timevalue} Uhr</th>
+                    <f:for each="{survey.appointments}" as="appointment" >
+                        <f:for each="{appointment.timeOfDay}" as="time" >
+                            <th >{time.timeValue} Uhr</th>
                         </f:for>
                     </f:for>
                     </tr>							
                     </thead>
 
-                    <f:for each="{survey.subscribers}" as="subscribers" >
+                    <f:for each="{survey.subscribers}" as="subscriber" >
                         <tbody>		
                             <tr>
-                                <th >{subscribers.nameSubscriber}</th>
-                        <f:for each="{survey.appiontments}" as="appiontment" >
-                            <f:for each="{appiontment.timeOfDay}" as="timeofday" >
-                                <f:for each="{subscribers.subcheck}" as="subcheck">
-                                    <f:for each="{timeofday.timecheck}" as="poll" >
+                                <th >{subscriber.nameSubscriber}</th>
+                        <f:for each="{survey.appointments}" as="appointment" >
+                            <f:for each="{appointment.timeOfDay}" as="time" >
+                                <f:for each="{subscriber.subcheck}" as="subcheck">
+                                    <f:for each="{time.timeCheck}" as="poll" >
                                         <f:if condition="{poll.uid}=={subcheck.uid}">
                                             <f:then>
-                                                <f:if condition="{poll.poll}==1">																
+                                                <f:if condition="{poll.pollValue}==1">																
                                                     <f:then>
                                                         <td bgcolor=green >																	
                                                         </td>
                                                     </f:then>																										
                                                 </f:if>	
-                                                <f:if condition="{poll.poll}==0">
+                                                <f:if condition="{poll.pollValue}==0">
                                                     <f:then>
                                                         <td bgcolor=darkred>																		
                                                         </td>

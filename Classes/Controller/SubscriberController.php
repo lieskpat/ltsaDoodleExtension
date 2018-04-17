@@ -76,9 +76,9 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	{
 		$polls = $_POST['tx_survey_surveylisting']['polls'];
 		$pollArray = $polls['poll'];
-		$timeofdayArray = $polls['timeofday'];
+		$timeofdayArray = $polls['time'];
 		$uid = $polls['subscriber'][0];
-		$appiontmentArray = $polls['appiontment'];
+		$appointmentArray = $polls['appointment'];
 		
 		$resultPoll = $this->pollRepository->addPoll($uid,$pollArray,$timeofdayArray,$appiontmentArray);
 		$resultTimeofday = $this->timeofdayRepository->updatePoll($appiontmentArray,$timeofdayArray);		

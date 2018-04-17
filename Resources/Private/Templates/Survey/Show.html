@@ -9,21 +9,24 @@
         <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
     </dl>
 
-    <f:if condition="{survey.appiontments}" >
+    <f:if condition="{survey.appointments}" >
         <ul class="list-group">			
-            <li class="list-group-item">
+            <li class="list-group-item-">
                 <table class="table table-bordered table-sm">				
                     <thead>							
                         <tr>							
                             <th rowspan="2"></th>
-                    <f:for each="{survey.appiontments}" as="appiontment" >								
-                        <th colspan="{appiontment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></th>											
+                    <f:for each="{survey.appointments}" as="appointment" iteration="i">								
+                        <th colspan="{appointment.timeOfDay -> f:count()}">
+                        <f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date>
+
+                        </th>											
                     </f:for>
                     </tr>
                     <tr>
-                    <f:for each="{survey.appiontments}" as="appiontment" >
-                        <f:for each="{appiontment.timeOfDay}" as="timeofdays" >
-                            <th >{timeofdays.timevalue} Uhr</th>
+                    <f:for each="{survey.appointments}" as="appointment" >
+                        <f:for each="{appointment.timeOfDay}" as="time" >
+                            <th >{time.timeValue} Uhr</th>
                         </f:for>
                     </f:for>
                     </tr>							
@@ -33,8 +36,8 @@
                         <tbody>		
                             <tr>
                                 <th >{subscribers.nameSubscriber}</th>
-                        <f:for each="{survey.appiontments}" as="appiontment" >
-                            <f:for each="{appiontment.timeOfDay}" as="timeofday" >
+                        <f:for each="{survey.appointments}" as="appointment" >
+                            <f:for each="{appointment.timeOfDay}" as="timeofday" >
                                 <f:for each="{subscribers.subcheck}" as="subcheck">
                                     <f:for each="{timeofday.timecheck}" as="poll" >
                                         <f:if condition="{poll.uid}=={subcheck.uid}">
@@ -68,7 +71,7 @@
     <ul class="list-group">
         <f:for each="{survey.subscribers}" as="subscriber" >
             <f:for each="{subscriber.comments}" as="comment" reverse="TRUE">
-                <li class="list-group-item">
+                <li class="list-group-item-">
                     <label>{subscriber.nameSubscriber}</label>
                     <br />
                     {comment.comment}
@@ -85,7 +88,7 @@
 
     <br />
     <ul class="list-group">
-        <li class="list-group-item">
+        <li class="list-group-item-">
             <table>
                 <thead>
                 <th>
@@ -97,7 +100,7 @@
                 <tbody>
                 <td >					
                     <span style="word-wrap: break-word; word-break: break-all;"> 
-                        {f:uri.action(action:'show', controller:'Subscriber', arguments:'{survey:survey}', noCache:'1', noCacheHash:'1', absolute:'1')}
+                        {f:uri.action(action:'show', controller:'Subscriber', arguments:'{survey:survey}', noCache:'0', noCacheHash:'0', absolute:'1')}
                     </span>
                 </td>
                 </tbody>
@@ -107,7 +110,7 @@
 
     <br />
     <br />
-    <f:link.action action="list" class="btn btn-primary">zurück</f:link.action>
+    <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">zurück</f:link.action>
 
 </f:section>
 

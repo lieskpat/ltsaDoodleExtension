@@ -36,10 +36,29 @@
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" iteration="i">
                     <li>
+
                         <div class="my-form">
                             <label>Termin: <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></label>
-                            <f:form.button class="btn btn-primary add-more button-{i.cycle}" type="button">Uhrzeiten Hinzufügen</f:form.button>
+
+                            <f:form controller="Appointment" action="newTimeOfDay" name="" object="" arguments="{survey: survey, appointment: appointment}">
+                                <f:comment>
+                                    <f:form.button class="btn btn-primary add-more button-{i.cycle}" type="button">Uhrzeit Hinzufügen</f:form.button>
+                                </f:comment>
+                                <div>
+                                    <f:form.submit value="Uhrzeit hinzufügen" class="btn btn-primary btn-xs" />
+                                </div>
+                            </f:form>
                         </div>
+                        </br>
+
+                    <f:if condition="{appointment.timeOfDay}">
+                        <f:for each="{appointment.timeOfDay}" as="time">
+
+                            <p>{time.timeValue} Uhr</p>
+
+                        </f:for>
+
+                    </f:if>
                     </li>
                 </f:for>
             </ul>
@@ -48,7 +67,7 @@
     </f:if>
 
 
-    <f:link.action action="addFormDate" controller="Appointment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
+    <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
     <br />
     <br />
     <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-primary">Umfrage erstellen</f:link.action>

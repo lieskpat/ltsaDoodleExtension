@@ -110,6 +110,32 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     }
 
     /**
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     */
+    public function newTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, 
+        \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        $this->view->assign('appointment', $appointment);
+        $this->view->assign('survey', $survey);
+    }
+    
+    /**
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * @param \array $timeOfDay
+     */
+    public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, 
+        \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
+        foreach ($timeOfDay as $key => $value) {
+            $timeValue = new \Schmidtch\Survey\Domain\Model\Timeofday();
+            $timeValue->setTimeValue($value);
+            $appointment->addTimeOfDay($timeValue);
+        }
+        $this->appointmentRepository->update($appointment);
+        $this->forward('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+    }
+
+    /**
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @param \Schmidtch\Survey\Domain\Model\Timeofday $timeOfDay
      */

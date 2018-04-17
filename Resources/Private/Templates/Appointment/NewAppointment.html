@@ -6,8 +6,6 @@
 
     <h1>{survey.title}</h1>
 
-    <h3>Termin wählen</h3>
-
     <f:comment>
         <f:form class="my-form" controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
             <f:form.validationResults for="survey">
@@ -52,10 +50,18 @@
         </f:form>
     </f:comment>
 
+    <f:if condition="{survey.appointments}">
+        <h3>Bereits gewählte Termine</h3>
+        <f:for each="{survey.appointments}" as="appointment">
+            <p>
+            <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
+            </p>
 
-    <br />
-    <hr />
-    <br />
+
+        </f:for>
+    </f:if>
+
+    <h3>Termin wählen</h3>
 
     <f:form class="my-form" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
         <div class="after-add-more">
@@ -67,7 +73,7 @@
         </div>
         <div>
             <br />
-            <f:form.submit value="Weiter" class="btn btn-primary btn-xs" />
+            <f:form.submit value="Speichern" class="btn btn-primary btn-xs" />
         </div>
     </f:form>
 
@@ -109,5 +115,8 @@
         });
 
     </script>
-
+    </br>
+    <f:if condition="{survey.appointments}">
+        <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
+    </f:if>
 </f:section>
