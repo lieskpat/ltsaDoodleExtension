@@ -63,60 +63,66 @@
 
     <h3>Termin wählen</h3>
 
-    <f:form class="my-form" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
-        <div class="after-add-more">
-            <div>
+    <f:form class="my-form btn-group" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
+        <div class="after-add-more form-row">
+            <div class="form-group col-md-6">
                 <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
             </div>
-
-            <f:form.button class="btn btn-primary add-more" type="button">Hinzufügen</f:form.button>
-        </div>
-        <div>
-            <br />
-            <f:form.submit value="Speichern" class="btn btn-primary btn-xs" />
-        </div>
-    </f:form>
-
-    <f:comment>
-        <div class="copy-fields" style="display: none!important;">
-            <div class="control-group" style="margin-top:10px" >
-                <f:form.textfield type="date" name="appointment[appointmentDate]" class="form-control" value=""/>
-                <f:comment><f:form.textfield type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" /></f:comment>
-                <f:form.button class="btn btn-primary remove" type="button">Löschen</f:form.button>
+            <div class="form-group col-md-4">
+                <f:form.button class="btn btn-outline-primary add-more" type="button">Hinzufügen</f:form.button>
             </div>
         </div>
-    </f:comment>
+        <f:comment>
+            <div class="copy-fields" style="display: none!important;">
+                <div class="control-group" style="margin-top:10px" >
+                    <f:form.textfield type="date" name="appointment[appointmentDate]" class="form-control" value=""/>
+                    <f:comment><f:form.textfield type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" /></f:comment>
+                    <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
+                </div>
+            </div>
+        </f:comment>
 
-    <div class="copy-fields" style="display: none!important;">
-        <div class="control-group" style="margin-top:10px" >
-            <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
-            <f:form.button class="btn btn-primary remove" type="button">Löschen</f:form.button>
+        <div class="copy-fields" style="display: none!important;">
+            <div class="control-group form-row" style="margin-top:10px" >
+                <div class="form-group col-md-6">
+                    <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+                </div>
+                <div class="form-group col-md-4">
+                    <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
+                </div>
+            </div>
         </div>
-    </div>
 
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        $(document).ready(function () {
-            //Button mit class="add-more" auswählen
-            $(".add-more").click(function () {
-                //speichere in var html html codeschnipsel innerhalb von class copy-fields
-                var html = $(".copy-fields").html();
-                //füge html codeschnipsel nach div mit class after-add-more ein
-                $(".after-add-more").after(html);
+            $(document).ready(function () {
+                //Button mit class="add-more" auswählen
+                $(".add-more").click(function () {
+                    //speichere in var html html codeschnipsel innerhalb von class copy-fields
+                    var html = $(".copy-fields").html();
+                    //füge html codeschnipsel nach div mit class after-add-more ein
+                    $(".after-add-more").after(html);
+                });
+                //bei click auf Löschen button 
+                //wird eingefügtes div mit class="copy-fields", welche die Eltern 
+                //von class="control-group ist, entfernt"
+                $("body").on("click", ".remove", function () {
+                    $(this).parents(".control-group").remove();
+                });
+
             });
-            //bei click auf Löschen button 
-            //wird eingefügtes div mit class="copy-fields", welche die Eltern 
-            //von class="control-group ist, entfernt"
-            $("body").on("click", ".remove", function () {
-                $(this).parents(".control-group").remove();
-            });
 
-        });
+        </script>
+        </br>
+        <f:if condition="{survey.appointments}">
+            <div class="btn-group form-row">
+                <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
 
-    </script>
-    </br>
-    <f:if condition="{survey.appointments}">
-        <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
-    </f:if>
+                <div>
+                    <f:form.submit value="Speichern" class="btn btn-primary" />
+                </div>
+            </div>
+        </f:if>
+    </f:form>
 </f:section>
