@@ -80,8 +80,8 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$uid = $polls['subscriber'][0];
 		$appointmentArray = $polls['appointment'];
 		
-		$resultPoll = $this->pollRepository->addPoll($uid,$pollArray,$timeofdayArray,$appiontmentArray);
-		$resultTimeofday = $this->timeofdayRepository->updatePoll($appiontmentArray,$timeofdayArray);		
+		$resultPoll = $this->pollRepository->addPoll($uid,$pollArray,$timeofdayArray,$appointmentArray);
+		$resultTimeofday = $this->timeofdayRepository->updatePoll($appointmentArray,$timeofdayArray);
 		$countSubscriber = $this->pollRepository->countSubscriber($uid);
 		$resultSubscriber = $this->subscriberRepository->updatePoll($uid,$countSubscriber); 
 		$this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber,'survey' => $survey));		

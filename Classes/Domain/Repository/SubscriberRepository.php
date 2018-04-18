@@ -31,7 +31,7 @@ namespace Schmidtch\Survey\Domain\Repository;
  */
 class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-	public function updatePoll($uid,$countSubscriber)
+	public function updatePoll($uid, $countSubscriber)
 	{		
 		$sql = "UPDATE tx_survey_domain_model_subscriber
 			SET subcheck='".$countSubscriber."'

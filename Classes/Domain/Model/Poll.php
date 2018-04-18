@@ -40,6 +40,16 @@ class Poll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $pollValue = false;
     
     /**
+     * Returns the pollValue
+     * 
+     * @return boolean $pollValue
+     */
+    public function getPollValue()
+    {
+        return $this->pollValue;
+    }
+    
+    /**
      * Returns the boolean state of poll
      * 
      * @return bool

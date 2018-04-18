@@ -6,58 +6,12 @@
 
     <h1>{survey.title}</h1>
 
-    <f:comment>
-        <f:form class="my-form" controller="Appointment" action="add" name="survey" object="{survey}" arguments="{survey:survey}" additionalAttributes="{role: 'form'}" >
-            <f:form.validationResults for="survey">
-                <f:if condition="{validationResults.flattenedErrors}">
-                    <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
-                        {proppertyPath}
-                        <ul>
-
-                            <f:for each="{errors}" as="error">
-                                <li>
-                                    {error.code} | {error} | Argumente: 
-                                <f:for each="{error.arguments}" as="argument">
-                                    {argument},
-                                </f:for>
-                                </li>
-                            </f:for>
-                        </ul>
-                    </f:for>
-                </f:if>
-            </f:form.validationResults>
-
-
-            <div class="after-add-more">
-                <div>
-                    <f:form.textfield type="date" placeholder="d-m-Y" property="appointments.0.appointmentDate" />
-                </div>
-                <f:comment><div>
-                        <f:form.textfield type="date" placeholder="d.m.Y" property="appointments.1.appointmentDate" />
-                        <br />
-                    </div>
-                    <div>
-                        <f:form.textfield type="date" placeholder="d.m.Y" property="appointments.2.appointmentDate" />
-                        <br />
-                    </div></f:comment>
-
-                <f:form.button class="btn btn-primary add-more" type="button">Hinzufügen</f:form.button>
-            </div>
-            <div>
-                <br />
-                <f:form.submit value="Weiter" class="btn btn-primary btn-xs" />
-            </div>
-        </f:form>
-    </f:comment>
-
     <f:if condition="{survey.appointments}">
         <h3>Bereits gewählte Termine</h3>
         <f:for each="{survey.appointments}" as="appointment">
             <p>
             <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
             </p>
-
-
         </f:for>
     </f:if>
 
@@ -72,57 +26,46 @@
                 <f:form.button class="btn btn-outline-primary add-more" type="button">Hinzufügen</f:form.button>
             </div>
         </div>
-        <f:comment>
-            <div class="copy-fields" style="display: none!important;">
-                <div class="control-group" style="margin-top:10px" >
-                    <f:form.textfield type="date" name="appointment[appointmentDate]" class="form-control" value=""/>
-                    <f:comment><f:form.textfield type="time" name="tx_survey_surveylisting[appointments][timeValue][]" style="width:10%" /></f:comment>
-                    <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
-                </div>
-            </div>
-        </f:comment>
+        </br>
+        <div>
+            <f:form.submit value="Speichern" class="btn btn-primary" />
+        </div>
+    </f:form>
+    <f:if condition="{survey.appointments}">
+        <div class="btn-group form-row">
+            <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
+        </div>
+    </f:if>
 
-        <div class="copy-fields" style="display: none!important;">
-            <div class="control-group form-row" style="margin-top:10px" >
-                <div class="form-group col-md-6">
-                    <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
-                </div>
-                <div class="form-group col-md-4">
-                    <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
-                </div>
+    <div class="copy-fields" style="display: none!important;">
+        <div class="control-group form-row" style="margin-top:10px" >
+            <div class="form-group col-md-6">
+                <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+            </div>
+            <div class="form-group col-md-4">
+                <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
             </div>
         </div>
+    </div>
+    <script type="text/javascript">
 
-
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-                //Button mit class="add-more" auswählen
-                $(".add-more").click(function () {
-                    //speichere in var html html codeschnipsel innerhalb von class copy-fields
-                    var html = $(".copy-fields").html();
-                    //füge html codeschnipsel nach div mit class after-add-more ein
-                    $(".after-add-more").after(html);
-                });
-                //bei click auf Löschen button 
-                //wird eingefügtes div mit class="copy-fields", welche die Eltern 
-                //von class="control-group ist, entfernt"
-                $("body").on("click", ".remove", function () {
-                    $(this).parents(".control-group").remove();
-                });
-
+        $(document).ready(function () {
+            var wrapper = $("")
+            //Button mit class="add-more" auswählen
+            $(".add-more").click(function () {
+                //speichere in var html html codeschnipsel innerhalb von class copy-fields
+                var html = $(".copy-fields").html();
+                //füge html codeschnipsel nach div mit class after-add-more ein
+                $(".after-add-more").append(html);
+            });
+            //bei click auf Löschen button 
+            //wird eingefügtes div mit class="copy-fields", welche die Eltern 
+            //von class="control-group ist, entfernt"
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".control-group").remove();
             });
 
-        </script>
-        </br>
-        <f:if condition="{survey.appointments}">
-            <div class="btn-group form-row">
-                <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
+        });
 
-                <div>
-                    <f:form.submit value="Speichern" class="btn btn-primary" />
-                </div>
-            </div>
-        </f:if>
-    </f:form>
+    </script>
 </f:section>

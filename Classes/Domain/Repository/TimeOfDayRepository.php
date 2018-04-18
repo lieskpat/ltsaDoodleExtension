@@ -31,9 +31,9 @@ namespace Schmidtch\Survey\Domain\Repository;
  */
 class TimeOfDayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-	public function updatePoll($appiontmentArray,$timeofdayArray)
+	public function updatePoll($appointmentArray, $timeofdayArray)
 	{
-		for($a=0;$a<sizeof($appiontmentArray);$a++) {
+		for($a=0;$a<sizeof($appointmentArray);$a++) {
 		
 			for($b=0;$b<sizeof($timeofdayArray[$a]);$b++) {
 

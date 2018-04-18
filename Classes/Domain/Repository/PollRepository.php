@@ -39,25 +39,25 @@ class PollRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 		return $num_rows;
 	}
 
-	public function addPoll($uid,$pollArray,$timeofdayArray,$appiontmentArray)
+	public function addPoll($uid, $pollArray, $timeofdayArray, $appointmentArray)
 	{		
-		for($a=0;$a<sizeof($appiontmentArray);$a++) {
+		for($a=0;$a<sizeof($appointmentArray);$a++) {
 		
 			for($b=0;$b<sizeof($timeofdayArray[$a]);$b++) {
 
 				if($pollArray[$a][$b] != NULL) {
-					$sql = "INSERT INTO tx_survey_domain_model_poll (pid, subscriber,timeofday,poll,tstamp,crdate)
+					$sql = "INSERT INTO tx_survey_domain_model_poll (pid, subscriber, timeofday, poll_Value, tstamp, crdate)
 						VALUES (70,'".$uid."','".$timeofdayArray[$a][$b]."','".$pollArray[$a][$b]."',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
 					$resultInsert = $GLOBALS['TYPO3_DB']->sql_query($sql);
 		
 				}
 				else {
-					$sql = "INSERT INTO tx_survey_domain_model_poll (pid, subscriber,timeofday,poll,tstamp,crdate)
+					$sql = "INSERT INTO tx_survey_domain_model_poll (pid, subscriber, timeofday, poll_Value, tstamp, crdate)
 						VALUES (70,'".$uid."','".$timeofdayArray[$a][$b]."',0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);";
 					$resultInsert = $GLOBALS['TYPO3_DB']->sql_query($sql);
 				}
 			}
-		}		
+		}	
 		return $resultInsert;    
 	}
 }

@@ -36,8 +36,11 @@
                                 <th width="150px">{subscriber.nameSubscriber}</th>
                         <f:for each="{survey.appointments}" as="appointment" >
                             <f:for each="{appointment.timeOfDay}" as="time" >
+
                                 <f:for each="{subscriber.subcheck}" as="subcheck">
-                                    <f:for each="{time.timecheck}" as="poll" >
+
+                                    <f:for each="{time.timeCheck}" as="poll" >
+
                                         <f:if condition="{poll.uid}=={subcheck.uid}">
                                             <f:then>
                                                 <f:if condition="{poll.pollValue}==1">																
