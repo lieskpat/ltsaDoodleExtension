@@ -60,7 +60,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      * surveyRepository
      *
      * @var \Schmidtch\Survey\Domain\Repository\SurveyRepository
-     * @inject
+     * 
      */
     protected $surveyRepository;
 
@@ -69,6 +69,13 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function injectSubscriberRepository(\Schmidtch\Survey\Domain\Repository\SubscriberRepository $subscriberRepository) {
         $this->subscriberRepository = $subscriberRepository;
+    }
+    
+    /**
+     * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
+     */
+    public function injectSurveyRepository(\Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+        $this->surveyRepository = $surveyRepository;
     }
 
     /**
@@ -95,9 +102,9 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
                 $subscriber->addSubcheck($pollObject);
             }	
         }
-        //$this->subscriberRepository->update($subscriber);
-        //$this->timeofdayRepository->update($timeOfDayObject);
-        $this->surveyRepository->update($survey);
+        $this->surveyRepository->update($survey);       
+        $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+        $persistenceManager->persistAll();
         $this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber,'survey' => $survey));	
     }
 
