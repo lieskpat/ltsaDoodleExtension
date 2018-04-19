@@ -3,7 +3,7 @@
 <f:section name="content">	
 
     <h1>{survey.title}</h1>
-
+    <f:debug>{survey}</f:debug>
     <dl class="dl-horizontal">
         <dt>Beschreibung:</dt>
         <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
@@ -38,14 +38,14 @@
                                 <th >{subscriber.nameSubscriber}</th>
                         <f:for each="{survey.appointments}" as="appointment" >
                             <f:for each="{appointment.timeOfDay}" as="time" >
-                                
+
                                 <f:for each="{subscriber.subcheck}" as="subcheck">
-                                    
+
                                     <f:for each="{time.timeCheck}" as="poll" >
-                                        
+
                                         <f:if condition="{poll.uid}=={subcheck.uid}">
                                             <f:then>
-                                                <f:debug>{poll.pollValue}</f:debug>
+
                                                 <f:if condition="{poll.pollValue}==1">																
                                                     <f:then>
                                                         <td bgcolor=green>																	

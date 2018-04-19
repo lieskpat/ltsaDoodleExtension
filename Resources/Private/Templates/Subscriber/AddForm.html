@@ -10,11 +10,12 @@
     </dl>
 
     <f:if condition="{survey.appointments}" >
-        <f:form action="add" object="{poll}" name="poll" arguments="{survey:survey, timeofday:timeofday, subscriber:subscriber}">
-            <f:form.hidden name="polls[subscriber][]" value="{subscriber.uid}" /> 
+
+        <f:form controller="Subscriber" action="add" method="post" arguments="{survey: survey, subscriber: subscriber, poll: poll}">  
+            <f:comment><f:form.hidden name="polls[subscriber][]" value="{subscriber.uid}" /></f:comment> 
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" iteration="iterator" >
-                    <f:form.hidden name="polls[appointment][]" value="{iterator.index}" /> 
+                    <f:comment><f:form.hidden name="polls[appointment][]" value="{iterator.index}" /></f:comment> 
                     <li class="list-group-item-">
                         <table class="table table-bordered table-sm">									
                             <thead>					
@@ -34,8 +35,10 @@
                                     <th width="150px">{subscriber.nameSubscriber}</th>								
                             <f:for each="{appointment.timeOfDay}" as="time" iteration="iteratorb" >
                                 <td>
-                                <f:form.checkbox name="polls[poll][{iterator.index}][{iteratorb.index}]" class="checkbox" checked="true" value="1" />
-                                <f:form.hidden name="polls[time][{iterator.index}][{iteratorb.index}]" value="{time.uid}" /> 
+
+                                <f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/>
+                                <f:comment><f:form.checkbox name="tx_survey_surveylisting[poll][{time.uid}][]" class="checkbox" value="true" /></f:comment>
+
                                 </td>										
                             </f:for>									
                             </tr>
