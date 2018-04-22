@@ -86,7 +86,7 @@
                 <source>Commentdate</source>
             </trans-unit>
             <trans-unit id="tx_survey_domain_model_poll">
-                <source>Poll</source>
+                <source>Poll-Value (True or False)</source>
             </trans-unit>
             <trans-unit id="tx_survey_domain_model_comment.poll_value">
                 <source>Poll-Value</source>

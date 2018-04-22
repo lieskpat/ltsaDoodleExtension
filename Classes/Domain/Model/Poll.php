@@ -1,7 +1,8 @@
 <?php
+
 namespace Schmidtch\Survey\Domain\Model;
 
-/***************************************************************
+/* * *************************************************************
  *
  *  Copyright notice
  *
@@ -24,41 +25,29 @@ namespace Schmidtch\Survey\Domain\Model;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * true/false Subscriber Timevalue
  */
-class Poll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
-{
+class Poll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * poll
      * 
      * @var bool
      */
-    protected $pollValue = false;
-    
+    protected $pollValue;
+
     /**
      * __construct
      * 
      * @param $pollValue 
      */
-    public function __construct($pollValue)
-    {
+    public function __construct($pollValue) {
         $this->pollValue = $pollValue;
     }
-    
-    /**
-     * Returns the pollValue
-     * 
-     * @return boolean $pollValue
-     */
-    public function getPollValue()
-    {
-        return $this->pollValue;
-    }
-    
+
     /**
      * 
      * @param bool $pollValue
@@ -67,14 +56,12 @@ class Poll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->pollValue = $pollValue;
     }
 
-
     /**
      * Returns the boolean state of poll
      * 
      * @return bool
      */
-    public function isPoll()
-    {
+    public function isPoll() {
         return $this->pollValue;
     }
 

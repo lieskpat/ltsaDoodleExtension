@@ -118,7 +118,7 @@ return array(
 
 		'poll_value' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_poll.poll_value',
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_poll',
 			'config' => array(
 				'type' => 'check',
 				'default' => 0
