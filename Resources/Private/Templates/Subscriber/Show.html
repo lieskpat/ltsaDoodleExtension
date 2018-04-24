@@ -43,13 +43,13 @@
 
                                         <f:if condition="{poll.uid}=={subcheck.uid}">
                                             <f:then>
-                                                <f:if condition="{poll.pollValue}==1">																
+                                                <f:if condition="{poll.pollValue}==TRUE">																
                                                     <f:then>
                                                         <td style="background-color:green">																	
                                                         </td>
                                                     </f:then>																										
                                                 </f:if>	
-                                                <f:if condition="{poll.pollValue}==0">
+                                                <f:if condition="{poll.pollValue}==FALSE">
                                                     <f:then>
                                                         <td style="background-color:red">																		
                                                         </td>

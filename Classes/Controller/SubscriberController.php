@@ -70,7 +70,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
     public function injectSubscriberRepository(\Schmidtch\Survey\Domain\Repository\SubscriberRepository $subscriberRepository) {
         $this->subscriberRepository = $subscriberRepository;
     }
-    
+
     /**
      * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
      */
@@ -85,30 +85,19 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function addAction(
     \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Subscriber $subscriber, array $poll) {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($poll);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->pollRepository->findAll());
         foreach ($poll as $key => $value) {
-            $timeOfDayObject = $this->timeofdayRepository->findByUid($key);
             $pollObject = new \Schmidtch\Survey\Domain\Model\Poll(FALSE);
-            //print_r($pollObject);
+            $timeOfDayObject = $this->timeofdayRepository->findByUid($key);
+            $timeOfDayObject->addTimeCheck($pollObject);
+            $subscriber->addSubcheck($pollObject);
             if (is_array($value)) {
                 if ($value['0']) {
-
                     $pollObject->setPollValue(TRUE);
-                    $timeOfDayObject->addTimeCheck($pollObject);
-                    $subscriber->addSubcheck($pollObject);
                 }
-            } else {
-                $timeOfDayObject->addTimeCheck($pollObject);
-                $subscriber->addSubcheck($pollObject);
-            }	
+            }
         }
-        $this->surveyRepository->update($survey);       
-        $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        $persistenceManager->persistAll();
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey);
-        //$this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber,'survey' => $survey));	
+        $this->surveyRepository->update($survey);
+        $this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber,'survey' => $survey));	
     }
 
     /**

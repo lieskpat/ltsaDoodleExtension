@@ -38,16 +38,24 @@ class Poll extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      * @var bool
      */
     protected $pollValue;
-
+    
     /**
      * __construct
      * 
-     * @param $pollValue 
+     * @param bool $pollValue 
      */
     public function __construct($pollValue) {
-        $this->pollValue = $pollValue;
+        $this->setPollValue($pollValue);
     }
-
+    
+    /**
+     * 
+     * @return bool $pollValue
+     */
+    function getPollValue() {
+        return $this->pollValue;
+    }
+    
     /**
      * 
      * @param bool $pollValue

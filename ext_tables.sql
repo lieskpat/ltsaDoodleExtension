@@ -268,7 +268,8 @@ CREATE TABLE tx_survey_domain_model_poll (
 	subscriber int(11) unsigned DEFAULT '0' NOT NULL,
 	timeofday int(11) unsigned DEFAULT '0' NOT NULL,
 
-	poll_Value tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	poll_value tinyint(1) unsigned DEFAULT '0' NOT NULL,
+
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

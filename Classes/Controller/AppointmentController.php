@@ -91,7 +91,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         //erfolgen immer am Ende der Action
         //lesende Zugriffe(z.B.findAll) erfolgen immer an der Stelle,
         //wo sie im Code notiert sind
-        foreach ($appointmentDate as $key => $value) {
+        foreach ($appointmentDate as $value) {
             $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
             $appointment->setAppointmentDate(\DateTime::createFromFormat('!Y-m-d', $value));
             $survey->addAppointment($appointment);
@@ -126,7 +126,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, 
         \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
-        foreach ($timeOfDay as $key => $value) {
+        foreach ($timeOfDay as $value) {
             $timeValue = new \Schmidtch\Survey\Domain\Model\Timeofday();
             $timeValue->setTimeValue($value);
             $appointment->addTimeOfDay($timeValue);

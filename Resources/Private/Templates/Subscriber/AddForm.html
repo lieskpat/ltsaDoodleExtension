@@ -12,16 +12,16 @@
     <f:if condition="{survey.appointments}" >
 
         <f:form controller="Subscriber" action="add" method="post" arguments="{survey: survey, subscriber: subscriber, poll: poll}">  
-            <f:comment><f:form.hidden name="polls[subscriber][]" value="{subscriber.uid}" /></f:comment> 
             <ul class="list-group">
-                <f:for each="{survey.appointments}" as="appointment" iteration="iterator" >
-                    <f:comment><f:form.hidden name="polls[appointment][]" value="{iterator.index}" /></f:comment> 
+                <f:for each="{survey.appointments}" as="appointment" > 
                     <li class="list-group-item-">
                         <table class="table table-bordered table-sm">									
                             <thead>					
                                 <tr>
                                     <th rowspan="2"></th>														
-                                    <th colspan="{appointment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></th>											
+                                    <th colspan="{appointment.timeOfDay -> f:count()}">
+                            <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
+                            </th>											
                             </tr>
                             <tr>						
                             <f:for each="{appointment.timeOfDay}" as="time" >
@@ -33,11 +33,11 @@
                             <tbody>		
                                 <tr>
                                     <th width="150px">{subscriber.nameSubscriber}</th>								
-                            <f:for each="{appointment.timeOfDay}" as="time" iteration="iteratorb" >
+                            <f:for each="{appointment.timeOfDay}" as="time" >
                                 <td>
 
-                                <f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/>
-                                <f:comment><f:form.checkbox name="tx_survey_surveylisting[poll][{time.uid}][]" class="checkbox" value="true" /></f:comment>
+                                <f:comment><f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/></f:comment>
+                                <f:form.checkbox class="checkbox" name="poll[{time.uid}][]" value="true" />Termin ist Frei
 
                                 </td>										
                             </f:for>									
