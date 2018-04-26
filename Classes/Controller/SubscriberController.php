@@ -97,7 +97,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
             }
         }
         $this->surveyRepository->update($survey);
-        $this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber,'survey' => $survey));	
+        $this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber, 'survey' => $survey));
     }
 
     /**

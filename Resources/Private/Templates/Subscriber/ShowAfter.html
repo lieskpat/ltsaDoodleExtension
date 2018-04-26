@@ -15,61 +15,54 @@
                     <thead>							
                         <tr>							
                             <th rowspan="2"></th>
-                    <f:for each="{survey.appointments}" as="appointment" >								
-                        <th colspan="{appointment.timeOfDay -> f:count()}">
-                        <f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date>
-                        </th>											
-                    </f:for>
-                    </tr>
-                    <tr>
-                    <f:for each="{survey.appointments}" as="appointment" >
-                        <f:for each="{appointment.timeOfDay}" as="time" >
+                            <f:for each="{survey.appointments}" as="appointment" >								
+                            <th colspan="{appointment.timeOfDay -> f:count()}">
+                            <f:format.date format="d.m.Y">{appointment.appointmentdate}</f:format.date>
+                            </th>											
+                            </f:for>
+                        </tr>
+                        <tr>
+                            <f:for each="{survey.appointments}" as="appointment" >
+                            <f:for each="{appointment.timeOfDay}" as="time" >
                             <th >{time.timeValue} Uhr</th>
-                        </f:for>
-                    </f:for>
-                    </tr>							
+                            </f:for>
+                            </f:for>
+                        </tr>							
                     </thead>
 
                     <f:for each="{survey.subscribers}" as="sub" >
-                        <tbody>		
-                            <tr>
-                                <th >{sub.nameSubscriber}</th>
-
-                        <f:for each="{survey.appointments}" as="appointment" >
+                    <tbody>		
+                        <tr>
+                            <th >{sub.nameSubscriber}</th>
+                            <f:for each="{survey.appointments}" as="appointment" >
                             <f:for each="{appointment.timeOfDay}" as="time" >
-
-                                <f:for each="{sub.subcheck}" as="subcheck">
-                                    
-                                    <f:for each="{time.timeCheck}" as="poll" >
-                                        
-                                        
-                                        <f:if condition="{poll.uid}=={subcheck.uid}">
-                                                
-                                            <f:then>
-
-                                                <f:if condition="{poll.pollValue}==TRUE">
-                                                    
-                                                    <f:then>
-                                                        <td style="background-color:green">																	
-                                                        </td>
-                                                    </f:then>																										
-                                                </f:if>	
-                                                <f:if condition="{poll.pollValue}==FALSE">
-                                                    <f:then>
-                                                        <td style="background-color:red">																		
-                                                        </td>
-                                                    </f:then>
-                                                </f:if>
-                                            </f:then>														
-                                        </f:if>
-                                    </f:for>
-                                </f:for>
+                            <f:for each="{sub.subcheck}" as="subcheck">
+                            <f:for each="{time.timeCheck}" as="poll" >
+                            <f:if condition="{poll.uid}=={subcheck.uid}">   
+                                <f:then>
+                                    <f:if condition="{poll.pollValue}==1">
+                                    <f:then>
+                                    <td style="background-color:green"></td>
+                                    </f:then>																										
+                                    </f:if>	
+                                    <f:if condition="{poll.pollValue}==0">
+                                    <f:then>
+                                    <td style="background-color:red"></td>
+                                    </f:then>
+                                    </f:if>
+                                </f:then>														
+                            </f:if>
                             </f:for>
-                        </f:for>
+                            </f:for>
+                            </f:for>
+                            </f:for>
                         </tr>
-                        </tbody>
-                    </f:for>
-
+                        </f:for>
+                        <tr>
+                            <th>Übereinstimmung</th>
+                        </tr>
+                    </tbody>
+                    
                 </table>
             </li>
 

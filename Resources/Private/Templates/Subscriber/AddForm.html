@@ -18,30 +18,28 @@
                         <table class="table table-bordered table-sm">									
                             <thead>					
                                 <tr>
-                                    <th rowspan="2"></th>														
+                                    <th rowspan="2">BLUB</th>														
                                     <th colspan="{appointment.timeOfDay -> f:count()}">
-                            <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
-                            </th>											
-                            </tr>
-                            <tr>						
-                            <f:for each="{appointment.timeOfDay}" as="time" >
-                                <th>{time.timeValue} Uhr</th>
-                            </f:for>
-                            </tr>
+                                    <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
+                                    </th>											
+                                </tr>
+                                <tr>						
+                                    <f:for each="{appointment.timeOfDay}" as="time" >
+                                    <th>{time.timeValue} Uhr</th>
+                                    </f:for>
+                                </tr>
                             </thead>
-
                             <tbody>		
                                 <tr>
                                     <th width="150px">{subscriber.nameSubscriber}</th>								
-                            <f:for each="{appointment.timeOfDay}" as="time" >
-                                <td>
+                                    <f:for each="{appointment.timeOfDay}" as="time" >
+                                    <td>
+                                        <f:comment><f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/></f:comment>
+                                        <f:form.checkbox class="checkbox" name="poll[{time.uid}][]" value="true" />Termin ist Frei
 
-                                <f:comment><f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/></f:comment>
-                                <f:form.checkbox class="checkbox" name="poll[{time.uid}][]" value="true" />Termin ist Frei
-
-                                </td>										
-                            </f:for>									
-                            </tr>
+                                    </td>										
+                                    </f:for>									
+                                </tr>
                             </tbody>						
                         </table>
                     </li>
