@@ -35,17 +35,18 @@
         <f:then>
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" iteration="i">
-                    <li>
+                    <li style="list-style: none">
 
-                        <div class="my-form">
-                            <label>Termin: <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></label>
+                        <div class="form-inline">
+
 
                             <f:form controller="Appointment" action="newTimeOfDay" name="" object="" arguments="{survey: survey, appointment: appointment}">
                                 <f:comment>
-                                    <f:form.button class="btn btn-primary add-more button-{i.cycle}" type="button">Uhrzeit Hinzufügen</f:form.button>
+                                    <f:form.button class="btn btn-default add-more button-{i.cycle}" type="button">Uhrzeit Hinzufügen</f:form.button>
                                 </f:comment>
-                                <div>
-                                    <f:form.submit value="Uhrzeit hinzufügen" class="btn btn-primary btn-xs" />
+                                <div class="form-group">
+                                    <label>Termin: <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></label>
+                                    <f:form.submit value="Uhrzeit hinzufügen" class="btn btn-default" />
                                 </div>
                             </f:form>
                         </div>
@@ -66,12 +67,10 @@
         <f:else>Keine Einträge vorhanden!!!!!</f:else>
     </f:if>
 
-
-    <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
-    <br />
-    <br />
-    <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-primary">Umfrage erstellen</f:link.action>
-
+    <div class="form-inline">
+        <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-default">weiteren Termin anlegen</f:link.action>
+        <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-default">Umfrage erstellen</f:link.action>
+    </div>
     <div class="copy" style="display: none!important;">
         <f:form controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
             <div class="after-add-more">
@@ -83,7 +82,7 @@
             </div>
             <div>
                 <br />
-                <f:form.submit value="Speichern" class="btn btn-primary btn-xs" />
+                <f:form.submit value="Speichern" class="btn btn-default" />
             </div>
         </f:form>
     </div>

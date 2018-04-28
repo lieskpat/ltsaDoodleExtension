@@ -18,17 +18,21 @@
     <h3>Termin wählen</h3>
 
     <f:form class="my-form btn-group" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
-        <div class="after-add-more form-row">
-            <div class="form-group col-md-6">
-                <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
-            </div>
-            <div class="form-group col-md-4">
-                <f:form.button class="btn btn-outline-primary add-more" type="button">Hinzufügen</f:form.button>
+        <div class="form-inline">
+            <div class="after-add-more">
+                <div class="form-group">
+                    <input class="form-control" type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+                </div>
+                <div class="form-group">
+                    <f:form.button class="btn btn-default add-more" type="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </f:form.button>
+                </div>
             </div>
         </div>
         </br>
         <div>
-            <f:form.submit value="Speichern" class="btn btn-primary" />
+            <f:form.submit value="Speichern" class="btn btn-default" />
         </div>
     </f:form>
     <f:if condition="{survey.appointments}">
@@ -38,12 +42,14 @@
     </f:if>
 
     <div class="copy-fields" style="display: none!important;">
-        <div class="control-group form-row" style="margin-top:10px" >
-            <div class="form-group col-md-6">
-                <input type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+        <div class="control-group" style="margin-top:10px" >
+            <div class="form-group">
+                <input class="form-control" type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
             </div>
-            <div class="form-group col-md-4">
-                <f:form.button class="btn btn-outline-primary remove" type="button">Löschen</f:form.button>
+            <div class="form-group">
+                <f:form.button class="btn btn-default remove" type="button">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </f:form.button>
             </div>
         </div>
     </div>
