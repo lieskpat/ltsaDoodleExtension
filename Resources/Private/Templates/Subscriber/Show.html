@@ -49,7 +49,7 @@
 
         </ul>
     </f:if>	
-    <br />
+    
     <ul class="list-group">
         <f:if condition="{survey.subscribers.comments}">
             <label>Kommentare</label>
@@ -67,8 +67,10 @@
         </f:if>
     </ul>
     <div class="form-inline form-group">
-        <f:link.action action="registerForm" class="btn btn-default form-control" arguments="{survey:survey, subscriber:subscriber}">abstimmen</f:link.action>
-        <f:link.action action="list" controller="Survey" class="btn btn-default form-control">zurück</f:link.action>
+        <f:link.action action="registerForm" class="btn btn-default form-control" arguments="{survey:survey, subscriber:subscriber}">Abstimmen</f:link.action>
+        <f:comment>
+            <f:link.action action="list" controller="Survey" class="btn btn-default form-control">zurück</f:link.action>
+        </f:comment>
     </div>
 
 </f:section>
