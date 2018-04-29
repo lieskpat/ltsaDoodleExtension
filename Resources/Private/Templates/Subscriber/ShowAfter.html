@@ -1,16 +1,17 @@
 <f:layout name="Default" />
 
 <f:section name="content">	
-
     <h1>{survey.title}</h1>
-    <dl class="dl-horizontal">
-        <dt>Beschreibung:</dt>
-        <dd><f:format.nl2br>{survey.description}</f:format.nl2br></dd>
-    </dl>
-
+    <div>
+        <h4>Beschreibung:</h4>
+    </div>
+    <div>
+        <f:format.nl2br>{survey.description}</f:format.nl2br>
+    </div>
+    <br/>
     <f:if condition="{survey.appointments}" >
         <ul class="list-group">
-            <li class="list-group-item-">
+            <li class="list-group-item-" style="list-style: none">
                 <table class="table table-bordered table-sm">				
                     <thead>							
                         <tr>							
@@ -58,9 +59,6 @@
                             </f:for>
                         </tr>
                         </f:for>
-                        <tr>
-                            <th>Übereinstimmung</th>
-                        </tr>
                     </tbody>
                     
                 </table>
@@ -68,17 +66,14 @@
 
         </ul>
     </f:if>	
-    <br />
-
-    <label>Kommentar</label>
     <f:form action="commentAjax" name="comment" object="{comment}" arguments="{survey:survey, subscriber:subscriber}">
-        <table  >
-            <td width="300px">
-            <f:form.textarea property="comment" id="commentfield" style="width:100%"/>
-            </td>
-        </table>
-        <br />
-        <f:form.submit value="Senden" class="btn btn-primary btn-xs" id="commentsubmit" />
+        <div class="form-group">
+            <label>Kommentar</label>    
+            <f:form.textarea class="form-control" property="comment" id="commentfield" />
+        </div>
+        <div class="form-group">
+            <f:form.submit value="Senden" class="btn btn-default" id="commentsubmit" />
+        </div>
     </f:form>
 
     <ul class="list-group" id="comments">

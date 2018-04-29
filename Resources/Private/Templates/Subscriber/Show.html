@@ -10,27 +10,27 @@
 
     <f:if condition="{survey.appointments}" >
         <ul class="list-group">
-            <li class="list-group-item-">
+            <li class="list-group-item-" style="list-style: none">
                 <table class="table table-bordered table-sm">				
                     <thead>							
                         <tr>							
                             <th rowspan="2"></th>
-                            <f:for each="{survey.appointments}" as="appointment" >								
-                            <th colspan="{appointment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></th>											
-                            </f:for>
-                        </tr>
-                        <tr>
-                            <f:for each="{survey.appointments}" as="appointment" >
-                            <f:for each="{appointment.timeOfDay}" as="time" >
+                    <f:for each="{survey.appointments}" as="appointment" >								
+                        <th colspan="{appointment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></th>											
+                    </f:for>
+                    </tr>
+                    <tr>
+                    <f:for each="{survey.appointments}" as="appointment" >
+                        <f:for each="{appointment.timeOfDay}" as="time" >
                             <th >{time.timeValue} Uhr</th>
-                            </f:for>
-                            </f:for>
-                        </tr>							
+                        </f:for>
+                    </f:for>
+                    </tr>							
                     </thead>
                     <tbody>
                     <f:for each="{survey.subscribers}" as="subscriber" >	
                         <tr>
-                        <th width="150px">{subscriber.nameSubscriber}</th>
+                            <th width="150px">{subscriber.nameSubscriber}</th>
                         <f:for each="{subscriber.subcheck}" as="poll">
                             <f:if condition="{poll.pollValue}==1">
                                 <f:then>
@@ -51,25 +51,25 @@
     </f:if>	
     <br />
     <ul class="list-group">
-        <label>Kommentare</label>
-        <f:for each="{survey.subscribers}" as="subscriber" >
-            <f:for each="{subscriber.comments}" as="comment" reverse="TRUE">			
-                <li class="list-group-item-">
-                    {subscriber.nameSubscriber} <br />
-                    {comment.comment}
-                    <span class="text-muted">
-                        (<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
-                    </span>
-                </li>			
+        <f:if condition="{survey.subscribers.comments}">
+            <label>Kommentare</label>
+            <f:for each="{survey.subscribers}" as="subscriber" >
+                <f:for each="{subscriber.comments}" as="comment" reverse="TRUE">			
+                    <li class="list-group-item-">
+                        {subscriber.nameSubscriber} <br />
+                        {comment.comment}
+                        <span class="text-muted">
+                            (<f:format.date format="d-m-Y H:i:s">{comment.commentdate}</f:format.date>)
+                        </span>
+                    </li>			
+                </f:for>
             </f:for>
-        </f:for>
+        </f:if>
     </ul>
-    <br />
-    <f:link.action action="registerForm" class="btn btn-primary" arguments="{survey:survey, subscriber:subscriber}">abstimmen</f:link.action>
-    <br />
-    <br />
-    <f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
-
+    <div class="form-inline form-group">
+        <f:link.action action="registerForm" class="btn btn-default form-control" arguments="{survey:survey, subscriber:subscriber}">abstimmen</f:link.action>
+        <f:link.action action="list" controller="Survey" class="btn btn-default form-control">zurück</f:link.action>
+    </div>
 
 </f:section>
 

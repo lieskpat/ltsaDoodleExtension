@@ -14,11 +14,11 @@
         <f:form controller="Subscriber" action="add" method="post" arguments="{survey: survey, subscriber: subscriber, poll: poll}">  
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" > 
-                    <li class="list-group-item-">
+                    <li class="list-group-item-" style="list-style: none">
                         <table class="table table-bordered table-sm">									
                             <thead>					
                                 <tr>
-                                    <th rowspan="2">BLUB</th>														
+                                    <th rowspan="2"></th>														
                                     <th colspan="{appointment.timeOfDay -> f:count()}">
                                     <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
                                     </th>											
@@ -35,7 +35,7 @@
                                     <f:for each="{appointment.timeOfDay}" as="time" >
                                     <td>
                                         <f:comment><f:form.checkbox name="poll[{time.uid}][]" class="checkbox" value="true"/></f:comment>
-                                        <f:form.checkbox class="checkbox" name="poll[{time.uid}][]" value="true" />Termin ist Frei
+                                        <f:form.checkbox class="checkbox" name="poll[{time.uid}][]" value="true" />
 
                                     </td>										
                                     </f:for>									
@@ -44,15 +44,19 @@
                         </table>
                     </li>
                 </f:for>
-                <br />
-                <f:form.submit value="Abschicken" class="btn btn-primary" />
+                <div class="form-inline">
+                    <f:comment>
+                    <div class="form-group">
+                        <f:link.action action="list" controller="Survey" class="btn btn-default">Zurück</f:link.action>
+                    </div>
+                    </f:comment>
+                    <div class="form-group">
+                        <f:form.submit value="Abschicken" class="btn btn-default" />
+                    </div>
+                </div>
             </ul>			
         </f:form>
     </f:if>
-
-    <br />
-    <br />
-    <f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
-
+    
 </f:section>
 

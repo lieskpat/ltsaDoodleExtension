@@ -11,7 +11,7 @@
 
     <f:if condition="{survey.appointments}" >
         <ul class="list-group">			
-            <li class="list-group-item-">
+            <li class="list-group-item-" style="list-style: none">
                 <table class="table table-bordered table-sm">				
                     <thead>							
                         <tr>							
@@ -84,31 +84,21 @@
         </f:for>
     </ul>
 
-    <br />
     <ul class="list-group">
-        <li class="list-group-item-">
-            <table>
-                <thead>
-                <th>
-                    Um Teilnehmer zu der Umfrage einzuladen, nutzen Sie bitte folgenden Link:
-                    <br />
-                    <br />
-                </th>
-                </thead>
-                <tbody>
-                <td >					
-                    <span style="word-wrap: break-word; word-break: break-all;"> 
-                        {f:uri.action(action:'show', controller:'Subscriber', arguments:'{survey:survey}', noCache:'0', noCacheHash:'0', absolute:'1')}
-                    </span>
-                </td>
-                </tbody>
-            </table>
+        <li class="list-group-item-" style="list-style: none">
+            <div>
+                <h4>Um Teilnehmer zu der Umfrage einzuladen, nutzen Sie bitte folgenden Link:</h4>
+            </div>
+            <br />
+            <div>        			
+                <span style="word-wrap: break-word; word-break: break-all;"> 
+                    {f:uri.action(action:'show', controller:'Subscriber', arguments:'{survey:survey}', noCache:'0', noCacheHash:'0', absolute:'1')}
+                </span>
+            </div>
         </li>
     </ul>
-
-    <br />
-    <br />
-    <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">zurück</f:link.action>
-
+    <div class="form-group">
+        <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-default">Zurück</f:link.action>
+    </div>
 </f:section>
 

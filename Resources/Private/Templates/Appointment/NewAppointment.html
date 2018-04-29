@@ -30,16 +30,19 @@
                 </div>
             </div>
         </div>
-        </br>
-        <div>
-            <f:form.submit value="Speichern" class="btn btn-default" />
+        <br/>
+        <div class="form-inline">
+            <f:if condition="{survey.appointments}">
+                <div class="form-group">
+                    <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-default">Zurück zur Übersicht</f:link.action>
+                </div>
+            </f:if>
+            <div class="form-group">
+                <f:form.submit value="Speichern" class="btn btn-default" />
+            </div>
         </div>
     </f:form>
-    <f:if condition="{survey.appointments}">
-        <div class="btn-group form-row">
-            <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-primary">Zurück zur Übersicht</f:link.action>
-        </div>
-    </f:if>
+    
 
     <div class="copy-fields" style="display: none!important;">
         <div class="control-group" style="margin-top:10px" >

@@ -14,7 +14,7 @@
 	<f:if condition="{survey.appiontments}" >
 		<ul class="list-group">
 			<f:for each="{survey.appiontments}" as="appiontment" >
-				<li class="list-group-item">
+                            <li class="list-group-item" style="list-style: none">
 					<table class="table table-bordered table-sm">									
 						<thead>					
 							<tr>
@@ -48,7 +48,7 @@
 	
 	<br />
 	<br />
-	<f:link.action action="list" controller="Survey" class="btn btn-primary">zurück</f:link.action>
+	<f:link.action action="list" controller="Survey" class="btn btn-default">zurück</f:link.action>
 	
 </f:section>
 	
