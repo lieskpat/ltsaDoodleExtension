@@ -12,10 +12,11 @@
             <p>
             <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
             </p>
+            <hr>
         </f:for>
     </f:if>
 
-    <h3>Termin wählen</h3>
+    <h3>Termin hinzufügen</h3>
 
     <f:form class="my-form btn-group" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
         <div class="form-inline">
@@ -31,7 +32,8 @@
             </div>
         </div>
         <br/>
-        <div class="form-inline">
+        <hr>
+        <div class="form-inline form-group">
             <f:if condition="{survey.appointments}">
                 <div class="form-group">
                     <f:link.action controller="Appointment" action="addFormTime" arguments="{survey: survey}" class="btn btn-default">Zurück zur Übersicht</f:link.action>

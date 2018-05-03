@@ -50,8 +50,9 @@ class Timeofday extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * __construct
      */
-    public function __construct()
+    public function __construct($timeValue)
     {
+        $this->setTimeValue($timeValue);
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
