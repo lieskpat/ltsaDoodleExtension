@@ -124,26 +124,53 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \array $timeOfDay
      */
     public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
+
         $appointmentObject = $this->appointmentRepository->findByUid($appointment->getUid());
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appointmentObject->getTimeOfDay());
         if (empty($appointmentObject->getTimeOfDay()->toArray())) {
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('EMPTY');
-            $this->createAndAddTimeOfDayObjectToAppointment($appointment, $timeOfDay);
+
+            $this->createAndAddTimeOfDayObjectToAppointment($appointment, $this->getArrayWithNoDuplicateTimeValues($timeOfDay, $this->getTimeValueArrayFromAppointmentObject($appointment)));
         } else {
-            foreach ($timeOfDay as $time) {
-                //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($timeObject);
-                if (!in_array($time, $appointmentObject->getTimeOfDay()->toArray())) {
-                    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($time);
-                    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($appointmentObject->getTimeOfDay());
-                    $helpArray[] = $time;
-                    
-                }
+//            foreach ($timeOfDay as $time) {
+//                if (!in_array($time, $this->getTimeValueArrayFromAppointmentObject($appointment))) {
+//                    $helpArray[] = $time;
+//                }       
+//            }
+            $helpArray = $this->getArrayWithNoDuplicateTimeValues($timeOfDay, $this->getTimeValueArrayFromAppointmentObject($appointment));
+            if (!empty($helpArray)) {
+                $this->createAndAddTimeOfDayObjectToAppointment($appointment, $helpArray);
             }
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($helpArray);
-            $this->createAndAddTimeOfDayObjectToAppointment($appointment, $helpArray);
         }
         $this->appointmentRepository->update($appointment);
         $this->forward('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+    }
+
+    /**
+     * @param \array $timeOfDay
+     * @param \array $timeValue
+     * @return \array an array with no duplicate values
+     */
+    private function getArrayWithNoDuplicateTimeValues(array $timeOfDay, array $timeValue) {
+        if (is_null($timeValue)) {
+            $manipulatedArray = array();
+        }
+        $manipulatedArray = $timeValue;
+        foreach ($timeOfDay as $time) {
+            if (!in_array($time, $manipulatedArray)) {
+                $manipulatedArray[] = $time;
+            }
+        }
+        return array_diff($manipulatedArray, $timeValue);
+    }
+
+    /**
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     * @return \array $timeValue
+     */
+    private function getTimeValueArrayFromAppointmentObject(\Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        foreach ($appointment->getTimeOfDay() as $timeOfDayObject) {
+            $timeValue[] = $timeOfDayObject->getTimeValue();
+        }
+        return $timeValue;
     }
 
     /**
