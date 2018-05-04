@@ -65,7 +65,7 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
     protected $surveyRepository;
 
     /**
-     * @param \Schmidtch\Survey\Domain\Repository\SubscriberRepository $timeofdayRepository
+     * @param \Schmidtch\Survey\Domain\Repository\SubscriberRepository $subscriberRepository
      */
     public function injectSubscriberRepository(\Schmidtch\Survey\Domain\Repository\SubscriberRepository $subscriberRepository) {
         $this->subscriberRepository = $subscriberRepository;
@@ -99,6 +99,9 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
         $this->surveyRepository->update($survey);
         $this->redirect('showAfter', 'Subscriber', NULL, array('subscriber' => $subscriber, 'survey' => $survey));
     }
+    
+    
+    
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
@@ -106,9 +109,9 @@ class SubscriberController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
      */
     public function commentAjaxAction(
     \Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Subscriber $subscriber, \Schmidtch\Survey\Domain\Model\Comment $comment = NULL) {
-        if ($comment->getComment() == "")
+        if ($comment->getComment() == "") {
             return FALSE;
-
+        }
         $comment->setCommentdate(new \DateTime());
         $subscriber->addComment($comment);
         $this->subscriberRepository->update($subscriber);

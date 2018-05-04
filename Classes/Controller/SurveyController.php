@@ -49,6 +49,13 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
     
     /**
+     *
+     */
+    public function listAction() {
+        $this->view->assign('surveys', $this->surveyRepository->findAll());
+    }
+    
+    /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
@@ -61,7 +68,6 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function createSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
        
         $survey->setPostdate(new \DateTime());
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($survey->getPostdate());
         $this->surveyRepository->add($survey);
         $persistenceManager = $this->objectManager->get(
                 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');

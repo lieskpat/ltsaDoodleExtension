@@ -125,17 +125,13 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
 
-        $appointmentObject = $this->appointmentRepository->findByUid($appointment->getUid());
-        if (empty($appointmentObject->getTimeOfDay()->toArray())) {
-
-            $this->createAndAddTimeOfDayObjectToAppointment($appointment, $this->getArrayWithNoDuplicateTimeValues($timeOfDay, $this->getTimeValueArrayFromAppointmentObject($appointment)));
+        if (empty($appointment->getTimeOfDay()->toArray())) {
+            $this->createAndAddTimeOfDayObjectToAppointment($appointment
+                    , $this->getArrayWithNoDuplicateTimeValues($timeOfDay
+                            , $appointment->getTimeValueArrayFromAppointmentObject()));
         } else {
-//            foreach ($timeOfDay as $time) {
-//                if (!in_array($time, $this->getTimeValueArrayFromAppointmentObject($appointment))) {
-//                    $helpArray[] = $time;
-//                }       
-//            }
-            $helpArray = $this->getArrayWithNoDuplicateTimeValues($timeOfDay, $this->getTimeValueArrayFromAppointmentObject($appointment));
+            $helpArray = $this->getArrayWithNoDuplicateTimeValues($timeOfDay
+                    , $appointment->getTimeValueArrayFromAppointmentObject());
             if (!empty($helpArray)) {
                 $this->createAndAddTimeOfDayObjectToAppointment($appointment, $helpArray);
             }
@@ -150,9 +146,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @return \array an array with no duplicate values
      */
     private function getArrayWithNoDuplicateTimeValues(array $timeOfDay, array $timeValue) {
-        if (is_null($timeValue)) {
-            $manipulatedArray = array();
-        }
         $manipulatedArray = $timeValue;
         foreach ($timeOfDay as $time) {
             if (!in_array($time, $manipulatedArray)) {
@@ -160,17 +153,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             }
         }
         return array_diff($manipulatedArray, $timeValue);
-    }
-
-    /**
-     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
-     * @return \array $timeValue
-     */
-    private function getTimeValueArrayFromAppointmentObject(\Schmidtch\Survey\Domain\Model\Appointment $appointment) {
-        foreach ($appointment->getTimeOfDay() as $timeOfDayObject) {
-            $timeValue[] = $timeOfDayObject->getTimeValue();
-        }
-        return $timeValue;
     }
 
     /**
@@ -190,9 +172,9 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function ajaxAddAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Timeofday $timeOfDay = NULL) {
         // Wenn das Feld leer ist, wird nicht persistiert
-        if ($timeOfDay->getTimeValue() == "")
+        if ($timeOfDay->getTimeValue() == "") {
             return FALSE;
-
+        }
         // Uhrzeit zum Termin hinzufühgen
         $appointment->addTimeOfDay($timeOfDay);
 
@@ -251,7 +233,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function deleteAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->addFlashMessage(
-            'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+                'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\surveyRepository')->update($survey);

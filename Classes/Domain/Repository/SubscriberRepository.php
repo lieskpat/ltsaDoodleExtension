@@ -1,7 +1,8 @@
 <?php
+
 namespace Schmidtch\Survey\Domain\Repository;
 
-/***************************************************************
+/* * *************************************************************
  *
  *  Copyright notice
  *
@@ -24,21 +25,11 @@ namespace Schmidtch\Survey\Domain\Repository;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * The repository for Subscribers
  */
-class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
-{
-	public function updatePoll($uid, $countSubscriber)
-	{		
-		$sql = "UPDATE tx_survey_domain_model_subscriber
-			SET subcheck='".$countSubscriber."'
-			WHERE uid='".$uid."'";
-		$resultInsert = $GLOBALS['TYPO3_DB']->sql_query($sql);
-				
-		return $resultInsert;    
-	}
+class SubscriberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     
 }

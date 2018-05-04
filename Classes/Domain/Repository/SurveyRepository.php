@@ -1,7 +1,8 @@
 <?php
+
 namespace Schmidtch\Survey\Domain\Repository;
 
-/***************************************************************
+/* * *************************************************************
  *
  *  Copyright notice
  *
@@ -24,13 +25,21 @@ namespace Schmidtch\Survey\Domain\Repository;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * The repository for Surveys
  */
-class SurveyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
-{
+class SurveyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-    
+    // Wenn PID nicht gesetzt ist, wie im folgenden
+    // plugin.tx_myextension.persistence.storagePid = 4
+    // führt findAll() zu leerem Ergebnis
+    // durch folgende Methode wird findAll() direkt auf DB ausgeführt
+    public function initializeObject() {
+
+        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings->setRespectStoragePage(FALSE);
+    }
+
 }

@@ -132,5 +132,16 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->timeOfDay = $timeOfDay;
     }
+    
+    /**
+     * @return \array $timeValue
+     */
+    public function getTimeValueArrayFromAppointmentObject() {
+        $timeValue = array();
+        foreach ($this->getTimeOfDay() as $timeOfDayObject) {
+            $timeValue[] = $timeOfDayObject->getTimeValue();
+        }
+        return $timeValue;
+    }
 
 }
