@@ -9,9 +9,14 @@
     <f:if condition="{survey.appointments}">
         <h3>Bereits gewählte Termine</h3>
         <f:for each="{survey.appointments}" as="appointment">
-            <p>
-            <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
-            </p>
+            <f:form>
+                <p>
+                    <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
+                    <f:form.button class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </f:form.button>
+                </p>
+            </f:form>
             <hr>
         </f:for>
     </f:if>

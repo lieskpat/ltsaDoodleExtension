@@ -49,11 +49,14 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * __construct
+     * 
+     * @param \DateTime $appointmentDate
      */
-    public function __construct()
+    public function __construct($appointmentDate)
     {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
+        $this->setAppointmentDate($appointmentDate);
     }
     
     /**

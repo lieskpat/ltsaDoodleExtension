@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $(':button').click(function () {
+            $(".bla").click(function () {
                 var html = $(".copy").html();
                 doSth(this, html);
                 //$(this).prop("disabled", true);
@@ -53,9 +53,13 @@
                         </br>
                     <f:if condition="{appointment.timeOfDay}">
                         <f:for each="{appointment.timeOfDay}" as="time">
-
-                            <p>{time.timeValue} Uhr</p>
-
+                            <f:form>
+                                <p>{time.timeValue} Uhr
+                                    <f:form.button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </f:form.button>
+                                </p>             
+                            </f:form>
                         </f:for>
 
                     </f:if>
@@ -68,7 +72,7 @@
     </f:if>
 
     <div class="form-inline form-group">
-        <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-default">weiteren Termin anlegen</f:link.action>
+        <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-default">Termine Bearbeiten</f:link.action>
         <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-default">Umfrage erstellen</f:link.action>
     </div>
     <div class="copy" style="display: none!important;">

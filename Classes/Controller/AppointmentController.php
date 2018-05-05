@@ -91,14 +91,52 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         //erfolgen immer am Ende der Action
         //lesende Zugriffe(z.B.findAll) erfolgen immer an der Stelle,
         //wo sie im Code notiert sind
-        foreach ($appointmentDate as $value) {
-            $appointment = new \Schmidtch\Survey\Domain\Model\Appointment();
-            $appointment->setAppointmentDate(\DateTime::createFromFormat('!Y-m-d', $value));
-            $survey->addAppointment($appointment);
+        if (empty($survey->getAppointments()->toArray())) {
+            $this->createAndAddAppointmentToSurvey($survey, $this->
+                            getArrayWithNoDuplicateStrings($appointmentDate
+                                    , $survey->getAppointmentDateArrayFromAppointments()));
+        } else {
+            $helpArray = $this->getArrayWithNoDuplicateStrings($appointmentDate
+                    , $survey->getAppointmentDateArrayFromAppointments());
+            if (!empty($helpArray)) {
+                $this->createAndAddAppointmentToSurvey($survey, $helpArray);
+            }
         }
         $this->surveyRepository->update($survey);
         //bei Aufruf von redirect wird automatisch vorher persistiert
         $this->redirect('addFormTime', 'Appointment', NULL, array('survey' => $survey));
+    }
+
+    /**
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @param \array $appointmentDate
+     *
+     */
+    private function createAndAddAppointmentToSurvey(
+    \Schmidtch\Survey\Domain\Model\Survey $survey, array $appointmentDate) {
+
+        foreach ($appointmentDate as $value) {
+            $survey->addAppointment(new \Schmidtch\Survey\Domain\Model\Appointment
+                    (\DateTime::createFromFormat('!Y-m-d', $value)));
+        }
+    }
+
+    /**
+     * filter duplicates from request and storage (DB)
+     * 
+     * @param array $requestArray request values are strings
+     * @param array $storageArray often are objects but instance variables
+     * mostly are strings
+     * @return array
+     */
+    private function getArrayWithNoDuplicateStrings(array $requestArray, array $storageArray) {
+        $manipulatedArray = $storageArray;
+        foreach ($requestArray as $string) {
+            if (!in_array($string, $manipulatedArray)) {
+                $manipulatedArray[] = $string;
+            }
+        }
+        return array_diff($manipulatedArray, $storageArray);
     }
 
     /**
@@ -127,10 +165,10 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         if (empty($appointment->getTimeOfDay()->toArray())) {
             $this->createAndAddTimeOfDayObjectToAppointment($appointment
-                    , $this->getArrayWithNoDuplicateTimeValues($timeOfDay
+                    , $this->getArrayWithNoDuplicateStrings($timeOfDay
                             , $appointment->getTimeValueArrayFromAppointmentObject()));
         } else {
-            $helpArray = $this->getArrayWithNoDuplicateTimeValues($timeOfDay
+            $helpArray = $this->getArrayWithNoDuplicateStrings($timeOfDay
                     , $appointment->getTimeValueArrayFromAppointmentObject());
             if (!empty($helpArray)) {
                 $this->createAndAddTimeOfDayObjectToAppointment($appointment, $helpArray);
@@ -138,21 +176,6 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         }
         $this->appointmentRepository->update($appointment);
         $this->forward('addFormTime', 'Appointment', NULL, array('survey' => $survey));
-    }
-
-    /**
-     * @param \array $timeOfDay
-     * @param \array $timeValue
-     * @return \array an array with no duplicate values
-     */
-    private function getArrayWithNoDuplicateTimeValues(array $timeOfDay, array $timeValue) {
-        $manipulatedArray = $timeValue;
-        foreach ($timeOfDay as $time) {
-            if (!in_array($time, $manipulatedArray)) {
-                $manipulatedArray[] = $time;
-            }
-        }
-        return array_diff($manipulatedArray, $timeValue);
     }
 
     /**

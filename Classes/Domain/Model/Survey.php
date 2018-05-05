@@ -453,5 +453,16 @@ class Survey extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->subscribers = $subscribers;
     }
+    
+    /**
+     * @return \array $timeValue
+     */
+    public function getAppointmentDateArrayFromAppointments() {
+        $appointmentDate = array();
+        foreach ($this->getAppointments() as $appointmentObject) {
+            $appointmentDate[] = $appointmentObject->getAppointmentDate()->format('Y-m-d');
+        }
+        return $appointmentDate;
+    }
 
 }

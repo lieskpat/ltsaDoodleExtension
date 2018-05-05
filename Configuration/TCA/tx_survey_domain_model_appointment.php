@@ -120,12 +120,12 @@ return array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_appointment.appointment_date',
 			'config' => array(
-				'dbType' => 'datetime',
+				'dbType' => 'date',
 				'type' => 'input',
 				'size' => 12,
 				'eval' => 'datetime',
 				'checkbox' => 0,
-				'default' => '0000-00-00 00:00:00'
+				'default' => '0000-00-00'
 			),
 		),
 		'time_of_day' => array(
