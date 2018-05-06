@@ -42,7 +42,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      *
-     * @var \Schmidtch\Survey\Service\AccesControlService $accessControlService
+     * @var \Schmidtch\Survey\Service\AccessControlService
      * @inject
      */
     protected $accessControlService;
@@ -68,20 +68,20 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
         //ist Nutzer eingeloggt (ist FE_User vorhanden, Abfrage mit Service Klasse)
         //AccessControlService ist Singleton
-        //if ($this->accessControlService->hasLoggedInFeUser()) {
-        //    $feUserName = $this->accessControlService->getFeUserName();
+        if ($this->accessControlService->hasLoggedInFeUser()) {
+            $feUserName = $this->accessControlService->getFeUserName();
             $this->view->assign('survey', $survey);
-        //    $this->view->assign('feUserName', $feUserName);
-        //} else {
-        //    $this->forward('errorLoggedIn');
-        //}
+            $this->view->assign('feUserName', $feUserName);
+        } else {
+            $this->forward('errorLoggedIn');
+        }
     }
-    
+
     /**
      * 
      */
     public function errorLoggedInAction() {
-       $this->view->assign(); 
+        $this->view->assign();
     }
 
     /**
