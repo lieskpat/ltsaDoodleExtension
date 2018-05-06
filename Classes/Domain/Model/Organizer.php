@@ -40,6 +40,35 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $feUserUid = 0;
     
     /**
+     * concatenated string from firstName and lastName
+     * 
+     * @var string $name
+     */
+    protected $name;
+
+        /**
+     *
+     * @var string $firstName
+     */
+    protected $firstName;
+    
+    /**
+     *
+     * @var string $lastName
+     */
+    protected $lastName;
+    
+    /**
+     * @param int $feUserUid the id from Fe_User 
+     */
+    public function __construct($feUserUid, $firstName = "", $lastName = "") {
+        $this->setFeUserUid($feUserUid);
+        if ($firstName !== "" and $lastName !== "") {
+            $this->setName($firstName, $lastName);
+        }
+    }
+
+        /**
      * Returns the feUserUid
      * 
      * @return int $feUserUid
@@ -58,6 +87,57 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFeUserUid($feUserUid)
     {
         $this->feUserUid = $feUserUid;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    function getName() {
+        return $this->getFirstName() . " " . $this->getLastName();
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    function getFirstName() {
+        return $this->firstName;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    function getLastName() {
+        return $this->lastName;
+    }
+
+    /**
+     * 
+     * @param string $firstName
+     * @param string $lastName
+     */
+    function setName($firstName, $lastName) {
+        $this->setFirstName($firstName);
+        $this->setLastName($lastName);
+        $this->name = $firstName . " " . $lastName;
+    }
+
+    /**
+     * 
+     * @param string $firstName
+     */
+    function setFirstName($firstName) {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * 
+     * @param string $lastName
+     */
+    function setLastName($lastName) {
+        $this->lastName = $lastName;
     }
 
 }

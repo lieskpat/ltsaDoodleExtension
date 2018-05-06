@@ -182,7 +182,9 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @param \array $timeOfDay
      */
-    private function createAndAddTimeOfDayObjectToAppointment(\Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
+    private function createAndAddTimeOfDayObjectToAppointment(
+    \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
+        
         foreach ($timeOfDay as $value) {
             $appointment->addTimeOfDay(new \Schmidtch\Survey\Domain\Model\Timeofday($value));
         }

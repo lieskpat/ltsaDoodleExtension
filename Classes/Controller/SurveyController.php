@@ -38,42 +38,64 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @var \Schmidtch\Survey\Domain\Repository\SurveyRepository
      * @inject
      */
-    protected $surveyRepository = NULL;
+    protected $surveyRepository;
+
+    /**
+     *
+     * @var \Schmidtch\Survey\Service\AccesControlService $accessControlService
+     * @inject
+     */
+    protected $accessControlService;
 
     /**
      * @param \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository
      */
     public function injectSurveyRepository(
-            \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
+    \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
         $this->surveyRepository = $surveyRepository;
     }
-    
+
     /**
      *
      */
     public function listAction() {
         $this->view->assign('surveys', $this->surveyRepository->findAll());
     }
-    
+
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
-        $this->view->assign('survey', $survey);
+        //ist Nutzer eingeloggt (ist FE_User vorhanden, Abfrage mit Service Klasse)
+        //AccessControlService ist Singleton
+        //if ($this->accessControlService->hasLoggedInFeUser()) {
+        //    $feUserName = $this->accessControlService->getFeUserName();
+            $this->view->assign('survey', $survey);
+        //    $this->view->assign('feUserName', $feUserName);
+        //} else {
+        //    $this->forward('errorLoggedIn');
+        //}
+    }
+    
+    /**
+     * 
+     */
+    public function errorLoggedInAction() {
+       $this->view->assign(); 
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function createSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
-       
+
         $survey->setPostdate(new \DateTime());
+        //$survey->setOrganizer(new \Schmidtch\Survey\Domain\Model\Organizer(ServiceClass->getFeUserId()));
         $this->surveyRepository->add($survey);
         $persistenceManager = $this->objectManager->get(
                 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
         $this->redirect('newAppointment', 'Appointment', NULL, array('survey' => $survey));
-        
     }
 
     /**
