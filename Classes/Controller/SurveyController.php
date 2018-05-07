@@ -83,14 +83,14 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return array $helpArray
      */
     private function getAllSurveysByLoggedInFeUser() {
-        //ToDo: korrekte Datensätze aus surveyRepository holen
-        //nicht über findAll() sondern
-        //anhand von organizer ID
-        //findSurveysByFeId($this->accessControlService->getFeUserUid())
-        //SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
-	//		typo3_db.tx_survey_domain_model_organizer as b
-        //              where b.uid = a.organizer and
-        //              b.fe_user_uid = 1;
+//ToDo: korrekte Datensätze aus surveyRepository holen
+//nicht über findAll() sondern
+//anhand von organizer ID
+//findSurveysByFeId($this->accessControlService->getFeUserUid())
+//SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
+//		typo3_db.tx_survey_domain_model_organizer as b
+//              where b.uid = a.organizer and
+//              b.fe_user_uid = 1;
         $helpArray = array();
         $surveys = $this->surveyRepository->findAll();
         foreach ($surveys as $survey) {
@@ -112,15 +112,34 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
+     * 
+     * @param int $feUserUid
+     * @return boolean
+     */
+    private function isOrganizerExist($feUserUid) {
+        if (!is_null($this->organizerRepository->findByUid($feUserUid))) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
      * @return \Schmidtch\Survey\Domain\Model\Organizer
      */
     private function createAndPersistOrganizer() {
-        $organizerObject = new \Schmidtch\Survey\Domain\Model\Organizer(
-                $this->accessControlService->getFeUserUid()
-                , $this->accessControlService->getFeUserFirstName()
-                , $this->accessControlService->getFeUserLastName());
-        $this->organizerRepository->add($organizerObject);
-        $this->persistAll();
+        $organizerObject = NULL;
+        if (!$this->isOrganizerExist($this->accessControlService->getFeUserUid())) {
+            $organizerObject = new \Schmidtch\Survey\Domain\Model\Organizer(
+                    $this->accessControlService->getFeUserUid()
+                    , $this->accessControlService->getFeUserFirstName()
+                    , $this->accessControlService->getFeUserLastName());
+            $this->organizerRepository->add($organizerObject);
+            $this->persistAll();
+        } else {
+            $organizerObject = $this->organizerRepository->findByUid(
+                    $this->accessControlService->getFeUserUid());
+        }
         return $organizerObject;
     }
 
@@ -144,7 +163,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * 
      */
     public function errorLoggedInAction() {
-        //$this->view->assign();
+//$this->view->assign();
     }
 
     /**
