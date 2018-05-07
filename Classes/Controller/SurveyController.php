@@ -36,7 +36,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * surveyRepository
      * 
      * @var \Schmidtch\Survey\Domain\Repository\SurveyRepository
-     * @inject
+     * 
      */
     protected $surveyRepository;
 
@@ -44,7 +44,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * organizerRepository
      * 
      * @var \Schmidtch\Survey\Domain\Repository\OrganizerRepository
-     * @inject
+     * 
      */
     protected $organizerRepository;
 
@@ -75,25 +75,27 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      */
     public function listAction() {
-        $helpArray = array();
-        $surveys = $this->surveyRepository->findAll();
-        foreach ($surveys as $survey) {
-            if ($survey->getOrganizer()->getFeUserUid() == $this->accessControlService->getFeUserUid()) {
-                $helpArray[] = $survey;
-            }
-        }
-        $this->view->assign('surveys', $helpArray);
+        $this->view->assign('surveys', $this->getAllSurveysByLoggedInFeUser());
     }
-    
+
     /**
      * 
      * @return array $helpArray
      */
     private function getAllSurveysByLoggedInFeUser() {
+        //ToDo: korrekte Datensätze aus surveyRepository holen
+        //nicht über findAll() sondern
+        //anhand von organizer ID
+        //findSurveysByFeId($this->accessControlService->getFeUserUid())
+        //SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
+	//		typo3_db.tx_survey_domain_model_organizer as b
+        //              where b.uid = a.organizer and
+        //              b.fe_user_uid = 1;
         $helpArray = array();
         $surveys = $this->surveyRepository->findAll();
         foreach ($surveys as $survey) {
-            if ($survey->getOrganizer()->getFeUserUid() == $this->accessControlService->getFeUserUid()) {
+            if ($survey->getOrganizer()->getFeUserUid() == $this->
+                    accessControlService->getFeUserUid()) {
                 $helpArray[] = $survey;
             }
         }
@@ -101,23 +103,38 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
+     * 
+     */
+    private function persistAll() {
+        $persistenceManager = $this->objectManager->get(
+                'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+        $persistenceManager->persistAll();
+    }
+
+    /**
+     * @return \Schmidtch\Survey\Domain\Model\Organizer
+     */
+    private function createAndPersistOrganizer() {
+        $organizerObject = new \Schmidtch\Survey\Domain\Model\Organizer(
+                $this->accessControlService->getFeUserUid()
+                , $this->accessControlService->getFeUserFirstName()
+                , $this->accessControlService->getFeUserLastName());
+        $this->organizerRepository->add($organizerObject);
+        $this->persistAll();
+        return $organizerObject;
+    }
+
+    /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
-        //ist Nutzer eingeloggt (ist FE_User vorhanden, Abfrage mit Service Klasse)
-        //AccessControlService ist Singleton
+        //Todo: immer wenn diese action aufgerufen wird,
+        //wird neuer Organizer angelegt
+        //Fehler beheben
         if ($this->accessControlService->hasLoggedInFeUser()) {
-            $organizerObject = new \Schmidtch\Survey\Domain\Model\Organizer($this->accessControlService->getFeUserUid()
-                , $this->accessControlService->getFeUserFirstName()
-                , $this->accessControlService->getFeUserLastName());
-            $this->organizerRepository->add($organizerObject);
-            $persistenceManager = $this->objectManager->get(
-                'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-            $persistenceManager->persistAll();
-            $helpArray = $this->getAllSurveysByLoggedInFeUser();
-            $this->view->assign('surveysByFe', $helpArray);
+            $this->view->assign('surveysByFe', $this->getAllSurveysByLoggedInFeUser());
             $this->view->assign('survey', $survey);
-            $this->view->assign('organizer', $organizerObject);
+            $this->view->assign('organizer', $this->createAndPersistOrganizer());
         } else {
             $this->forward('errorLoggedIn');
         }
@@ -134,34 +151,33 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      * @param \Schmidtch\Survey\Domain\Model\Organizer $organizer
      */
-    public function createSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey
+    public function createSurveyAction(
+    \Schmidtch\Survey\Domain\Model\Survey $survey
     , \Schmidtch\Survey\Domain\Model\Organizer $organizer) {
 
         $survey->setPostdate(new \DateTime());
         $survey->setOrganizer($organizer);
         $this->surveyRepository->add($survey);
-        $persistenceManager = $this->objectManager->get(
-            'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        $persistenceManager->persistAll();
+        $this->persistAll();
         $this->redirect('newAppointment', 'Appointment', NULL, array('survey' => $survey));
     }
 
     /**
-     * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
-    public function showAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
-        $this->view->assign('survey', $surveyByFe);
+    public function showAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->view->assign('survey', $survey);
     }
 
     /**
-     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
      */
     public function updateFormAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
         $this->view->assign('survey', $surveyByFe);
     }
 
     /**
-     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
      */
     public function updateAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
         $this->surveyRepository->update($surveyByFe);

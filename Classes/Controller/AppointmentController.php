@@ -161,7 +161,9 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      * @param \array $timeOfDay
      */
-    public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
+    public function createTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey
+    , \Schmidtch\Survey\Domain\Model\Appointment $appointment
+    , array $timeOfDay) {
 
         if (empty($appointment->getTimeOfDay()->toArray())) {
             $this->createAndAddTimeOfDayObjectToAppointment($appointment
@@ -184,7 +186,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     private function createAndAddTimeOfDayObjectToAppointment(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, array $timeOfDay) {
-        
+
         foreach ($timeOfDay as $value) {
             $appointment->addTimeOfDay(new \Schmidtch\Survey\Domain\Model\Timeofday($value));
         }
