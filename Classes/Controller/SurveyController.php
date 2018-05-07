@@ -83,14 +83,14 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return array $helpArray
      */
     private function getAllSurveysByLoggedInFeUser() {
-//ToDo: korrekte Datensätze aus surveyRepository holen
-//nicht über findAll() sondern
-//anhand von organizer ID
-//findSurveysByFeId($this->accessControlService->getFeUserUid())
-//SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
-//		typo3_db.tx_survey_domain_model_organizer as b
-//              where b.uid = a.organizer and
-//              b.fe_user_uid = 1;
+        //ToDo: korrekte Datensätze aus surveyRepository holen
+        //nicht über findAll() sondern
+        //anhand von organizer ID
+        //findSurveysByFeId($this->accessControlService->getFeUserUid())
+        //SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
+        //		typo3_db.tx_survey_domain_model_organizer as b
+        //              where b.uid = a.organizer and
+        //              b.fe_user_uid = 1;
         $helpArray = array();
         $surveys = $this->surveyRepository->findAll();
         foreach ($surveys as $survey) {
@@ -147,9 +147,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      */
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
-        //Todo: immer wenn diese action aufgerufen wird,
-        //wird neuer Organizer angelegt
-        //Fehler beheben
+
         if ($this->accessControlService->hasLoggedInFeUser()) {
             $this->view->assign('surveysByFe', $this->getAllSurveysByLoggedInFeUser());
             $this->view->assign('survey', $survey);
@@ -163,7 +161,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * 
      */
     public function errorLoggedInAction() {
-//$this->view->assign();
+        //$this->view->assign();
     }
 
     /**
