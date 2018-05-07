@@ -117,6 +117,11 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return boolean
      */
     private function isOrganizerExist($feUserUid) {
+        //ToDo: repo Methode schreiben findByFeUserUid
+        //Oder feUserUid in Tabelle Organizer zu 
+        //Primärschlüssel machen
+        //Methode findByUid liefert unter Umständen falsches Ergebnis
+        //da im allgemeinen Uid ungleich feUserUid
         if (!is_null($this->organizerRepository->findByUid($feUserUid))) {
             return TRUE;
         } else {
