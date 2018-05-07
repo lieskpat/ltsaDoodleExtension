@@ -9,6 +9,12 @@
             <trans-unit id="tx_survey_domain_model_organizer.fe_user_uid">
                 <source>Fe User Uid</source>
             </trans-unit>
+            <trans-unit id="tx_survey_domain_model_organizer.first_name">
+                <source>First Name</source>
+            </trans-unit>
+            <trans-unit id="tx_survey_domain_model_organizer.last_name">
+                <source>Last Name</source>
+            </trans-unit>
             <trans-unit id="tx_survey_domain_model_survey">
                 <source>Survey</source>
             </trans-unit>

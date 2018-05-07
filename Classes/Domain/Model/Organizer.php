@@ -37,14 +37,14 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @var int
      */
-    protected $feUserUid = 0;
+    protected $feUserUid;
     
     /**
      * concatenated string from firstName and lastName
      * 
      * @var string $name
      */
-    protected $name;
+    protected $completedName;
 
         /**
      *
@@ -64,7 +64,7 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function __construct($feUserUid, $firstName = "", $lastName = "") {
         $this->setFeUserUid($feUserUid);
         if ($firstName !== "" and $lastName !== "") {
-            $this->setName($firstName, $lastName);
+            $this->setCompletedName($firstName, $lastName);
         }
     }
 
@@ -93,7 +93,7 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @return string
      */
-    function getName() {
+    function getCompletedName() {
         return $this->getFirstName() . " " . $this->getLastName();
     }
 
@@ -118,10 +118,10 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $firstName
      * @param string $lastName
      */
-    function setName($firstName, $lastName) {
+    function setCompletedName($firstName, $lastName) {
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
-        $this->name = $firstName . " " . $lastName;
+        $this->completedName = $firstName . " " . $lastName;
     }
 
     /**

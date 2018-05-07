@@ -6,6 +6,12 @@
 			<trans-unit id="fe_user_uid.description">
 				<source>UID of the Fe-User</source>
 			</trans-unit>
+                        <trans-unit id="first_name.description">
+				<source>First Name of the Fe-User</source>
+			</trans-unit>
+                        <trans-unit id="fe_user_uid.description">
+				<source>Last Name of the Fe-User</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

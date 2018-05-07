@@ -20,7 +20,7 @@ class AccessControlService implements \TYPO3\CMS\Core\SingletonInterface {
      * @return boolean
      */
     public function hasLoggedInFeUser() {
-        return $GLOBALS['TSFE']->loginUser === 1 ? TRUE : FALSE;
+        return $GLOBALS['TSFE']->loginUser;
     }
 
     /**
@@ -28,7 +28,7 @@ class AccessControlService implements \TYPO3\CMS\Core\SingletonInterface {
      * @return int
      */
     public function getFeUserUid() {
-        if ($this->hasLoggedInFrontendUser() && !empty($GLOBALS['TSFE']->fe_user->user['uid'])) {
+        if ($this->hasLoggedInFeUser() && !empty($GLOBALS['TSFE']->fe_user->user['uid'])) {
             return intval($GLOBALS['TSFE']->fe_user->user['uid']);
         }
         return NULL;
@@ -39,7 +39,7 @@ class AccessControlService implements \TYPO3\CMS\Core\SingletonInterface {
      * @return string
      */
     public function getFeUserName() {
-        if ($this->hasLoggedInFrontendUser() && !empty($GLOBALS['TSFE']->fe_user->user['name'])) {
+        if ($this->hasLoggedInFeUser() && !empty($GLOBALS['TSFE']->fe_user->user['name'])) {
             return $GLOBALS['TSFE']->fe_user->user['name'];
         }
         return "";
@@ -50,14 +50,14 @@ class AccessControlService implements \TYPO3\CMS\Core\SingletonInterface {
      * @return string
      */
     public function getFeUserFirstName() {
-        if ($this->hasLoggedInFrontendUser() && !empty($GLOBALS['TSFE']->fe_user->user['first_name'])) {
+        if ($this->hasLoggedInFeUser() && !empty($GLOBALS['TSFE']->fe_user->user['first_name'])) {
             return $GLOBALS['TSFE']->fe_user->user['first_name'];
         }
         return "";
     }
     
     public function getFeUserLastName() {
-        if ($this->hasLoggedInFrontendUser() && !empty($GLOBALS['TSFE']->fe_user->user['last_name'])) {
+        if ($this->hasLoggedInFeUser() && !empty($GLOBALS['TSFE']->fe_user->user['last_name'])) {
             return $GLOBALS['TSFE']->fe_user->user['last_name'];
         }
         return "";

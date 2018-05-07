@@ -125,6 +125,26 @@ return array(
 				'eval' => 'int'
 			)
 		),
+        
+        'first_name' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_organizer.first_name',
+			'config' => array(
+				'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,required'
+			)
+		),
+        
+        'last_name' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:survey/Resources/Private/Language/locallang_db.xlf:tx_survey_domain_model_organizer.last_name',
+			'config' => array(
+				'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,required'
+			)
+		),
 		
 	),
 );

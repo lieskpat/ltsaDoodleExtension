@@ -4,7 +4,7 @@
 
     <h1>{headline}</h1>
 
-    <f:form action="update" object="{survey}" name="survey" additionalAttributes="{role: 'form'}">
+    <f:form action="update" object="{surveyByFe}" name="surveyByFe" additionalAttributes="{role: 'form'}">
 
         <div class="form-group">
             <label>Umfrage-Titel</label>
@@ -31,23 +31,23 @@
     </f:form>
     <br />
 
-    <f:if condition="{survey.appiontments}">
+    <f:if condition="{surveyByFe.appiontments}">
         <ul class="list-group">
-            <f:for each="{survey.appiontments}" as="appiontment">
+            <f:for each="{surveyByFe.appiontments}" as="appiontment">
                 <li class="list-group-item">
                     <label><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></label>
-                <f:link.action action="delete" controller="Appiontment" arguments="{survey:survey,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right">
+                <f:link.action action="delete" controller="Appiontment" arguments="{surveyByFe:surveyByFe,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     löschen
                 </f:link.action>
-                <f:link.action action="updateForm" controller="Appiontment" arguments="{survey:survey,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right margin-right">
+                <f:link.action action="updateForm" controller="Appiontment" arguments="{surveyByFe:surveyByFe,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right margin-right">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Uhrzeit hinzufügen
                 </f:link.action>
                 <f:for each="{appiontment.timeOfDay}" as="timeofday">
                     <dd>
                         {timeofday.timevalue} Uhr &nbsp; &nbsp;
-                    <f:link.action action="deleteUpdateSurvey" controller="TimeOfDay" arguments="{survey:survey,appiontment:appiontment,timeofday:timeofday}" class="btn  btn-xs">
+                    <f:link.action action="deleteUpdateSurvey" controller="TimeOfDay" arguments="{surveyByFe:surveyByFe,appiontment:appiontment,timeofday:timeofday}" class="btn  btn-xs">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </f:link.action>
                     </dd>
