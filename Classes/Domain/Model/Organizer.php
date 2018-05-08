@@ -1,7 +1,8 @@
 <?php
+
 namespace Schmidtch\Survey\Domain\Model;
 
-/***************************************************************
+/* * *************************************************************
  *
  *  Copyright notice
  *
@@ -24,13 +25,12 @@ namespace Schmidtch\Survey\Domain\Model;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * organizer fe UID
  */
-class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
-{
+class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * UID of the Fe-User
@@ -38,7 +38,7 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var int
      */
     protected $feUserUid;
-    
+
     /**
      * concatenated string from firstName and lastName
      * 
@@ -46,18 +46,18 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $completedName;
 
-        /**
+    /**
      *
      * @var string $firstName
      */
     protected $firstName;
-    
+
     /**
      *
      * @var string $lastName
      */
     protected $lastName;
-    
+
     /**
      * @param int $feUserUid the id from Fe_User 
      */
@@ -68,27 +68,25 @@ class Organizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
     }
 
-        /**
+    /**
      * Returns the feUserUid
      * 
      * @return int $feUserUid
      */
-    public function getFeUserUid()
-    {
+    public function getFeUserUid() {
         return $this->feUserUid;
     }
-    
+
     /**
      * Sets the feUserUid
      * 
      * @param int $feUserUid
      * @return void
      */
-    public function setFeUserUid($feUserUid)
-    {
+    public function setFeUserUid($feUserUid) {
         $this->feUserUid = $feUserUid;
     }
-    
+
     /**
      * 
      * @return string

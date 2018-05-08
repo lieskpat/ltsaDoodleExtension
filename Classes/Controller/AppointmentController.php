@@ -93,11 +93,11 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         //wo sie im Code notiert sind
         if (empty($survey->getAppointments()->toArray())) {
             $this->createAndAddAppointmentToSurvey($survey, $this->
-                            getArrayWithNoDuplicateStrings($appointmentDate
-                                    , $survey->getAppointmentDateArrayFromAppointments()));
+                    getArrayWithNoDuplicateStrings($appointmentDate
+                        , $survey->getAppointmentDateArrayFromAppointments()));
         } else {
             $helpArray = $this->getArrayWithNoDuplicateStrings($appointmentDate
-                    , $survey->getAppointmentDateArrayFromAppointments());
+                , $survey->getAppointmentDateArrayFromAppointments());
             if (!empty($helpArray)) {
                 $this->createAndAddAppointmentToSurvey($survey, $helpArray);
             }
@@ -117,7 +117,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         foreach ($appointmentDate as $value) {
             $survey->addAppointment(new \Schmidtch\Survey\Domain\Model\Appointment
-                    (\DateTime::createFromFormat('!Y-m-d', $value)));
+                (\DateTime::createFromFormat('!Y-m-d', $value)));
         }
     }
 
@@ -151,7 +151,9 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
      */
-    public function newTimeOfDayAction(\Schmidtch\Survey\Domain\Model\Survey $survey, \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+    public function newTimeOfDayAction(
+    \Schmidtch\Survey\Domain\Model\Survey $survey
+    , \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
         $this->view->assign('appointment', $appointment);
         $this->view->assign('survey', $survey);
     }
@@ -167,11 +169,11 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
         if (empty($appointment->getTimeOfDay()->toArray())) {
             $this->createAndAddTimeOfDayObjectToAppointment($appointment
-                    , $this->getArrayWithNoDuplicateStrings($timeOfDay
-                            , $appointment->getTimeValueArrayFromAppointmentObject()));
+                , $this->getArrayWithNoDuplicateStrings($timeOfDay
+                    , $appointment->getTimeValueArrayFromAppointmentObject()));
         } else {
             $helpArray = $this->getArrayWithNoDuplicateStrings($timeOfDay
-                    , $appointment->getTimeValueArrayFromAppointmentObject());
+                , $appointment->getTimeValueArrayFromAppointmentObject());
             if (!empty($helpArray)) {
                 $this->createAndAddTimeOfDayObjectToAppointment($appointment, $helpArray);
             }
@@ -197,7 +199,8 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @param \Schmidtch\Survey\Domain\Model\Timeofday $timeOfDay
      */
     public function ajaxAddAction(
-    \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Timeofday $timeOfDay = NULL) {
+    \Schmidtch\Survey\Domain\Model\Appointment $appointment
+    , \Schmidtch\Survey\Domain\Model\Timeofday $timeOfDay = NULL) {
         // Wenn das Feld leer ist, wird nicht persistiert
         if ($timeOfDay->getTimeValue() == "") {
             return FALSE;
@@ -260,7 +263,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     public function deleteAction(
     \Schmidtch\Survey\Domain\Model\Appointment $appointment, \Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->addFlashMessage(
-                'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+            'Termin gelöscht!', 'Status', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
         $this->objectManager->get('Schmidtch\\Survey\\Domain\\Repository\\surveyRepository')->update($survey);
