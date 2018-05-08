@@ -38,19 +38,21 @@ class SurveyRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     // durch folgende Methode wird findAll() direkt auf DB ausgeführt
     public function initializeObject() {
 
-        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings = $this->objectManager->get(
+            'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         $this->defaultQuerySettings->setRespectStoragePage(FALSE);
     }
     
     /**
+     * find all surveys by a given organizer
      * 
-     * @param int $feUserUid
-     * @return array
+     * @param \Schmidtch\Survey\Domain\Model\Organizer $organizerObject
+     * @return \Schmidtch\Survey\Domain\Model\Survey 
      */
-    public function findSurveysByFeUserUid($feUserUid) {
-        //ToDo: saubere Abfrage über query Object
-        //KEIN SQL
-        return $surveysByFeUserUid;
+    public function findInOrganizer(\Schmidtch\Survey\Domain\Model\Organizer $organizerObject) {
+        $query = $this->createQuery();
+        $query->matching($query->equals('organizer', $organizerObject));
+        return $query->execute();
     }
 
 }

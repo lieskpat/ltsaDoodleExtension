@@ -75,31 +75,15 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      */
     public function listAction() {
-        $this->view->assign('surveys', $this->getAllSurveysByLoggedInFeUser());
+        $this->view->assign('surveys', $this->getAllSurveysByLoggedInFeUser($this->createAndPersistOrganizer()));
     }
 
     /**
-     * 
+     * @param \Schmidtch\Survey\Domain\Model\Organizer $organizerObject
      * @return array $helpArray
      */
-    private function getAllSurveysByLoggedInFeUser() {
-        //ToDo: korrekte Datensätze aus surveyRepository holen
-        //nicht über findAll() sondern
-        //anhand von organizer ID
-        //findSurveysByFeId($this->accessControlService->getFeUserUid())
-        //SELECT a.* FROM typo3_db.tx_survey_domain_model_survey as a,
-        //		typo3_db.tx_survey_domain_model_organizer as b
-        //              where b.uid = a.organizer and
-        //              b.fe_user_uid = 1;
-        $helpArray = array();
-        $surveys = $this->surveyRepository->findAll();
-        foreach ($surveys as $survey) {
-            if ($survey->getOrganizer()->getFeUserUid() == $this->
-                    accessControlService->getFeUserUid()) {
-                $helpArray[] = $survey;
-            }
-        }
-        return $helpArray;
+    private function getAllSurveysByLoggedInFeUser(\Schmidtch\Survey\Domain\Model\Organizer $organizerObject) {
+        return $this->surveyRepository->findInOrganizer($organizerObject);
     }
 
     /**
@@ -117,15 +101,10 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return boolean
      */
     private function isOrganizerExist($feUserUid) {
-        //ToDo: repo Methode schreiben findByFeUserUid
-        //Oder feUserUid in Tabelle Organizer zu 
-        //Primärschlüssel machen
-        //Methode findByUid liefert unter Umständen falsches Ergebnis
-        //da im allgemeinen Uid ungleich feUserUid
-        if (!is_null($this->organizerRepository->findByUid($feUserUid))) {
-            return TRUE;
-        } else {
+        if (is_null($this->organizerRepository->findOneByFeUserUid($feUserUid))) {
             return FALSE;
+        } else {
+            return TRUE;
         }
     }
 
@@ -142,7 +121,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $this->organizerRepository->add($organizerObject);
             $this->persistAll();
         } else {
-            $organizerObject = $this->organizerRepository->findByUid(
+            $organizerObject = $this->organizerRepository->findOneByFeUserUid(
                     $this->accessControlService->getFeUserUid());
         }
         return $organizerObject;
@@ -153,10 +132,11 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function newSurveyAction(\Schmidtch\Survey\Domain\Model\Survey $survey = NULL) {
 
+        $organizerObject = $this->createAndPersistOrganizer();
         if ($this->accessControlService->hasLoggedInFeUser()) {
-            $this->view->assign('surveysByFe', $this->getAllSurveysByLoggedInFeUser());
+            $this->view->assign('surveysByFe', $this->getAllSurveysByLoggedInFeUser($organizerObject));
             $this->view->assign('survey', $survey);
-            $this->view->assign('organizer', $this->createAndPersistOrganizer());
+            $this->view->assign('organizer', $organizerObject);
         } else {
             $this->forward('errorLoggedIn');
         }

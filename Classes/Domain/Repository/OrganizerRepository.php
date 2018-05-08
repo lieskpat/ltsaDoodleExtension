@@ -32,5 +32,16 @@ namespace Schmidtch\Survey\Domain\Repository;
 class OrganizerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
+    /**
+     * give back the organizer with spezified feUserUid
+     * 
+     * @param int $feUserUid
+     * @return \Schmidtch\Survey\Domain\Model\Organizer
+     */
+    public function findByFeUserUid($feUserUid) {
+        $query = $this->createQuery();
+        $query->matching($query->equals('feUserUid', $feUserUid));
+        return $query->execute();
+    }
     
 }
