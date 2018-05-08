@@ -174,23 +174,23 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
      */
-    public function updateFormAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
-        $this->view->assign('survey', $surveyByFe);
+    public function updateFormAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->view->assign('survey', $survey);
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
      */
-    public function updateAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
-        $this->surveyRepository->update($surveyByFe);
-        $this->redirect('updateForm', 'Survey', NULL, array('survey' => $surveyByFe));
+    public function updateAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->surveyRepository->update($survey);
+        $this->redirect('updateForm', 'Survey', NULL, array('survey' => $survey));
     }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $surveyByFe
      */
-    public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Survey $surveyByFe) {
-        $this->view->assign('survey', $surveyByFe);
+    public function deleteConfirmAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $this->view->assign('survey', $survey);
     }
 
     /**
@@ -198,7 +198,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function deleteAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->surveyRepository->remove($survey);
-        $this->redirect('list');
+        $this->redirect('newSurvey');
     }
 
     /**

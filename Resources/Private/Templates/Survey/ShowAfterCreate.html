@@ -2,6 +2,8 @@
 	
 <f:section name="content">	
 
+    <f:render partial="pollSummaryBySubscriber" arguments="{survey: survey}" />
+    
 	<h1>{survey.title}</h1>
 	
 	<f:flashMessages class="alert alert-success" />

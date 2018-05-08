@@ -4,7 +4,7 @@
 
     <h1>{headline}</h1>
 
-    <f:form action="update" object="{surveyByFe}" name="surveyByFe" additionalAttributes="{role: 'form'}">
+    <f:form action="update" object="{survey}" name="survey" additionalAttributes="{role: 'form'}">
 
         <div class="form-group">
             <label>Umfrage-Titel</label>
@@ -26,28 +26,28 @@
             <f:form.checkbox property="commentVisible" value="1" class="checkbox" checked="true" />
         </div>
 
-        <f:form.submit value="Änderungen speichern" class="btn btn-primary" />
+        <f:form.submit value="Änderungen speichern" class="btn btn-default" />
 
     </f:form>
     <br />
 
-    <f:if condition="{surveyByFe.appiontments}">
+    <f:if condition="{survey.appointments}">
         <ul class="list-group">
-            <f:for each="{surveyByFe.appiontments}" as="appiontment">
+            <f:for each="{survey.appointments}" as="appointment">
                 <li class="list-group-item">
                     <label><f:format.date format="d.m.Y">{appiontment.appiontmentdate}</f:format.date></label>
-                <f:link.action action="delete" controller="Appiontment" arguments="{surveyByFe:surveyByFe,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right">
+                <f:link.action action="delete" controller="Appointment" arguments="{survey:survey,appointment:appointment}" class="btn btn-default btn-xs pull-right">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     löschen
                 </f:link.action>
-                <f:link.action action="updateForm" controller="Appiontment" arguments="{surveyByFe:surveyByFe,appiontment:appiontment}" class="btn btn-primary btn-xs pull-right margin-right">
+                <f:link.action action="updateForm" controller="Appointment" arguments="{survey:survey,appointment:appointment}" class="btn btn-default btn-xs pull-right margin-right">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Uhrzeit hinzufügen
                 </f:link.action>
-                <f:for each="{appiontment.timeOfDay}" as="timeofday">
+                <f:for each="{appointment.timeOfDay}" as="timeofday">
                     <dd>
                         {timeofday.timevalue} Uhr &nbsp; &nbsp;
-                    <f:link.action action="deleteUpdateSurvey" controller="TimeOfDay" arguments="{surveyByFe:surveyByFe,appiontment:appiontment,timeofday:timeofday}" class="btn  btn-xs">
+                    <f:link.action action="deleteUpdateSurvey" controller="TimeOfDay" arguments="{survey:survey,appointment:appointment,timeofday:timeofday}" class="btn  btn-xs">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </f:link.action>
                     </dd>
@@ -57,10 +57,10 @@
         </ul>
     </f:if>
 
-    <f:link.action action="addFormDate" controller="Appiontment" arguments="{survey:survey}" class="btn btn-primary btn-xs">weiteren Termin anlegen</f:link.action>
+    <f:link.action action="addFormDate" controller="Appointment" arguments="{survey:survey}" class="btn btn-default btn-xs">weiteren Termin anlegen</f:link.action>
     <br />	
     <br />
-    <f:link.action action="list" class="btn btn-primary">zurück</f:link.action>
+    <f:link.action action="newSurvey" class="btn btn-default">zurück</f:link.action>
 
 </f:section>
 
