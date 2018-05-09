@@ -82,6 +82,7 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * 
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
      * @param \array $appointmentDate
+     * @validate $appointmentDate Schmidtch.Survey:ArrayOnEmptyItems
      *
      */
     public function createAppointmentAction(

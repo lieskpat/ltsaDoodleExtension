@@ -22,7 +22,7 @@
         <div class="form-inline">
             <div class="form-group">
                 <label>Dürfen Teilnehmer andere Teilnehmer in der Umfrage sehen?</label>
-                <f:form.checkbox class="form-control" value="visible" property="visible" class="checkbox" checked="true" />
+                <f:form.checkbox class="form-control checkbox" value="visible" property="visible" checked="true" />
             </div>
         </div>
         <div class="form-group">
@@ -30,6 +30,6 @@
         </div>
     </f:form>
 
-    <f:render partial="listSurveysByFeUser" arguments="{surveysByFe: surveysByFe}" />
+    <f:render partial="listSurveysByFeUser" arguments="{headline: 'Terminvorschläge', surveysByFe: surveysByFe}" />
 
 </f:section>
