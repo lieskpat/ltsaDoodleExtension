@@ -36,8 +36,9 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * date of the Appointment
      * 
      * @var \DateTime
+     * @validate DateTime
      */
-    protected $appointmentDate = null;
+    protected $appointmentDate;
     
     /**
      * timeOfDay
@@ -51,6 +52,7 @@ class Appointment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * __construct
      * 
      * @param \DateTime $appointmentDate
+     * @va
      */
     public function __construct($appointmentDate)
     {

@@ -1,0 +1,35 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace Schmidtch\Survey\Validation\Validator;
+
+/**
+ * Description of ExistTimeOfDayToEveryAppointment
+ *
+ * @author Lieske
+ */
+class ExistTimeOfDayToEveryAppointmentValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator{
+    
+    /**
+     * 
+     * @var \Schmidtch\Survey\Service\ValidationService $validationService
+     * @inject
+     */
+    protected $validationService;
+    
+    /**
+     * 
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     */
+    protected function isValid($survey) {
+        if(!$this->validationService->isValidateExistTimeOfDayToEveryAppointment($survey)) {
+            $this->addError('Bitte geben Sie zu jedem Termin mindestens eine Uhrzeit ein', 1389545446);
+        }
+    }
+
+}

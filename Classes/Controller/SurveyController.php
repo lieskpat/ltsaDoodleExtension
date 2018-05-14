@@ -166,6 +166,7 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @validate $survey Schmidtch.Survey:ExistTimeOfDayToEveryAppointment
      */
     public function showAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
         $this->view->assign('survey', $survey);

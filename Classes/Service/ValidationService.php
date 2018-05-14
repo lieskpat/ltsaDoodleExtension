@@ -20,7 +20,6 @@ class ValidationService implements \TYPO3\CMS\Core\SingletonInterface {
      * @param array $arrayToCheck
      */
     public function isValidateArrayOnEmptyItems(array $arrayToCheck) {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arrayToCheck);
         $check = FALSE;
         foreach ($arrayToCheck as $value) {
             if ($value == '') {
@@ -31,6 +30,22 @@ class ValidationService implements \TYPO3\CMS\Core\SingletonInterface {
             }
         }
         return $check;
+    }
+    
+    /**
+     * 
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey
+     * @return boolean 
+     */
+    public function isValidateExistTimeOfDayToEveryAppointment(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        $check = FALSE;
+        foreach ($survey->getAppointments() as $appointment) {
+            if(empty($appointment->getTimeOfDay())) {
+                $check = FALSE;
+            } else {
+                $check = TRUE;
+            }            
+        }
     }
 
 }

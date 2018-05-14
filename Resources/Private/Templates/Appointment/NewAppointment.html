@@ -1,7 +1,7 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-
+    
     <f:render partial="Error" arguments="{object: 'appointment'}" />
 
     <h1>{survey.title}</h1>
@@ -9,12 +9,12 @@
     <f:if condition="{survey.appointments}">
         <h3>Bereits gewählte Termine</h3>
         <f:for each="{survey.appointments}" as="appointment">
-            <f:form>
+            <f:form controller="Appointment" action="ajaxDelete" method="post" arguments="{survey: survey, appointment: appointment}">
                 <p>
                     <f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date>
-                    <f:form.button class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </f:form.button>
+                    <f:form.submit class="btn btn-default glyphicon glyphicon-trash" >
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </f:form.submit>
                 </p>
             </f:form>
             <hr>
@@ -22,12 +22,13 @@
     </f:if>
 
     <h3>Termin hinzufügen</h3>
-
+    <f:render partial="Error" arguments="{object: 'appointmentDate'}" />
     <f:form class="my-form btn-group" controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">
         <div class="form-inline">
             <div class="after-add-more">
                 <div class="form-group">
-                    <input class="form-control" type="date" placeholder="d-m-Y" name="tx_survey_surveylisting[appointmentDate][]" value="{newAppointment.appointmentDate}" />
+                    <input class="form-control" type="date" placeholder="Y-m-d" name="tx_survey_surveylisting[appointmentDate][]" 
+                           value="{newAppointment.appointmentDate->f:format.date(format: 'd.m.Y')}" />
                 </div>
                 <div class="form-group">
                     <f:form.button class="btn btn-default add-more" type="button">

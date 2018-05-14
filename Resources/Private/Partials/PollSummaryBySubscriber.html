@@ -5,60 +5,6 @@
     <div>
         <f:format.nl2br>{survey.description}</f:format.nl2br>
     </div>
-
-    <f:if condition="{survey.appointments}" >
-        <ul class="list-group">
-            <li class="list-group-item-" style="list-style: none">
-                <table class="table table-bordered table-sm">				
-                    <thead>							
-                        <tr>							
-                            <th rowspan="2"></th>
-                    <f:for each="{survey.appointments}" as="appointment" >								
-                        <th colspan="{appointment.timeOfDay -> f:count()}"><f:format.date format="d.m.Y">{appointment.appointmentDate}</f:format.date></th>											
-                    </f:for>
-                    </tr>
-                    <tr>
-                    <f:for each="{survey.appointments}" as="appointment" >
-                        <f:for each="{appointment.timeOfDay}" as="time" >
-                            <th >{time.timeValue} Uhr</th>
-                        </f:for>
-                    </f:for>
-                    </tr>							
-                    </thead>
-                    <tbody>
-                    <f:for each="{survey.subscribers}" as="subscriber" >	
-                        <tr>
-                            <th width="150px">{subscriber.nameSubscriber}</th>
-                        <f:for each="{subscriber.subcheck}" as="poll">
-                            <f:if condition="{poll.pollValue}==1">
-                                <f:then>
-                                    <td style="background-color:green"></td>
-                               	</f:then>
-                                <f:else>
-                                    <td style="background-color:red"></td>
-                                </f:else>
-                            </f:if>													
-                        </f:for>
-                        </tr>
-                    </f:for>
-                    </tbody>
-                </table>
-            </li>
-
-        </ul>
-    </f:if>	
-
-
-
-
-<f:comment>
-<h1>{survey.title}</h1>
-    <div>
-        <h4>Beschreibung:</h4>
-    </div>
-    <div>
-        <f:format.nl2br>{survey.description}</f:format.nl2br>
-    </div>
     <br/>
     <f:if condition="{survey.appointments}" >
         <ul class="list-group">
@@ -117,4 +63,3 @@
 
         </ul>
     </f:if>
-</f:comment>

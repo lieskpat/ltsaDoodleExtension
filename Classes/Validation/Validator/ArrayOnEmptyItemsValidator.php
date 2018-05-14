@@ -34,16 +34,11 @@ class ArrayOnEmptyItemsValidator extends \TYPO3\CMS\Extbase\Validation\Validator
      * @param array $arrayToCheck
      */
     protected function isValid($arrayToCheck) {
-        $success = FALSE;
-        if ($this->validationService->isValidateArrayOnEmptyItems($arrayToCheck)) {
-            $success = TRUE;
-        } else {
-            $this->result->getErrors(new \TYPO3\CMS\Extbase\Error\Error('Bitte füllen Sie die Termine korrekt aus'
-            , 1389545446));
-            $success = FALSE;
+        //Eigentlich muss geprüft werden, ob alle array Items valide DateTime Objecte sind
+        if (!$this->validationService->isValidateArrayOnEmptyItems($arrayToCheck)) {
+            $this->addError('Bitte füllen Sie die Termine korrekt aus', 1389545446);
         }
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($success);
-        return $success;
+        
     }
 
 }

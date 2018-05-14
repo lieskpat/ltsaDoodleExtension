@@ -194,6 +194,19 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
             $appointment->addTimeOfDay(new \Schmidtch\Survey\Domain\Model\Timeofday($value));
         }
     }
+    
+    /**
+     * 
+     * @param \Schmidtch\Survey\Domain\Model\Survey $survey 
+     * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
+     */
+    public function ajaxDeleteAction(\Schmidtch\Survey\Domain\Model\Survey $survey
+        , \Schmidtch\Survey\Domain\Model\Appointment $appointment) {
+        
+        $this->appointmentRepository->remove($appointment);
+        $this->redirect('newAppointment', 'Appointment', NULL, array('survey' => $survey));
+        
+    }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Appointment $appointment
