@@ -18,9 +18,17 @@ class ExistTimeOfDayToEveryAppointmentValidator extends \TYPO3\CMS\Extbase\Valid
     /**
      * 
      * @var \Schmidtch\Survey\Service\ValidationService $validationService
-     * @inject
+     *
      */
     protected $validationService;
+    
+    /**
+     * @param \Schmidtch\Survey\Service\ValidationService $validationService
+     */
+    public function injectValidationService(
+    \Schmidtch\Survey\Service\ValidationService $validationService) {
+        $this->validationService = $validationService;
+    }
     
     /**
      * 
