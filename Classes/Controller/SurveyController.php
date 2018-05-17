@@ -169,6 +169,8 @@ class SurveyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @validate $survey Schmidtch.Survey:ExistTimeOfDayToEveryAppointment
      */
     public function showAction(\Schmidtch\Survey\Domain\Model\Survey $survey) {
+        //$referrer = $this->request->getArgument('__referrer');
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($referrer);
         $this->view->assign('survey', $survey);
     }
 

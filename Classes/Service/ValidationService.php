@@ -42,8 +42,10 @@ class ValidationService implements \TYPO3\CMS\Core\SingletonInterface {
         foreach ($survey->getAppointments() as $appointment) {
             if(empty($appointment->getTimeOfDay())) {
                 $check = FALSE;
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('FALSE');
             } else {
                 $check = TRUE;
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('TRUE');
             }            
         }
     }

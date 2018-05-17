@@ -30,11 +30,13 @@
 
 
     </script>
-
+    
     <f:if condition="{survey.appointments}">
         <f:then>
+            
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" iteration="i">
+                    
                     <li style="list-style: none">
 
                         <div class="form-inline">
@@ -70,10 +72,13 @@
         </f:then>
         <f:else>Keine Einträge vorhanden!!!!!</f:else>
     </f:if>
-
+    
     <div class="form-inline form-group">
-        <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-default">Termine Bearbeiten</f:link.action>
-        <f:link.action action="show" controller="Survey" arguments="{survey:survey}" class="btn btn-default">Umfrage erstellen</f:link.action>
+        
+        <f:form action="show" controller="Survey" arguments="{survey:survey}">
+            <f:link.action action="newAppointment" controller="Appointment" arguments="{survey:survey}" class="btn btn-default">Termine Bearbeiten</f:link.action>
+            <f:form.submit value="Umfrage erstellen" class="btn btn-default" />
+        </f:form>        
     </div>
     <div class="copy" style="display: none!important;">
         <f:form controller="Appointment" action="createAppointment" method="post" arguments="{survey: survey, appointmentDate: appointmentDate}">

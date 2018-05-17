@@ -37,6 +37,7 @@ class ExistTimeOfDayToEveryAppointmentValidator extends \TYPO3\CMS\Extbase\Valid
     protected function isValid($survey) {
         if(!$this->validationService->isValidateExistTimeOfDayToEveryAppointment($survey)) {
             $this->addError('Bitte geben Sie zu jedem Termin mindestens eine Uhrzeit ein', 1389545446);
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('FEHLER');
         }
     }
 
