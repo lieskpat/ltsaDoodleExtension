@@ -18,6 +18,7 @@ class ValidationService implements \TYPO3\CMS\Core\SingletonInterface {
     /**
      * 
      * @param array $arrayToCheck
+     * @return boolean
      */
     public function isValidateArrayOnEmptyItems(array $arrayToCheck) {
         $check = FALSE;
@@ -38,19 +39,13 @@ class ValidationService implements \TYPO3\CMS\Core\SingletonInterface {
      * @return boolean 
      */
     public function isValidateExistTimeOfDayToEveryAppointment(\Schmidtch\Survey\Domain\Model\Survey $survey) {
-        $check = FALSE;
+        $check = TRUE;
         foreach ($survey->getAppointments() as $appointment) {
-            //wenn auch nur eines des getTimeOfDay arrays leer ist, muss false zurückgegeben werden
-            if(!$this->isValidateArrayOnEmptyItems($appointment->getTimeOfDay())) {
+            if (!$this->isValidateArrayOnEmptyItems($appointment->getTimeValueArrayFromAppointmentObject())) {
+                $check = FALSE;
                 return $check;
             }
-            foreach ($appointment->getTimeOfDay() as $value) {
-                $helpArray[] = $value;
-            }
-            
         }
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($helpArray, 'HELP ARRAY');
-        $check = $this->isValidateArrayOnEmptyItems($helpArray);
         return $check;
     }
 

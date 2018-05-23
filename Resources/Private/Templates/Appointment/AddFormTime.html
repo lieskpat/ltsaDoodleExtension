@@ -33,7 +33,7 @@
     
     <f:if condition="{survey.appointments}">
         <f:then>
-            
+            <f:render partial="Error" arguments="{object:'survey'}" />
             <ul class="list-group">
                 <f:for each="{survey.appointments}" as="appointment" iteration="i">
                     
