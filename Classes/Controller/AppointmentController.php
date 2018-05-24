@@ -68,6 +68,13 @@ class AppointmentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     \Schmidtch\Survey\Domain\Repository\SurveyRepository $surveyRepository) {
         $this->surveyRepository = $surveyRepository;
     }
+    
+    /**
+     * 
+     */
+    public function listAction() {
+       $this->forward('show'); 
+    }
 
     /**
      * @param \Schmidtch\Survey\Domain\Model\Survey $survey

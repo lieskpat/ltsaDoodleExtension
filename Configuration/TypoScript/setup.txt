@@ -16,7 +16,7 @@ plugin.tx_survey_surveylisting {
 			Schmidtch\Survey\Domain\Model\Organizer {
 				newRecordStoragePid = 17
 			}
-			Schmidtch\Survey\Domain\Model\Appiontment {
+			Schmidtch\Survey\Domain\Model\Appointment {
 				newRecordStoragePid = 18
 			}
 			Schmidtch\Survey\Domain\Model\TimeOfDay {
